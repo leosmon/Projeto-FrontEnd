@@ -1,0 +1,157 @@
+#header {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    background-color: #007BFF;
+    border-bottom: 10px solid #91D8F7;
+
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f8f7f7;
+}
+
+
+#Logo-header {
+    width: 120px;
+    height: 90px;
+    padding-left: 50px;
+    padding-top: 5%;
+}
+
+#menu {
+    display: flex;
+    padding-left: 50px;
+    width: 70%;
+
+}
+
+.item-menu {
+    text-decoration: none;
+    color: inherit;
+    font-family: 'Raleway', sans-serif;
+    font-size: 17px;
+    color: #f8f7f7;
+    padding: 10px;
+    
+}
+
+.item-menu:hover {
+    color: #193ae2;
+    transition: 0.3s;
+}
+
+#login-button {
+
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #ff8400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+#login-button:hover {
+    background-color: #b14d00;
+}
+
+#search-bar-background {
+
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+
+
+}
+
+#search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 50%;
+
+    margin-top: 5%;
+
+}
+
+
+#search-bar {
+    width: 100%;
+    height: 10%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f7f7;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: #ff8400;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #b14d00;
+}
+
+
+#site-title-container {
+    display: grid;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#site-title {
+    font-family: Raleway, sans-serif;
+    font-size: 45px;
+    
+}
+
+p {
+
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+
+}
+#mais-lidos{
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+}
+
+#logo{
+    height: 160px;
+    padding-left: 50px;
+    padding-top: 5%;
+}
