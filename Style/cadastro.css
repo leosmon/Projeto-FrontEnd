@@ -1,115 +1,180 @@
-*{
+/* Reset global: garante consistência no box model e remove margens/paddings padrão */
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
- 
 }
 
+/* Estilo base do body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
+    display: flex;              /* centraliza conteúdo */
+    flex-direction: column;
     
+    justify-content: center;
+    min-height: 100vh;          /* altura mínima da tela, permite rolagem */
+    width: 100%;
 }
 
+/* Container principal */
 .container {
-   text-align: center;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    text-align: center;
 }
+
+/* Logo dentro do container */
 .container img {
-    Width: 200px;
+    width: 200px;
     padding: 20px;
 }
+
+/* Título principal */
 .container h2 {
     font-size: 2em;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;   
+    font-weight: 700; 
 }
+
+/* Caixa do formulário */
 .form {
     background-color: #fff;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 50%;
+    max-width: 800px;           /* largura máxima */
+    width: 90%;                 /* responsivo */
     margin: auto;
-    justify-content: start;
-  
-   
 }
 
-.form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+/* Labels dos campos */
 .form label {
     display: block;
     margin-bottom: 5px;
-    text-align:justify ;
+    text-align: justify;
 }
 
+/* Texto dos grupos de formulário */
+.formulario {
+    color: #7b7b7b;
+    margin-bottom: 30px;
+}
+
+/* Inputs de texto e senha */
 .form input[type="text"],
 .form input[type="password"] {
     width: 100%;
     padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
-#form-field-ConfirmarSenha{
-    flex: 1;
-    
-    
+
+/* Efeito de foco nos inputs */
+input:focus {
+    border-color: #2219d4;
+    outline: none;              /* remove contorno padrão */
 }
+
+/* Grupo de campos (2 em 2) */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     display: flex;
     gap: 10px;
 }
 
+/* Campo padrão dentro do grupo */
 .form-field {
-    flex: 11;
-   
+    flex: 1;
 }
 
+/* Campo CEP ocupa menos espaço */
 .form-field-cep {
     flex: 1;
 }
 
+/* Botão de buscar CEP */
 .form-field-btn {
     display: flex;
-    align-items: end;
-    justify-content: end;
-    margin-bottom: 2px;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
-.form button {
+/* Botão dentro do formulário */
+.formulario button {
     background-color: #2219d4;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    
-}   
-.form button:hover {
+    transition: 0.3s;           /* suaviza hover */
+}
+
+.formulario button:hover {
     background-color: #08007d;
 }
 
-input{
-     border-radius: 5px;
-     border: 1px solid #ccc;
-     
-}
-input:focus {
-    border-color: #2219d4;
+/* Checkboxes em duas colunas */
+.CheckBox {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-weight: bold; 
+    color: #020202;
 }
 
-.checkBox{
-     text-align: center;
-    align-items: center;
+/* Cada coluna de checkboxes */
+.tipo-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Texto dos termos */
+.termos {
+    font-family: 'Raleway', sans-serif;
+    font-size: small;
+    margin-bottom: 20px;
+}
+
+.termos a {
+    color: #ff8400;
+    font-weight: bold;
+}
+
+.termos a:hover {
+    text-decoration: underline;
+}
+
+/* Botão principal de cadastro */
+.form-group-btn {
+    display: flex;
     justify-content: center;
-    height: 50%;
+    margin-bottom: 20px;
+}
 
+.form-group-btn button {
+    background-color: #ff8400;
+    color: white;
+    border: none;
+    padding: 20px 120px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* destaque */
+}
+
+.form-group-btn button:hover {
+    background-color: #b14d00;
+}
+
+/* Link para login */
+.login-link a {
+    color: #ff8400;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
 }

@@ -1,0 +1,20 @@
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo base do body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;              /* centraliza conteúdo */
+    flex-direction: column;
+    
+    justify-content: center;
+    min-height: 100vh;          /* altura mínima da tela, permite rolagem */
+    width: 100%;
+}
+
