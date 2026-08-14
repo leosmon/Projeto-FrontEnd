@@ -1,0 +1,224 @@
+/* Reset global */
+* {
+  box-sizing: border-box; /* Correção: aplicado globalmente */
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease-in-out; /* Suaviza interações */
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Correção: fonte mais legível para textos */
+  background-color: #f8f7f7;
+}
+
+/* HEADER */
+#header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Correção: distribui logo, menu e botões */
+  background-color: #007BFF;
+  border-bottom: 10px solid #91D8F7;
+  padding: 10px 40px;
+  position: sticky; /* Correção: fixa no topo */
+  top: 0;
+  z-index: 1000;
+}
+
+#logo-header {
+  width: 120px;
+  height: auto; /* Correção: evita distorção */
+}
+
+/* MENU */
+#menu {
+  display: flex;
+  gap: 20px; /* Correção: espaçamento uniforme */
+}
+
+.item-menu {
+  text-decoration: none;
+  color: #f8f7f7;
+  font-family: 'Raleway', sans-serif;
+  font-size: 17px;
+}
+
+.item-menu:hover {
+  color: #193ae2;
+}
+
+/* BOTÕES HEADER */
+.btn-header { /* Correção: substitui id duplicado */
+  padding: 10px 20px;
+  background-color: #ff8400;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-header:hover {
+  background-color: #b14d00;
+}
+
+/* BARRA DE BUSCA */
+#search-bar-background {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+#search-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 70%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Correção: destaque visual */
+}
+
+#search-bar-livro,
+#search-bar-local {
+  flex: 1; /* Correção: inputs ocupam espaço proporcional */
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 100px;
+  background-color: #f8f7f7;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* TIPO DE BUSCA */
+.tipo-busca {
+  display: flex;
+  gap: 15px;
+}
+
+.tipo-busca input {
+  margin-right: 5px;
+  accent-color: #ff8400; /* Correção: personaliza cor dos radio buttons */
+}
+
+.tipo-busca label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  color: #7e7e7e;
+}
+
+/* BOTÃO PESQUISAR */
+#search-button {
+  padding: 10px 20px;
+  background-color: #ff8400;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  background-color: #b14d00;
+}
+
+/* TÍTULO DO SITE */
+#site-title-container {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.imagem {
+  width: 20%;
+  margin-bottom: 10px;
+}
+
+#site-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 45px;
+}
+
+/* CARROSSEL DE LIVROS */
+#mais-lidos {
+  text-align: center;
+}
+
+#carrosel-livros-pg-inicial {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  overflow-x: auto; /* Correção: permite rolagem horizontal */
+  margin-top: 40px;
+  
+  
+}
+.capa-livro {
+  width: 150px;
+  height: auto; /* Correção: mantém proporção da imagem */
+  border-radius: 10px;
+  transition: transform 0.3s ease; /* Correção: animação suave */
+  
+}
+
+#carrosel-livros-pg-inicial a{
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  #search-bar-container {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  #menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tipo-busca {
+    flex-wrap: wrap;
+  }
+
+  #logo {
+    height: 120px;
+  }
+}
+
+#footer {
+  background-color: #007BFF; /* Azul padrão do site */
+  color: #f8f7f7; /* Texto claro */
+  padding: 20px;
+  text-align: center;
+  border-top: 5px solid #91D8F7; /* Detalhe visual */
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; /* Responsivo */
+}
+
+.footer-links a {
+  color: #f8f7f7;
+  text-decoration: none;
+  margin: 0 10px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.footer-links a:hover {
+  color: #ff8400; /* Laranja no hover */
+}
+
+#footer img {
+  width: 30%;
+  margin-top: 10px;
+}
+
