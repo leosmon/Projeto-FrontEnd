@@ -1,0 +1,113 @@
+/* Reset global: garante consistência no box model e remove margens/paddings padrão */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo base do body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    min-height: 100vh;   /* altura mínima da tela */
+    width: 100%;
+}
+
+/* Container principal: imagem + formulário lado a lado */
+.container {
+    background-color: #fff;
+    display: flex;       /* coloca imagem e form em linha */
+    align-items: center; /* centraliza verticalmente */
+    justify-content: center;
+    gap: 50px;           /* espaço entre imagem e formulário */
+}
+
+/* Título do formulário */
+h1 {
+    color: #0b007f;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Imagem lateral */
+.container img {
+    width: 35%;          /* ocupa parte da largura */
+}
+
+/* Caixa do formulário */
+#form-login {
+    margin-top: 20px;
+    max-width: 400px; 
+    width: 100%;;         /* largura fixa (pode virar % para responsividade) */
+}
+
+/* Link "Esqueceu sua senha?" */
+.login a {
+    text-decoration: none;
+    font-size: small;
+    color: #ff8400;
+    font-weight: bold;
+    align-self: end;
+}
+
+/* Botão principal "Entrar" */
+#form-login button {
+    background-color: #ff8400;
+    color: white;
+    border: none;
+    padding: 20px 120px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 40px;
+}
+
+/* Formulário: inputs e layout interno */
+form {
+    display: flex;
+    flex-direction: column; /* empilha os campos */
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+form input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Botão dentro do form (redundante com #form-login button) */
+form button {
+    background-color: #007BFF; /* azul diferente do botão principal */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Seção de cadastro abaixo do login */
+.cadastro {
+    text-align: center;
+    color: #7d7d7d;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: #7d7d7d solid 1px; /* linha separadora */
+}
+
+.cadastro a {
+    color: #ff8400;
+    font-weight: bold;
+}

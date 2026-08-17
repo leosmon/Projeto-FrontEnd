@@ -169,6 +169,15 @@ body {
     text-decoration: none;
 }
 
+.info-leitores { 
+  font-size: 0.85rem; 
+  color: #555; 
+  margin-top: -10px; 
+  text-align: center; 
+font-weight: 500;         
+
+}
+
 @media (max-width: 768px) {
   #search-bar-container {
     flex-direction: column;
