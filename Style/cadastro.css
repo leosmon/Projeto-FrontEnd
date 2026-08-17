@@ -49,12 +49,18 @@ body {
 .form label {
     display: block;
     margin-bottom: 5px;
+    text-align:justify ;
 }
 
 .form input[type="text"],
 .form input[type="password"] {
     width: 100%;
     padding: 10px;
+}
+#form-field-ConfirmarSenha{
+    flex: 1;
+    
+    
 }
 .form-group {
     margin-bottom: 15px;
@@ -98,4 +104,12 @@ input{
 }
 input:focus {
     border-color: #2219d4;
+}
+
+.checkBox{
+     text-align: center;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+
 }
