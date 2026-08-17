@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR"> <!-- Correção: idioma ajustado para português -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Book</title> <!-- Correção: título mais descritivo -->
+  <link rel="stylesheet" href="Style/Style.css" />
+
+  <!-- Importação de fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div id="header">
+      <!-- Logo -->
+      <a href="index.html">
+        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+      </a>
+
+      <!-- Menu de navegação -->
+      <nav id="menu">
+        <a class="item-menu" href="#">Página Inicial</a>
+        <a class="item-menu" href="#">Avaliações de Livros</a>
+        <a class="item-menu" href="#">Livros em Alta</a>
+      </nav>
+
+      <!-- Botões de login/cadastro -->
+      <div id="botoes-header"> <!-- Correção: antes estava com erro de fechamento -->
+        <a href="login.html"><button class="btn-header">Login</button></a> <!-- Correção: trocado id por classe -->
+        <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BARRA DE BUSCA -->
+  <div id="search-bar-background">
+    <div id="search-bar-container">
+      <!-- Campo de busca por livro -->
+      <img class="icon" src="conteudo/search.png" alt="Ícone de busca" />
+      <input type="text" id="search-bar-livro" placeholder="Autor, Livro ou Gênero" /> <!-- Correção: id único -->
+
+      <!-- Campo de busca por local -->
+      <img class="icon" src="conteudo/local.png" alt="Ícone de localização" />
+      <input type="text" id="search-bar-local" placeholder="Cidade, Estado ou Região" /> <!-- Correção: id único -->
+
+      <!-- Tipo de busca -->
+      <div class="tipo-busca">
+        <label><input type="radio" name="tipo" value="venda"> Venda</label>
+        <label><input type="radio" name="tipo" value="troca"> Troca</label>
+        <label><input type="radio" name="tipo" value="leitura"> Leitura</label>
+      </div>
+
+      <!-- Botão de pesquisa -->
+      <button id="search-button">Pesquisar</button>
+    </div>
+  </div>
+
+  <!-- TÍTULO DO SITE -->
+  <main id="site-title-container"> <!-- Correção: uso de <main> para semântica -->
+    <div id="logo-container-site-title">
+      <img class="imagem" src="conteudo/logo sem slogam.png" alt="Logo Search Book sem slogan" />
+    </div>
+    <h2 id="site-title">Conectando Leitores</h2> <!-- Correção: ortografia -->
+    <p>O que você procura pode estar aqui</p>
+  </main>
+
+  <!-- SEÇÃO DE MAIS LIDOS -->
+  <section id="mais-lidos">
+    <h3>Os Mais Lidos no Momento</h3>
+    <div id="carrosel-livros-pg-inicial">
+      <div class="livro">
+        <a href="#"><img class="capa-livro" src="conteudo/boa noite pun.png" alt="Capa Boa Noite Punpun" /><p class="info-leitores">180 Leitores</p></a>
+      </div>
+      <div class="livro">
+        <a href="#"><img class="capa-livro" src="conteudo/capa android.png" alt="Capa Android" /><p class="info-leitores">180 Leitores</p></a>
+      </div>
+      <div class="livro">
+        <a href="#"><img class="capa-livro" src="conteudo/dom casmurro .png" alt="Capa Dom Casmurro" /><p class="info-leitores">180 Leitores</p></a>
+      </div>
+      <div class="livro">
+        <a href="#"><img class="capa-livro" src="conteudo/guia do mochileiro.png" alt="Capa Guia do Mochileiro" /><p class="info-leitores">180 Leitores</p></a>
+      </div>
+      <div class="livro">
+        <a href="#"><img class="capa-livro" src="conteudo/tecnologia.png" alt="Capa Tecnologia" /><p class="info-leitores">180 Leitores</p></a>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-container">
+    <!-- Logo ou nome do site -->
+    <div class="footer-logo">
+      <img src="conteudo/logo.png" alt="Logo Search Book">
+      <p>Search Book © 2026</p>
+    </div>
+
+    <!-- Links rápidos -->
+    <div class="footer-links">
+      <a href="index.html">Página Inicial</a>
+      <a href="cadastro.html">Cadastro</a>
+      <a href="login.html">Login</a>
+    </div>
+
+    <!-- Contato -->
+    <div class="footer-contact">
+      <p>Email: contato@searchbook.com</p>
+      <p>Telefone: (21) 99999-9999</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
