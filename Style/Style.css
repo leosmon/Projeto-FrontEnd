@@ -1,39 +1,60 @@
 /* Reset global */
 * {
-  box-sizing: border-box; /* Correção: aplicado globalmente */
+  box-sizing: border-box;
+  /* Correção: aplicado globalmente */
   margin: 0;
   padding: 0;
-  transition: all 0.2s ease-in-out; /* Suaviza interações */
+  transition: all 0.2s ease-in-out;
+  /* Suaviza interações */
 }
 
 body {
-  font-family: 'Roboto', sans-serif; /* Correção: fonte mais legível para textos */
+  font-family: 'Roboto', sans-serif;
+  /* Correção: fonte mais legível para textos */
   background-color: #f8f7f7;
 }
+
+#menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#menu-responsivo {
+  display: none;
+}
+
 
 /* HEADER */
 #header {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Correção: distribui logo, menu e botões */
+  justify-content: space-between;
+  /* Correção: distribui logo, menu e botões */
   background-color: #007BFF;
   border-bottom: 10px solid #91D8F7;
   padding: 10px 40px;
-  position: sticky; /* Correção: fixa no topo */
+  position: sticky;
+  /* Correção: fixa no topo */
   top: 0;
   z-index: 1000;
 }
 
 #logo-header {
   width: 120px;
-  height: auto; /* Correção: evita distorção */
+  height: auto;
+  /* Correção: evita distorção */
 }
 
 /* MENU */
 #menu {
   display: flex;
-  gap: 20px; /* Correção: espaçamento uniforme */
+  gap: 20px;
+  /* Correção: espaçamento uniforme */
 }
 
 .item-menu {
@@ -48,7 +69,8 @@ body {
 }
 
 /* BOTÕES HEADER */
-.btn-header { /* Correção: substitui id duplicado */
+.btn-header {
+  /* Correção: substitui id duplicado */
   padding: 10px 20px;
   background-color: #ff8400;
   color: white;
@@ -77,12 +99,14 @@ body {
   border-radius: 20px;
   width: 70%;
   background-color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Correção: destaque visual */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Correção: destaque visual */
 }
 
 #search-bar-livro,
 #search-bar-local {
-  flex: 1; /* Correção: inputs ocupam espaço proporcional */
+  flex: 1;
+  /* Correção: inputs ocupam espaço proporcional */
   padding: 10px;
   border: none;
   outline: none;
@@ -104,7 +128,8 @@ body {
 
 .tipo-busca input {
   margin-right: 5px;
-  accent-color: #ff8400; /* Correção: personaliza cor dos radio buttons */
+  accent-color: #ff8400;
+  /* Correção: personaliza cor dos radio buttons */
 }
 
 .tipo-busca label {
@@ -152,59 +177,47 @@ body {
   display: flex;
   justify-content: center;
   gap: 20px;
-  overflow-x: auto; /* Correção: permite rolagem horizontal */
+  overflow-x: auto;
+  /* Correção: permite rolagem horizontal */
   margin-top: 40px;
-  
-  
+
+
 }
+
 .capa-livro {
-  width: 150px;
-  height: auto; /* Correção: mantém proporção da imagem */
+  width: 100%;
+  height: auto;
+  /* Correção: mantém proporção da imagem */
   border-radius: 10px;
-  transition: transform 0.3s ease; /* Correção: animação suave */
-  
-}
-
-#carrosel-livros-pg-inicial a{
-    text-decoration: none;
-}
-
-.info-leitores { 
-  font-size: 0.85rem; 
-  color: #555; 
-  margin-top: -10px; 
-  text-align: center; 
-font-weight: 500;         
+  transition: transform 0.3s ease;
+  /* Correção: animação suave */
 
 }
 
-@media (max-width: 768px) {
-  #search-bar-container {
-    flex-direction: column;
-    width: 90%;
-  }
-
-  #menu {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .tipo-busca {
-    flex-wrap: wrap;
-  }
-
-  #logo {
-    height: 120px;
-  }
+#carrosel-livros-pg-inicial a {
+  text-decoration: none;
 }
+
+.info-leitores {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: -10px;
+  text-align: center;
+  font-weight: 500;
+
+}
+
+
 
 #footer {
-  background-color: #007BFF; /* Azul padrão do site */
-  color: #f8f7f7; /* Texto claro */
+  background-color: #007BFF;
+  /* Azul padrão do site */
+  color: #f8f7f7;
+  /* Texto claro */
   padding: 20px;
   text-align: center;
-  border-top: 5px solid #91D8F7; /* Detalhe visual */
+  border-top: 5px solid #91D8F7;
+  /* Detalhe visual */
   margin-top: 50px;
 }
 
@@ -212,7 +225,8 @@ font-weight: 500;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap; /* Responsivo */
+  flex-wrap: wrap;
+  /* Responsivo */
 }
 
 .footer-links a {
@@ -223,7 +237,8 @@ font-weight: 500;
 }
 
 .footer-links a:hover {
-  color: #ff8400; /* Laranja no hover */
+  color: #ff8400;
+  /* Laranja no hover */
 }
 
 #footer img {
@@ -231,3 +246,122 @@ font-weight: 500;
   margin-top: 10px;
 }
 
+@media (max-width: 1185px) {
+  #header {
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+  }
+
+  #botoes-header {
+    display: none;
+  }
+
+  #menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    display: none;
+  }
+
+
+
+  #menu-responsivo {
+    display: none;
+    flex-direction: column;
+    background-color: #007BFF;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  #menu-responsivo.show {
+    display: flex;
+  }
+
+  #menu-toggle {
+    display: block;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+
+  #search-bar-container {
+    width: 90%;
+  }
+
+  #search-bar-livro,
+  #search-bar-local {
+    width: 15%;
+  }
+
+  .tipo-busca label {
+
+    font-size: 70%;
+
+  }
+
+  .tipo-busca input {
+    width: 16%;
+  }
+
+  #site-title {
+    font-size: 35px;
+  }
+}
+
+/* Telas pequenas (celulares) */
+@media (max-width: 750px) {
+  #header {
+    flex-direction: row;
+    text-align: center;
+  }
+
+  #menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-header {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  #search-bar-container {
+    flex-direction: column;
+    width: 95%;
+    gap: 10px;
+  }
+
+  .icon {
+    display: none;
+  }
+
+  #search-bar-livro,
+  #search-bar-local {
+    width: 80%;
+    text-align: center;
+  }
+
+  #site-title {
+    font-size: 28px;
+  }
+
+  .capa-livro {
+    width: 80%;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .info-leitores{
+    font-size: 60%;
+  }
+}

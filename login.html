@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR"> <!-- Define idioma da página -->
+<html lang="pt-BR"> <!--  idioma da página -->
 <head>
     <meta charset="UTF-8"> <!-- Suporte a acentos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
@@ -11,41 +11,52 @@
 
 <body>
     <!-- HEADER -->
-    <header>
-        <div id="header">
-            <!-- Logo -->
-            <a href="index.html">
-                <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-            </a>
+  <header>
+    <div id="header">
+      <!-- Logo -->
+      <a href="index.html">
+        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+      </a>
 
-            <!-- Menu de navegação -->
-            <nav id="menu">
-                <a class="item-menu" href="index.html">Página Inicial</a>
-                <a class="item-menu" href="#">Avaliações de Livros</a>
-                <a class="item-menu" href="#">Livros em Alta</a>
-            </nav>
+      <!-- Menu de navegação -->
+      <nav id="menu">
+        <a class="item-menu" href="#">Página Inicial</a>
+        <a class="item-menu" href="#">Avaliações de Livros</a>
+        <a class="item-menu" href="#">Livros em Alta</a>
+      </nav>
 
-            <!-- Botões de login/cadastro -->
-            <div id="botoes-header">
-                <a href="login.html"><button class="btn-header">Login</button></a>
-                <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
-            </div>
-        </div>
-    </header>
+      <!-- Botões de login/cadastro -->
+      <div id="botoes-header"> <!-- Correção: antes estava com erro de fechamento -->
+        <a href="login.html"><button class="btn-header">Login</button></a> <!-- Correção: trocado id por classe -->
+        <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
+      </div>
+
+      <!-- Botão hamburguer para display responsivo -->
+      <button id="menu-toggle">☰</button>
+
+      <!-- Menu de navegação responsivo -->
+      <nav id="menu-responsivo">
+        <a class="item-menu" href="index.html">Página Inicial</a>
+        <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+        <a class="item-menu" href="alta.html">Livros em Alta</a>
+        <a class="item-menu" href="login.html">Login</a>
+        <a class="item-menu" href="cadastro.html">Cadastro</a>
+      </nav>
+  </header>
 
     <!-- CONTAINER PRINCIPAL: imagem + formulário -->
     <div class="container">
         <!-- Lado esquerdo: imagem -->
-        <img src="conteudo/foto login.png" alt="Imagem ilustrativa de login">
+        <img class="imagem-login" src="conteudo/foto login.png" alt="Imagem ilustrativa de login">
 
         <!-- Lado direito: formulário -->
         <div id="form-login">
             <h1>Faça Seu Login</h1>
             <form action="login.php" method="POST" class="login">
-                <!-- Campo de e-mail -->
-                <input type="text" name="email" placeholder="E-mail" required>
+                <!-- Campo de Usuario -->
+                <input type="text" id="usuarioLogin" name="login" placeholder="Nome de Usuario" required>
                 <!-- Campo de senha -->
-                <input type="password" name="senha" placeholder="Senha" required>
+                <input type="password" id="senhaLogin" name="senha" placeholder="Senha" required>
                 <!-- Link de recuperação -->
                 <a href="#">Esqueceu sua Senha?</a>
                 <!-- Botão principal -->
