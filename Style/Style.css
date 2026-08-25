@@ -176,7 +176,7 @@ body {
 #carrosel-livros-pg-inicial {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   overflow-x: auto;
   /* Correção: permite rolagem horizontal */
   margin-top: 40px;
@@ -185,7 +185,7 @@ body {
 }
 
 .capa-livro {
-  width: 100%;
+  width: 70%;
   height: auto;
   /* Correção: mantém proporção da imagem */
   border-radius: 10px;

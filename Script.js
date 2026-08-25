@@ -63,7 +63,7 @@ if (senha !== confirmarSenha) {
   console.log("Cadastro salvo:", dados);
 });
 
-
+//botão buscar cep
 document.getElementById("cep").addEventListener("blur", () => {
   const cep = document.getElementById("cep").value.replace(/\D/g, "");
   if (cep.length === 8) {
