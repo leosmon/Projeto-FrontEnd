@@ -365,3 +365,34 @@ body {
     font-size: 60%;
   }
 }
+
+.erro{
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+}
+
+.container-erro{
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  display: flex;
+  flex-direction:column;
+}
+
+.texto-erro{
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  display: flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.erro-btn{
+  margin-top: 10px;
+  gap: 20px
+  
+}
+
