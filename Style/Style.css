@@ -37,7 +37,7 @@ body {
   /* Correção: distribui logo, menu e botões */
   background-color: #007BFF;
   border-bottom: 10px solid #91D8F7;
-  padding: 10px 40px;
+  padding: 10px 10px;
   position: sticky;
   /* Correção: fixa no topo */
   top: 0;
@@ -45,7 +45,7 @@ body {
 }
 
 #logo-header {
-  width: 120px;
+  width: 200px;
   height: auto;
   /* Correção: evita distorção */
 }
@@ -185,7 +185,7 @@ body {
 }
 
 .capa-livro {
-  width: 70%;
+  width: 50%;
   height: auto;
   /* Correção: mantém proporção da imagem */
   border-radius: 10px;
@@ -207,7 +207,11 @@ body {
 
 }
 
-
+.livro{
+  width: 80%;
+  gap:2px;
+  display: flex;
+}
 
 #footer {
   background-color: #007BFF;
@@ -223,7 +227,7 @@ body {
 
 .footer-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   /* Responsivo */
@@ -242,7 +246,7 @@ body {
 }
 
 #footer img {
-  width: 30%;
+  width: 25%;
   margin-top: 10px;
 }
 
@@ -393,6 +397,6 @@ body {
 .erro-btn{
   margin-top: 10px;
   gap: 20px
-  
+
 }
 
