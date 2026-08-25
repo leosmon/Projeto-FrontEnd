@@ -111,3 +111,20 @@ form button:hover {
     color: #ff8400;
     font-weight: bold;
 }
+
+
+@media (max-width: 750px) {
+.imagem-login{
+    display: none;
+}
+
+#form-login{
+    width: 90%;
+}
+
+#form-login h1{
+    font-size: 100%;
+}
+
+
+}
