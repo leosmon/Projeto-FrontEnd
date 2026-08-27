@@ -1,0 +1,76 @@
+.erro{
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+}
+
+.container-erro{
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  display: flex;
+  flex-direction:column;
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+
+.container-erro img{
+    width: 40%;
+}
+
+.texto-erro{
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  display: flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.erro-btn{
+  margin-top: 20px;
+  gap: 20px;
+ 
+}
+
+.btn-inicial{
+    padding: 10px 25px  10px  25px;
+    background-color: #ff8400;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-busca{
+    padding: 10px 25px  10px  25px;
+    background-color: white;
+    border-color: midnightblue;
+    border: 1px solid;
+  color: blue;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.Container-ajuda{
+    display: flex;
+    align-items:center ;
+    justify-content: center;
+    margin-top: 5%;
+    
+}
+.Container-ajuda img{
+    width: 10%;
+}
+
+.texto-ajuda{
+    display: flex;
+    gap: 4px;
+}
+
+.ajuda{
+    color: darkblue;
+    font-weight: bold;
+}

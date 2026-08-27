@@ -223,13 +223,16 @@ body {
   border-top: 5px solid #91D8F7;
   /* Detalhe visual */
   margin-top: 50px;
+ 
 }
 
 .footer-container {
   display: flex;
+  align-text:  center;
   justify-content: space-between;
-  align-items: center;
+  align-items:center ;
   flex-wrap: wrap;
+  /*align-self: flex-end;
   /* Responsivo */
 }
 
@@ -245,8 +248,12 @@ body {
   /* Laranja no hover */
 }
 
-#footer img {
-  width: 25%;
+#footer img{
+  width: 100%;
+}
+
+.footer-logo {
+  width: 15%;
   margin-top: 10px;
 }
 
@@ -368,35 +375,5 @@ body {
   .info-leitores{
     font-size: 60%;
   }
-}
-
-.erro{
-  width: 60%;
-  justify-content: center;
-  align-items: center;
-  justify-self: center;
-}
-
-.container-erro{
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  display: flex;
-  flex-direction:column;
-}
-
-.texto-erro{
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  display: flex;
-  flex-direction:column;
-  gap: 10px;
-}
-
-.erro-btn{
-  margin-top: 10px;
-  gap: 20px
-
 }
 
