@@ -84,4 +84,3 @@ document.getElementById("cep").addEventListener("blur", () => {
       });
   }
 });
-

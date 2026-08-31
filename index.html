@@ -1,147 +1,172 @@
 <!doctype html>
-<html lang="pt-BR"> <!-- Correção: idioma ajustado para português -->
+<html lang="pt-BR"> <!-- Idioma definido para português -->
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search Book</title> <!-- Correção: título mais descritivo -->
+  <title>Search Book - Conectando Leitores</title> <!-- Título mais descritivo -->
   <link rel="stylesheet" href="Style/Style.css" />
-  <script src="script.js"></script>
-
 
   <!-- Importação de fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@400;500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet" />
 </head>
 
 <body>
   <!-- HEADER -->
-  <header>
-    <div id="header">
-      <!-- Logo -->
-      <a href="index.html">
-        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-      </a>
+  <header id="header" aria-label="Cabeçalho principal">
+    <a href="index.html" aria-label="Ir para página inicial">
+      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+    </a>
 
-      <!-- Menu de navegação -->
-      <nav id="menu">
-        <a class="item-menu" href="#">Página Inicial</a>
-        <a class="item-menu" href="#">Avaliações de Livros</a>
-        <a class="item-menu" href="#">Livros em Alta</a>
-      </nav>
+    <!-- Menu desktop -->
+    <nav id="menu" aria-label="Menu principal">
+      <a class="item-menu" href="index.html">Página Inicial</a>
+      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+      <a class="item-menu" href="alta.html">Livros em Alta</a>
+    </nav>
 
-      <!-- Botões de login/cadastro -->
-      <div id="botoes-header"> <!-- Correção: antes estava com erro de fechamento -->
-        <a href="login.html"><button class="btn-header">Login</button></a> <!-- Correção: trocado id por classe -->
-        <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
-      </div>
+    <!-- Botões desktop -->
+    <div id="botoes-header">
+      <a class="btn-login" href="login.html">Login</a>
+      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+    </div>
 
-      <!-- Botão hamburguer para display responsivo -->
-      <button id="menu-toggle">☰</button>
-
-      <!-- Menu de navegação responsivo -->
-      <nav id="menu-responsivo">
-        <a class="item-menu" href="index.html">Página Inicial</a>
-        <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-        <a class="item-menu" href="alta.html">Livros em Alta</a>
-        <a class="item-menu" href="login.html">Login</a>
-        <a class="item-menu" href="cadastro.html">Cadastro</a>
-      </nav>
-  </header>
-  </div>
+    <!-- Botão hamburguer -->
+    <button id="menu-toggle" aria-label="Abrir menu responsivo">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-
+  <!-- Menu responsivo -->
+  <nav id="menu-responsivo" aria-label="Menu responsivo">
+    <a class="item-menu" href="index.html">Página Inicial</a>
+    <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+    <a class="item-menu" href="alta.html">Livros em Alta</a>
+    <div class="menu-auth">
+      <a class="btn-login" href="login.html">Login</a>
+      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+    </div>
+  </nav>
 
   <!-- BARRA DE BUSCA -->
-  <div id="search-bar-background">
+  <section id="search-bar-background" aria-label="Barra de busca de livros">
+    <div class="search-title">
+      <h2 id="site-title">Conectando <span class="highlight">Leitores</span></h2>
+      <p>O que você procura pode estar aqui</p>
+    </div>
+
     <div id="search-bar-container">
-      <!-- Campo de busca por livro -->
-      <img class="icon" src="conteudo/search.png" alt="Ícone de busca" />
-      <input type="text" id="search-bar-livro" placeholder="Autor, Livro ou Gênero" /> <!-- Correção: id único -->
-
-      <!-- Campo de busca por local -->
-      <img class="icon" src="conteudo/local.png" alt="Ícone de localização" />
-      <input type="text" id="search-bar-local" placeholder="Cidade, Estado ou Região" /> <!-- Correção: id único -->
-
       <!-- Tipo de busca -->
-      <div class="tipo-busca">
-        <label><input type="radio" name="tipo" value="venda"> Venda</label>
-        <label><input type="radio" name="tipo" value="troca"> Troca</label>
-        <label><input type="radio" name="tipo" value="leitura"> Leitura</label>
-      </div>
+      <fieldset class="tipo-busca" aria-label="Tipo de busca">
+        <label><input type="radio" name="tipo" value="venda" checked> <span>Venda</span></label>
+        <label><input type="radio" name="tipo" value="troca"> <span>Troca</span></label>
+        <label><input type="radio" name="tipo" value="leitura"> <span>Leitura</span></label>
+      </fieldset>
 
-      <!-- Botão de pesquisa -->
-      <button id="search-button">Pesquisar</button>
-    </div>
-  </div>
+      <!-- Inputs -->
+      <div class="inputs">
+        <div class="input-box">
+          <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input id="search-bar-livro" type="text" placeholder="Autor, Livro ou Gênero"
+            aria-label="Buscar por autor, livro ou gênero">
+        </div>
 
-  <!-- TÍTULO DO SITE -->
-  <main id="site-title-container"> <!-- Correção: uso de <main> para semântica -->
-    <div id="logo-container-site-title">
-      <img class="imagem" src="conteudo/logo sem slogam.png" alt="Logo Search Book sem slogan" />
-    </div>
-    <h2 id="site-title">Conectando Leitores</h2> <!-- Correção: ortografia -->
-    <p>O que você procura pode estar aqui</p>
-  </main>
+        <div class="input-box">
+          <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <input id="search-bar-local" type="text" placeholder="Cidade, Estado ou Região"
+            aria-label="Buscar por localização">
+        </div>
 
-  <!-- SEÇÃO DE MAIS LIDOS -->
-  <section id="mais-lidos">
-    <h3>Os Mais Lidos no Momento</h3>
-    <div id="carrosel-livros-pg-inicial">
-      <div class="livro">
-        <a href="#"><img class="capa-livro" src="conteudo/boa noite pun.png" alt="Capa Boa Noite Punpun" />
-          <p class="info-leitores">180 Leitores</p>
-        </a>
-      </div>
-      <div class="livro">
-        <a href="#"><img class="capa-livro" src="conteudo/capa android.png" alt="Capa Android" />
-          <p class="info-leitores">180 Leitores</p>
-        </a>
-      </div>
-      <div class="livro">
-        <a href="#"><img class="capa-livro" src="conteudo/dom casmurro .png" alt="Capa Dom Casmurro" />
-          <p class="info-leitores">180 Leitores</p>
-        </a>
-      </div>
-      <div class="livro">
-        <a href="#"><img class="capa-livro" src="conteudo/guia do mochileiro.png" alt="Capa Guia do Mochileiro" />
-          <p class="info-leitores">180 Leitores</p>
-        </a>
-      </div>
-      <div class="livro">
-        <a href="#"><img class="capa-livro" src="conteudo/tecnologia.png" alt="Capa Tecnologia" />
-          <p class="info-leitores">180 Leitores</p>
-        </a>
+        <!-- Botão -->
+        <button id="search-button" aria-label="Pesquisar livros">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          Pesquisar
+        </button>
       </div>
     </div>
   </section>
-  <!-- FOOTER -->
-  <footer id="footer">
-    <div class="footer-container">
-      <!-- Logo ou nome do site -->
-      <div class="footer-logo">
-        <img src="conteudo/logo.png" alt="Logo Search Book">
-        <p>Search Book © 2026</p>
-      </div>
 
-      <!-- Links rápidos -->
-      <div class="footer-links">
-        <a href="index.html">Página Inicial</a>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="login.html">Login</a>
+  <!-- SEÇÃO DE LIVROS -->
+  <section id="mais-lidos" class="mais-lidos" aria-label="Livros mais lidos">
+    <div class="cabecalho">
+      <div>
+        <p class="tag">TENDÊNCIAS</p>
+        <h2>Os Mais Lidos no Momento</h2>
       </div>
+      <a href="#" class="ver-todos">Ver todos →</a>
+    </div>
 
-      <!-- Contato -->
-      <div class="footer-contact">
-        <p>Email: contato@searchbook.com</p>
-        <p>Telefone: (21) 99999-9999</p>
+    <div class="relative">
+      <div id="carrosel-livros-pg-inicial"
+        class="flex gap-5 overflow-hidden mx-2 transition-transform duration-400 ease-in-out"
+        aria-label="Carrossel de livros">
+        <!-- Cards dos livros via JS -->
       </div>
     </div>
-  </footer>
+  </section>
 
+  <!-- SEÇÃO DE CADASTRO -->
+  <section class="cadastro px-6 pb-14" aria-label="Seção de cadastro">
+    <div class="cadastro-container max-w-4xl mx-auto rounded-3xl p-10 text-center relative overflow-hidden">
+      <div class="decorativo decorativo-top"></div>
+      <div class="decorativo decorativo-bottom"></div>
+
+      <h2 class="cadastro-titulo">Pronto para começar a leitura?</h2>
+      <p class="cadastro-texto">Cadastre-se gratuitamente e conecte-se a milhares de leitores apaixonados por livros.
+      </p>
+
+      <a href="/cadastro.html" class="cadastro-botao" aria-label="Criar conta grátis">
+        Criar conta grátis
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+          aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="footer px-6 py-12" aria-label="Rodapé do site">
+    <div class="footer-container">
+      <div class="logo-rodape" aria-label="Logo e marca">
+        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+      </div>
+
+      <div class="Links-rodape" aria-label="Links rápidos">
+        <p class="footer-title">Links Rápidos</p>
+        <a class="footer-link" href="/">Página Inicial</a>
+        <a class="footer-link" href="/cadastro">Cadastro</a>
+        <a class="footer-link" href="/login">Login</a>
+      </div>
+
+      <div class="contatos-rodape" aria-label="Informações de contato">
+        <p class="footer-title">Contato</p>
+        <p class="footer-text">Email: contato@searchbook.com</p>
+        <p class="footer-text">Telefone: (21) 99999-9999</p>
+      </div>
+    </div>
+    <div class="direitos">
+      <p>© 2026 SearchBook. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+ 
+  <script src="livros.js"></script>
+  <script src="botaoHamburguer.js"></script>
 </body>
 
 </html>

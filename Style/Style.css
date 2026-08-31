@@ -1,306 +1,811 @@
-/* Reset global */
+/* ===========================
+   RESET GLOBAL
+   =========================== */
 * {
   box-sizing: border-box;
-  /* Correção: aplicado globalmente */
   margin: 0;
   padding: 0;
   transition: all 0.2s ease-in-out;
   /* Suaviza interações */
 }
-
+a{
+  text-decoration: none;
+}
 body {
   font-family: 'Roboto', sans-serif;
-  /* Correção: fonte mais legível para textos */
   background-color: #f8f7f7;
 }
 
-#menu-toggle {
-  display: none;
-  font-size: 28px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-#menu-responsivo {
-  display: none;
-}
-
-
-/* HEADER */
+/* ===========================
+   HEADER
+   =========================== */
 #header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* Correção: distribui logo, menu e botões */
-  background-color: #007BFF;
-  border-bottom: 10px solid #91D8F7;
-  padding: 10px 10px;
+  background-color: #f9f9f9;
+
+  box-shadow: #585757 0px 0px 10px;
+ 
+  
+  padding: 10px 40px;
   position: sticky;
-  /* Correção: fixa no topo */
+  /* fixa no topo */
   top: 0;
   z-index: 1000;
 }
 
 #logo-header {
-  width: 200px;
+  width: 120px;
   height: auto;
-  /* Correção: evita distorção */
 }
 
-/* MENU */
+/* Menu desktop */
 #menu {
   display: flex;
   gap: 20px;
-  /* Correção: espaçamento uniforme */
 }
 
 .item-menu {
   text-decoration: none;
-  color: #f8f7f7;
+  color: #373737;
   font-family: 'Raleway', sans-serif;
-  font-size: 17px;
+  font-size: 14px;
+font-weight: bold;
+ 
 }
 
 .item-menu:hover {
   color: #193ae2;
 }
 
-/* BOTÕES HEADER */
+.btn-login {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    color: #007BFF;
+    border: 2px solid #007BFF;
+    border-radius: 999px;
+    padding: 8px 15px 8px 15px;
+    text-decoration: none;
+    transition: background 0.3s;
+    
+
+  }
+
+  .btn-login:hover {
+    background: rgba(0, 123, 255, 0.1);
+  }
+
+  .btn-cadastro {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #FF8400, #E06500);
+    transition: opacity 0.3s;
+    
+  }
+
+  .btn-cadastro:hover {
+    opacity: 0.9;
+  }
+/* Botões de login/cadastro 
 .btn-header {
-  /* Correção: substitui id duplicado */
   padding: 10px 20px;
   background-color: #ff8400;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
+}*/
 
-.btn-header:hover {
-  background-color: #b14d00;
-}
 
-/* BARRA DE BUSCA */
-#search-bar-background {
-  display: flex;
+
+/* ===========================
+   BOTÃO HAMBÚRGUER
+   =========================== */
+#menu-toggle {
+  display: none;
+  flex-direction: column;
   justify-content: center;
-  margin-top: 30px;
-}
-
-#search-bar-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  width: 70%;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Correção: destaque visual */
-}
-
-#search-bar-livro,
-#search-bar-local {
-  flex: 1;
-  /* Correção: inputs ocupam espaço proporcional */
-  padding: 10px;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
   border: none;
-  outline: none;
-  font-size: 16px;
-  border-radius: 100px;
-  background-color: #f8f7f7;
+  background: none;
+  cursor: pointer;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
+#menu-toggle span {
+  height: 3px;
+  width: 24px;
+  background: rgb(60, 60, 60);
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
-/* TIPO DE BUSCA */
+/* Animação para virar X */
+#menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===========================
+   MENU RESPONSIVO (MOBILE)
+   =========================== */
+#menu-responsivo {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background: #fbfbfb;
+  transition: all 0.3s ease;
+  text-align: start;
+}
+
+#menu-responsivo.ativo {
+  max-height: 200px;
+  opacity: 1;
+  padding: 10px 0;
+}
+
+.item-menu {
+  display: block;
+  color: rgb(61, 61, 61);
+  text-decoration: none;
+  padding: 10px;
+}
+
+#menu-responsivo a:hover {
+  background: #e0eefa;
+  color: #2c48d8;
+}
+
+.menu-auth {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  justify-content: center;
+}
+
+/* ===========================
+   BARRA DE BUSCA
+   =========================== */
+/* Fundo com gradiente */
+#search-bar-background {
+  padding: 4rem 1rem;
+  background: linear-gradient(160deg, #001d40 0%, #00347a 55%, #0056c7 100%);
+}
+
+/* Título */
+.search-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.search-title h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.search-title .highlight {
+  color: #ff8400;
+}
+
+.search-title p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+/* Container da busca */
+#search-bar-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 20px;
+}
+
+/* Tipo de busca */
 .tipo-busca {
   display: flex;
-  gap: 15px;
-}
-
-.tipo-busca input {
-  margin-right: 5px;
-  accent-color: #ff8400;
-  /* Correção: personaliza cor dos radio buttons */
+  gap: 10px;
+  margin-bottom: 15px;
+  border: none;
 }
 
 .tipo-busca label {
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  color: #7e7e7e;
-}
-
-/* BOTÃO PESQUISAR */
-#search-button {
-  padding: 10px 20px;
-  background-color: #ff8400;
-  color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 
+.tipo-busca input {
+  display: none;
+}
+
+.tipo-busca span {
+  display: block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f0f4ff;
+  color: #007BFF;
+  transition: all 0.3s;
+}
+
+.tipo-busca input:checked + span {
+  background: #007BFF;
+  color: #fff;
+  border: none;
+}
+
+/* Inputs */
+.inputs {
+  display: flex;
+  
+  gap: 12px;
+}
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  border: 2px solid #e8eef8;
+  background: #f8faff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Botão */
+#search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #007BFF, #0056c7);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
 #search-button:hover {
-  background-color: #b14d00;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
-/* TÍTULO DO SITE */
-#site-title-container {
-  text-align: center;
-  margin: 50px 0;
+#search-button:active {
+  transform: scale(0.95);
 }
 
-.imagem {
-  width: 20%;
-  margin-bottom: 10px;
-}
 
-#site-title {
-  font-family: 'Raleway', sans-serif;
-  font-size: 45px;
-}
-
-/* CARROSSEL DE LIVROS */
+/* ===========================
+   CARROSSEL DE LIVROS
+   =========================== */
 #mais-lidos {
-  text-align: center;
+  padding: 3.5rem 1.5rem;
+  background: #f8faff;
 }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.section-header .tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ff8400;
+  margin-bottom: 0.25rem;
+}
+
+.section-header .title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.ver-todos {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.ver-todos:hover {
+  color: #0056c7;
+}
+
+/* Carrossel */
+#carrosel-livros-pg-inicial {
+  display: flex;
+  gap: 1rem;
+  transform: translateX(0);
+}
+
+#indicadores button {
+  border: none;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+#indicadores button.ativo {
+  width: 24px;
+  height: 8px;
+  background: rgb(0, 123, 255);
+}
+
+#indicadores button.inativo {
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 123, 255, 0.3);
+}
+
+
+
+
+
+.carrossel-container {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 1rem;
+}
+
+.livro {
+  flex-shrink: 0;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.capa {
+  height: 210px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.livro:hover .capa {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.info .titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.info .autor {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.info .leitores {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff8400;
+}
+
+/* Botões */
+.btn-prev, .btn-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.3s, color 0.3s;
+}
+
+.btn-prev { left: -10px; }
+.btn-next { right: -10px; }
+
+.btn-prev:hover, .btn-next:hover {
+  border-color: #007BFF;
+  color: #007BFF;
+}
+
+/* Indicadores */
+.indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1.5rem;
+}
+
+.indicadores button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,123,255,0.3);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, width 0.3s;
+}
+
+.indicadores button.ativo {
+  width: 24px;
+  background: #007BFF;
+}
+
+/* ===========================
+   Livros
+   =========================== */
 
 #carrosel-livros-pg-inicial {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  gap: 20px;
   overflow-x: auto;
-  /* Correção: permite rolagem horizontal */
-  margin-top: 40px;
+  scroll-behavior: smooth;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 6%;
 
-
+  
 }
 
-.capa-livro {
-  width: 50%;
-  height: auto;
-  /* Correção: mantém proporção da imagem */
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-  /* Correção: animação suave */
-
-}
-
-#carrosel-livros-pg-inicial a {
-  text-decoration: none;
-}
-
-.info-leitores {
-  font-size: 0.85rem;
-  color: #555;
-  margin-top: -10px;
+.livro-card {
+  position: relative;
+  width: 150px;
+  flex-shrink: 0;
   text-align: center;
-  font-weight: 500;
-
 }
 
-.livro{
-  width: 80%;
-  gap:2px;
-  display: flex;
+.livro-capa {
+  height: 210px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
 }
 
-#footer {
-  background-color: #007BFF;
-  /* Azul padrão do site */
-  color: #f8f7f7;
-  /* Texto claro */
-  padding: 20px;
-  text-align: center;
-  border-top: 5px solid #91D8F7;
-  /* Detalhe visual */
-  margin-top: 50px;
- 
+.livro-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.footer-container {
-  display: flex;
-  align-text:  center;
-  justify-content: space-between;
-  align-items:center ;
-  flex-wrap: wrap;
-  /*align-self: flex-end;
-  /* Responsivo */
+/* Overlay transparente */
+.livro-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0); /* invisível */
+  transition: background 0.3s;
 }
 
-.footer-links a {
-  color: #f8f7f7;
-  text-decoration: none;
-  margin: 0 10px;
+.livro-card:hover .livro-overlay {
+  background: rgba(0, 0, 0, 0.2); /* preto 20% no hover */
+}
+
+
+.livro-card:hover .livro-capa {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.livro-info .titulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
   font-family: 'Raleway', sans-serif;
 }
 
-.footer-links a:hover {
+.livro-info .autor {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.livro-info .leitores {
+  font-size: 0.75rem;
+  font-weight: 600;
   color: #ff8400;
-  /* Laranja no hover */
+}
+.tag{
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff8400;
 }
 
-#footer img{
-  width: 100%;
+
+/* ===========================
+   CALL TO ACTION
+   =========================== */
+
+.cadastro {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 }
 
+/* Container principal */
+.cadastro-container {
+  background: linear-gradient(135deg, rgb(255, 132, 0), rgb(224, 101, 0));
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 45px;
+  border-radius: 25px;
+  margin-bottom: 5%;
+}
+
+/* Elementos decorativos */
+.decorativo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  
+}
+
+.decorativo-top {
+  top: -40px;
+  right: -40px;
+  width: 12rem;
+  height: 12rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.decorativo-bottom {
+  bottom: 0;
+  left: -40px;
+  width: 9rem;
+  height: 9rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Título */
+.cadastro-titulo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+/* Texto */
+.cadastro-texto {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.75rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botão */
+.cadastro-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: #ff8400;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cadastro-botao:hover {
+  background: #f9fafb;
+}
+
+.cadastro-botao:active {
+  transform: scale(0.95);
+}
+/* ===========================
+   FOOTER
+   =========================== */
+/* Fundo e layout */
+.footer {
+  background-color: #021b3a; /* azul escuro */
+  color: #fff;
+  
+}
+
+.footer-container{
+  display: flex;
+  gap:25%;
+  justify-content: center;
+  padding: 40px;
+  
+}
+
+.Links-rodape{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo-rodape{
+  display: flex;
+  flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+/* Links */
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+
+
+
+/* Logo */
 .footer-logo {
-  width: 15%;
-  margin-top: 10px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #fff;
 }
 
-@media (max-width: 1185px) {
-  #header {
-    flex-direction: row;
-    align-items: center;
-    padding: 20px;
-  }
+/* Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
 
+
+}
+
+/* Marca */
+.footer-brand {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-brand .brand-blue {
+  color: #007BFF; /* azul */
+}
+
+.footer-brand .brand-orange {
+  color: #ff8400; /* laranja */
+}
+
+/* Texto copy */
+.footer-copy {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+/* Títulos */
+.footer-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ff8400;
+  margin-bottom: 0.5rem;
+}
+
+/* Links */
+.footer-link {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+/* Texto contato */
+.footer-text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.direitos{
+   border-top: #333;
+   border-top-style: solid;
+   border-top-width: 1px;
+   padding: 1rem;
+   margin-top: 1rem;
+   color: #505151;
+   font-size: 12px;
+   align-items: center;
+
+}
+.direitos p{
+  text-align: center;
+  color: #505151;
+  font-size: 12px;
+
+  
+}
+
+/* ===========================
+   RESPONSIVIDADE
+   =========================== */
+@media (max-width: 900px) {
   #botoes-header {
     display: none;
   }
+.footer {
+    text-align: center;
+  }
+   .cadastro-titulo {
+    font-size: 1.5rem;
+  }
 
   #menu {
-    flex-wrap: wrap;
-    justify-content: center;
     display: none;
-  }
-
-
-
-  #menu-responsivo {
-    display: none;
-    flex-direction: column;
-    background-color: #007BFF;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  #menu-responsivo.show {
-    display: flex;
   }
 
   #menu-toggle {
-    display: block;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+    display: flex;
+    /* mostra botão hamburguer */
   }
-
 
   #search-bar-container {
     width: 90%;
@@ -312,9 +817,7 @@ body {
   }
 
   .tipo-busca label {
-
     font-size: 70%;
-
   }
 
   .tipo-busca input {
@@ -324,20 +827,70 @@ body {
   #site-title {
     font-size: 35px;
   }
+
+
+  .btn-login {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    color: #007BFF;
+    border: 2px solid #007BFF;
+    border-radius: 999px;
+    padding: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+    margin-left: 10%;
+
+  }
+
+  .btn-login:hover {
+    background: rgba(0, 123, 255, 0.1);
+  }
+
+  .btn-cadastro {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #FF8400, #E06500);
+    transition: opacity 0.3s;
+    width: 10px;
+    margin-right: 10%;
+  }
+
+  .btn-cadastro:hover {
+    opacity: 0.9;
+  }
+.inputs {
+    flex-direction: row;
+  }
+  .item-menu{
+    margin-left: 5%;
+  }
+  .livro-card {
+    width: 140px; /* diminui tamanho dos cards */
+  }
 }
 
-/* Telas pequenas (celulares) */
-@media (max-width: 750px) {
+
+
+@media (max-width: 843px) {
   #header {
     flex-direction: row;
     text-align: center;
   }
-
-  #menu {
-    flex-direction: column;
-    gap: 10px;
+ .livro-card {
+    width: 120px; /* ainda menor em telas pequenas */
   }
 
+  .livro-info .titulo{
+    font-size: 12px;
+  }
   .btn-header {
     width: 100%;
     margin-top: 10px;
@@ -371,9 +924,8 @@ body {
     flex-direction: column;
     text-align: center;
   }
-  
-  .info-leitores{
+
+  .info-leitores {
     font-size: 60%;
   }
 }
-

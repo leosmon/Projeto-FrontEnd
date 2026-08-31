@@ -1,0 +1,98 @@
+const form = document.getElementById("form");
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // Captura valores
+    const nome = document.getElementById("nome").value.trim();
+    const cpf = document.getElementById("cpf").value.trim();
+    const cep = document.getElementById("cep").value.trim();
+    const rua = document.getElementById("rua").value.trim();
+    const bairro = document.getElementById("bairro").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const estado = document.getElementById("estado").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const celular = document.getElementById("celular").value.trim();
+    const usuario = document.getElementById("usuario").value.trim();
+    const senha = document.getElementById("senha").value.trim();
+    const confirmarSenha = document.getElementById("confirmarSenha").value.trim();
+
+    const inputConfirmarSenha = document.getElementById("confirmarSenha");
+
+    // Validação de senha
+    if (senha !== confirmarSenha) {
+        inputConfirmarSenha.setCustomValidity("As senhas não conferem");
+        inputConfirmarSenha.reportValidity();
+        setTimeout(() => {
+            inputConfirmarSenha.setCustomValidity("");
+        }, 2000);
+        return;
+    } else {
+        inputConfirmarSenha.setCustomValidity("");
+    }
+
+    // Captura checkboxes
+    const tiposCadastro = [];
+    if (document.querySelector("input[value='venda']").checked) tiposCadastro.push("venda");
+    if (document.querySelector("input[value='troca']").checked) tiposCadastro.push("troca");
+    if (document.querySelector("input[value='compra']").checked) tiposCadastro.push("compra");
+    if (document.querySelector("input[value='leitura']").checked) tiposCadastro.push("leitura");
+
+    // Cria objeto JSON
+    const dados = {
+        nome,
+        cpf,
+        cep,
+        rua,
+        bairro,
+        cidade,
+        estado,
+        telefone,
+        celular,
+        usuario,
+        senha,
+        tiposCadastro
+    };
+
+    // Salva no LocalStorage
+    localStorage.setItem("cadastro", JSON.stringify(dados));
+
+    document.body.innerHTML = `
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:Raleway,sans-serif;text-align:center;">
+    <h1 style="color:#ff8400;">Cadastro realizado com sucesso!</h1>
+    <p style="color:#333;margin:1rem 0;">Você será redirecionado para a página inicial em instantes...</p>
+  </div>
+`;
+
+    // Redireciona após 3 segundos
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 3000);
+});
+
+// Busca CEP automático
+document.getElementById("cep").addEventListener("blur", () => {
+    const cep = document.getElementById("cep").value.replace(/\D/g, "");
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(res => res.json())
+            .then(data => {
+                const inputCep = document.getElementById("cep");
+                if (!data.erro) {
+                    inputCep.setCustomValidity("");
+                    document.getElementById("rua").value = data.logradouro;
+                    document.getElementById("bairro").value = data.bairro;
+                    document.getElementById("cidade").value = data.localidade;
+                    document.getElementById("estado").value = data.uf;
+                } else {
+                    inputCep.setCustomValidity("CEP não encontrado");
+                    inputCep.reportValidity();
+                }
+            })
+            .catch(() => {
+                const inputCep = document.getElementById("cep");
+                inputCep.setCustomValidity("Erro ao buscar CEP");
+                inputCep.reportValidity();
+            });
+    }
+});
