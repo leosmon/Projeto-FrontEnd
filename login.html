@@ -12,7 +12,7 @@
 
 <body>
     <!-- HEADER -->
-   <header id="header" aria-label="Cabeçalho principal">
+  <header id="header" class="light" aria-label="Cabeçalho principal">
     <a href="index.html" aria-label="Ir para página inicial">
       <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
     </a>
@@ -24,17 +24,23 @@
       <a class="item-menu" href="alta.html">Livros em Alta</a>
     </nav>
 
+
     <!-- Botões desktop -->
     <div id="botoes-header">
       <a class="btn-login" href="login.html">Login</a>
       <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
     </div>
 
+    <!-- Botões de acessibilidade -->
+    <div id="acessibilidade">
+    <button id="btn-aumentar">A+</button>
+    <button id="btn-diminuir">A-</button>
+    <button id="btn-tema">🌙/☀️</button>
+    </div>
     <!-- Botão hamburguer -->
     <button id="menu-toggle" aria-label="Abrir menu responsivo">
       <span></span><span></span><span></span>
     </button>
-    
   </header>
   <nav id="menu-responsivo" aria-label="Menu responsivo">
     <a class="item-menu" href="index.html">Página Inicial</a>
@@ -88,7 +94,7 @@
           <button type="submit" class="buton-login">Entrar</button>
         </form>
 
-        <p class="register">Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+        <p class="register">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
       </div>
     </div>
   </main>
@@ -119,5 +125,6 @@
   </footer>
   <script src="botaoHamburguer.js"></script>
   <script src="login.js"></script>
+  <script src="Script.js"></script>
 </body>
 </html>

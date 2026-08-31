@@ -11,30 +11,37 @@
 
 <body>
     <!-- HEADER -->
-    <header id="header" aria-label="Cabeçalho principal">
-        <a href="index.html" aria-label="Ir para página inicial">
-            <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-        </a>
+  <header id="header" class="light" aria-label="Cabeçalho principal">
+    <a href="index.html" aria-label="Ir para página inicial">
+      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+    </a>
 
-        <!-- Menu desktop -->
-        <nav id="menu" aria-label="Menu principal">
-            <a class="item-menu" href="index.html">Página Inicial</a>
-            <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-            <a class="item-menu" href="alta.html">Livros em Alta</a>
-        </nav>
+    <!-- Menu desktop -->
+    <nav id="menu" aria-label="Menu principal">
+      <a class="item-menu" href="index.html">Página Inicial</a>
+      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+      <a class="item-menu" href="alta.html">Livros em Alta</a>
+    </nav>
 
-        <!-- Botões desktop -->
-        <div id="botoes-header">
-            <a class="btn-login" href="login.html">Login</a>
-            <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
-        </div>
 
-        <!-- Botão hamburguer -->
-        <button id="menu-toggle" aria-label="Abrir menu responsivo">
-            <span></span><span></span><span></span>
-        </button>
+    <!-- Botões desktop -->
+    <div id="botoes-header">
+      <a class="btn-login" href="login.html">Login</a>
+      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+    </div>
 
-    </header>
+    <!-- Botões de acessibilidade -->
+  <div id="acessibilidade">
+    <button id="btn-aumentar">A+</button>
+    <button id="btn-diminuir">A-</button>
+    <button id="btn-tema">🌙/☀️</button>
+  </div>
+
+    <!-- Botão hamburguer -->
+    <button id="menu-toggle" aria-label="Abrir menu responsivo">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
     <nav id="menu-responsivo" aria-label="Menu responsivo">
         <a class="item-menu" href="index.html">Página Inicial</a>
         <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
@@ -204,7 +211,7 @@
 
     <script src="livros.js"></script>
     <script src="botaoHamburguer.js"></script>
-    <!--<script src="Script.js"></script>-->
+    <script src="Script.js"></script>
     <script src="cadastro.js"></script>
 
 

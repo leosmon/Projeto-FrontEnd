@@ -4,7 +4,9 @@ async function carregarObras() {
     { titulo: "The Hitchhiker's Guide to the Galaxy", link: "hitchhiker.html" },
     { titulo: "Dom Casmurro", link: "domcasmurro.html" },
     { titulo: "A Arte da Guerra", link: "artedaguerra.html" },
-    { titulo: "Harry Potter", link: "harrypotter.html" }
+    { titulo: "Harry Potter", link: "harrypotter.html" },
+    { titulo: "Dune", link:"Dune.html"},
+    { titulo: "bleach", link:"bleach.html"}
   ];
 
   const container = document.getElementById("carrosel-livros-pg-inicial");

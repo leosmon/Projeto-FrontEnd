@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Search Book</title> <!-- Correção: título mais descritivo -->
   <link rel="stylesheet" href="Style/Style.css" />
+  <link rel="stylesheet" href="Style/perfil.css"/>
   <script src="script.js"></script>
 
 
@@ -18,44 +19,139 @@
 
 <body>
   <!-- HEADER -->
-  <header>
-    <div id="header">
-      <!-- Logo -->
-      <a href="index.html">
-        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-      </a>
+  <header id="header" class="light" aria-label="Cabeçalho principal">
+    <a href="index.html" aria-label="Ir para página inicial">
+      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+    </a>
 
-      <!-- Menu de navegação -->
-      <nav id="menu">
-        <a class="item-menu" href="#">Página Inicial</a>
-        <a class="item-menu" href="#">Avaliações de Livros</a>
-        <a class="item-menu" href="#">Livros em Alta</a>
-      </nav>
+    <!-- Menu desktop -->
+    <nav id="menu" aria-label="Menu principal">
+      <a class="item-menu" href="index.html">Página Inicial</a>
+      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+      <a class="item-menu" href="alta.html">Livros em Alta</a>
+    </nav>
 
-      <!-- Botões de login/cadastro -->
-      <div id="botoes-header"> <!-- Correção: antes estava com erro de fechamento -->
-        <a href="login.html"><button class="btn-header">Login</button></a> <!-- Correção: trocado id por classe -->
-        <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
+
+    <!-- Botões desktop -->
+    <div id="botoes-header">
+      <a class="btn-login" href="login.html">Login</a>
+      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+    </div>
+
+    <!-- Botões de acessibilidade -->
+    <div id="acessibilidade">
+    <button id="btn-aumentar">A+</button>
+    <button id="btn-diminuir">A-</button>
+    <button id="btn-tema">🌙/☀️</button>
+    </div>
+    <!-- Botão hamburguer -->
+    <button id="menu-toggle" aria-label="Abrir menu responsivo">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+
+
+  <!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - SearchBook</title>
+  <link rel="stylesheet" href="Style/perfil.css">
+</head>
+<body>
+  <main class="perfil-main">
+    <!-- Seção de informações do usuário -->
+    <section class="perfil-header">
+      <div class="perfil-banner"></div>
+      <div class="perfil-info">
+        <div class="perfil-user">
+          <div class="perfil-avatar">AL</div>
+          <div>
+            <h1 class="perfil-nome">Ana Lima</h1>
+            <p class="perfil-email">ana.lima@searchbook.com</p>
+            <span class="perfil-membro">Membro desde: Abril de 2024</span>
+          </div>
+        </div>
+        <button class="btn-editar">Editar Perfil</button>
+      </div>
+    </section>
+
+    <!-- Grid de cards -->
+    <div class="perfil-grid">
+      <!-- Lendo no Momento -->
+      <div class="card">
+        <h2>Lendo no Momento</h2>
+        <div class="livro">
+          <img src="/conteudo/dom casmurro .png" alt="Dom Casmurro">
+          <div>
+            <p class="titulo">Dom Casmurro</p>
+            <p class="autor">Machado de Assis</p>
+            <p class="progresso">Progresso: 68%</p>
+          </div>
+        </div>
+        <button class="btn-acao">Ver mais</button>
       </div>
 
-      <!-- Botão hamburguer para display responsivo -->
-      <button id="menu-toggle">☰</button>
+      <!-- Livros à Venda -->
+      <div class="card">
+        <h2>Livros à Venda</h2>
+        <ul>
+          <li>O Alquimista — R$25</li>
+          <li>Sapiens — R$38</li>
+          <li>Duna — R$42</li>
+        </ul>
+        <button class="btn-acao">Adicionar Livro</button>
+      </div>
 
-      <!-- Menu de navegação responsivo -->
-      <nav id="menu-responsivo">
-        <a class="item-menu" href="index.html">Página Inicial</a>
-        <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-        <a class="item-menu" href="alta.html">Livros em Alta</a>
-        <a class="item-menu" href="login.html">Login</a>
-        <a class="item-menu" href="cadastro.html">Cadastro</a>
-      </nav>
-  </header>
-  </div>
-  </header>
+      <!-- Avaliações -->
+      <div class="card">
+        <h2>Avaliações</h2>
+        <ul>
+          <li>1984 — ★★★★★</li>
+          <li>A Revolução dos Bichos — ★★★★☆</li>
+          <li>Boa Noite PunPun — ★★★★★</li>
+        </ul>
+        <button class="btn-acao">Ver todas</button>
+      </div>
 
+      <!-- Meus Grupos -->
+      <div class="card">
+        <h2>Meus Grupos</h2>
+        <ul>
+          <li>Clássicos da Literatura Brasileira — 34 membros</li>
+          <li>Ficção Científica Brasil — 87 membros</li>
+          <li>Mangás & Quadrinhos — 52 membros</li>
+        </ul>
+        <button class="btn-acao">Explorar grupos</button>
+      </div>
+    </div>
 
+    <!-- Formulário de Feedback -->
+    <section class="feedback">
+      <h2>Formulário de Feedback</h2>
+      <form>
+        <label for="opiniao">O que você achou?</label>
+        <select id="opiniao">
+          <option value="">Selecione uma opção</option>
+          <option value="excelente">⭐ Excelente</option>
+          <option value="muito_bom">😊 Muito bom</option>
+          <option value="bom">👍 Bom</option>
+          <option value="regular">😐 Regular</option>
+          <option value="ruim">👎 Pode melhorar</option>
+        </select>
 
-  
+        <label for="comentario">Comentário</label>
+        <textarea id="comentario" rows="3" placeholder="Conte-nos o que você acha..."></textarea>
+
+        <button type="submit" class="btn-feedback">Enviar Feedback</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
+
 
 
 

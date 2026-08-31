@@ -1,86 +1,31 @@
-const form = document.getElementById("form");
+document.addEventListener("DOMContentLoaded", () => {
+  let currentSize = 16; // tamanho inicial em px
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  const btnAumentar = document.getElementById("btn-aumentar");
+  const btnDiminuir = document.getElementById("btn-diminuir");
 
-  // Captura valores
-  const nome = document.getElementById("nome").value.trim();
-  const cpf = document.getElementById("cpf").value.trim();
-  const cep = document.getElementById("cep").value.trim();
-  const rua = document.getElementById("rua").value.trim();
-  const bairro = document.getElementById("bairro").value.trim();
-  const cidade = document.getElementById("cidade").value.trim();
-  const estado = document.getElementById("estado").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const celular = document.getElementById("celular").value.trim();
-  const usuario = document.getElementById("usuario").value.trim();
-  const senha = document.getElementById("senha").value.trim();
-  const confirmarSenha = document.getElementById("confirmarSenha").value.trim();
+  function aplicarTamanho() {
+    // aplica em todo o body
+    document.body.style.fontSize = currentSize + "px";
 
-  const inputConfirmarSenha = document.getElementById("confirmarSenha");
-
-if (senha !== confirmarSenha) {
-  inputConfirmarSenha.setCustomValidity("As senhas não conferem");
-  inputConfirmarSenha.reportValidity();
-  localStorage.clear();
-  return;
-} else {
-  inputConfirmarSenha.setCustomValidity(""); // limpa erro
-}
-
-  // Captura checkboxes
-  const tiposCadastro = [];
-  if (document.getElementById("venda").checked) tiposCadastro.push("venda");
-  if (document.getElementById("troca").checked) tiposCadastro.push("troca");
-  if (document.getElementById("compra").checked) tiposCadastro.push("compra");
-  if (document.getElementById("leitura").checked) tiposCadastro.push("leitura");
-
-  // Validações básicas (exemplo)
-  if (senha !== confirmarSenha) {
-    alert("As senhas não conferem!");
-    return;
+    // força todos os elementos a herdarem
+    document.querySelectorAll("input, textarea, select, label, button, p, h1, h2, h3, h4, h5, h6, a, span")
+      .forEach(el => el.style.fontSize = currentSize + "px");
   }
 
-  // Cria objeto JSON com todos os dados
-  const dados = {
-    nome,
-    cpf,
-    cep,
-    rua,
-    bairro,
-    cidade,
-    estado,
-    telefone,
-    celular,
-    usuario,
-    senha,
-    tiposCadastro
-  };
+  if (btnAumentar) {
+    btnAumentar.addEventListener("click", () => {
+      currentSize += 2;
+      aplicarTamanho();
+    });
+  }
 
-  // Salva no LocalStorage como JSON
-  localStorage.setItem("cadastro", JSON.stringify(dados));
-
-  console.log("Cadastro salvo:", dados);
-});
-
-//botão buscar cep
-document.getElementById("cep").addEventListener("blur", () => {
-  const cep = document.getElementById("cep").value.replace(/\D/g, "");
-  if (cep.length === 8) {
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then(res => res.json())
-      .then(data => {
-        const inputCep = document.getElementById("cep");
-        if (!data.erro) {
-          inputCep.setCustomValidity(""); // limpa erro
-          document.getElementById("rua").value = data.logradouro;
-          document.getElementById("bairro").value = data.bairro;
-          document.getElementById("cidade").value = data.localidade;
-          document.getElementById("estado").value = data.uf;
-        } else {
-          inputCep.setCustomValidity("CEP não encontrado");
-          inputCep.reportValidity(); // mostra o balão de erro
-        }
-      });
+  if (btnDiminuir) {
+    btnDiminuir.addEventListener("click", () => {
+      if (currentSize > 12) {
+        currentSize -= 2;
+        aplicarTamanho();
+      }
+    });
   }
 });

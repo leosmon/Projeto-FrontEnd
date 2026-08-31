@@ -1,4 +1,47 @@
 /* ===========================
+   acessibilidade
+   =========================== */
+
+#acessibilidade {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+#acessibilidade button {
+  border: 1px solid #ccc;
+  background: #f8faff;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#acessibilidade button:hover {
+  background: #e8eef8;
+}
+
+/* Tema claro/escuro */
+body.light {
+  background: #f8faff;
+  color: #333;
+}
+
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+body.dark header,
+body.dark .card,
+body.dark .perfil-header,
+body.dark .feedback {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+
+/* ===========================
    RESET GLOBAL
    =========================== */
 * {
@@ -13,7 +56,16 @@ a{
 }
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f8f7f7;
+  background-color: #f1f1f1;
+  body {
+  font-size: 16px; /* tamanho base */
+}
+
+/* garante que inputs, labels e botões herdem */
+input, textarea, select, label, button {
+  font-size: inherit;
+}
+
 }
 
 /* ===========================
