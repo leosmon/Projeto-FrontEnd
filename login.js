@@ -27,7 +27,7 @@ formLogin.addEventListener("submit", (event) => {
 
     // Redireciona após 3 segundos
     setTimeout(() => {
-      window.location.href = "index.html";
+      window.location.href = "perfil.html";
     }, 3000);
   } else {
     alert("Usuário ou senha inválidos. Tente novamente.");

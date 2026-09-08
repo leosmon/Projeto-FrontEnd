@@ -10,53 +10,13 @@
 </head>
 
 <body>
+
+
     <!-- HEADER -->
-  <header id="header" class="light" aria-label="Cabeçalho principal">
-    <a href="index.html" aria-label="Ir para página inicial">
-      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-    </a>
+    <div id="header-container"></div>
 
-    <!-- Menu desktop -->
-    <nav id="menu" aria-label="Menu principal">
-      <a class="item-menu" href="index.html">Página Inicial</a>
-      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-      <a class="item-menu" href="alta.html">Livros em Alta</a>
-    </nav>
-
-
-    <!-- Botões desktop -->
-    <div id="botoes-header">
-      <a class="btn-login" href="login.html">Login</a>
-      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
-    </div>
-
-    <!-- Botões de acessibilidade -->
-  <div id="acessibilidade">
-    <button id="btn-aumentar">A+</button>
-    <button id="btn-diminuir">A-</button>
-    <button id="btn-tema">🌙/☀️</button>
-  </div>
-
-    <!-- Botão hamburguer -->
-    <button id="menu-toggle" aria-label="Abrir menu responsivo">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-    <nav id="menu-responsivo" aria-label="Menu responsivo">
-        <a class="item-menu" href="index.html">Página Inicial</a>
-        <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-        <a class="item-menu" href="alta.html">Livros em Alta</a>
-        <div class="menu-auth">
-            <a class="btn-login" href="login.html">Login</a>
-            <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
-        </div>
-    </nav>
     <main>
-
         <div class="container">
-
-
-
             <!-- Título -->
             <h2>Cadastre-se no Search Book</h2>
             <form id="form" aria-label="Formulário de cadastro de usuário">
@@ -185,32 +145,15 @@
                 </div>
             </form>
     </main>
-    <footer class="footer px-6 py-12" aria-label="Rodapé do site">
-        <div class="footer-container">
-            <div class="logo-rodape" aria-label="Logo e marca">
-                <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-            </div>
 
-            <div class="Links-rodape" aria-label="Links rápidos">
-                <p class="footer-title">Links Rápidos</p>
-                <a class="footer-link" href="/">Página Inicial</a>
-                <a class="footer-link" href="/cadastro">Cadastro</a>
-                <a class="footer-link" href="/login">Login</a>
-            </div>
+    <!-- FOOTER -->
+     <div id="footer"></div>
 
-            <div class="contatos-rodape" aria-label="Informações de contato">
-                <p class="footer-title">Contato</p>
-                <p class="footer-text">Email: contato@searchbook.com</p>
-                <p class="footer-text">Telefone: (21) 99999-9999</p>
-            </div>
-        </div>
-        <div class="direitos">
-            <p>© 2026 SearchBook. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
+    <!-- SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="livros.js"></script>
-    <script src="botaoHamburguer.js"></script>
+    <script src="header-footer.js"></script>
     <script src="Script.js"></script>
     <script src="cadastro.js"></script>
 

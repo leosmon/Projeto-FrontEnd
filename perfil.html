@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang="pt-BR"> <!-- Correção: idioma ajustado para português -->
 
 <head>
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Search Book</title> <!-- Correção: título mais descritivo -->
   <link rel="stylesheet" href="Style/Style.css" />
-  <link rel="stylesheet" href="Style/perfil.css"/>
+  <link rel="stylesheet" href="Style/perfil.css" />
   <script src="script.js"></script>
 
 
@@ -15,52 +15,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet" />
-</head>
+
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
 <body>
   <!-- HEADER -->
-  <header id="header" class="light" aria-label="Cabeçalho principal">
-    <a href="index.html" aria-label="Ir para página inicial">
-      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-    </a>
+  <!-- HEADER -->
+  <div id="header-container"></div>
 
-    <!-- Menu desktop -->
-    <nav id="menu" aria-label="Menu principal">
-      <a class="item-menu" href="index.html">Página Inicial</a>
-      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-      <a class="item-menu" href="alta.html">Livros em Alta</a>
-    </nav>
-
-
-    <!-- Botões desktop -->
-    <div id="botoes-header">
-      <a class="btn-login" href="login.html">Login</a>
-      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
-    </div>
-
-    <!-- Botões de acessibilidade -->
-    <div id="acessibilidade">
-    <button id="btn-aumentar">A+</button>
-    <button id="btn-diminuir">A-</button>
-    <button id="btn-tema">🌙/☀️</button>
-    </div>
-    <!-- Botão hamburguer -->
-    <button id="menu-toggle" aria-label="Abrir menu responsivo">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-
-
-  <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil - SearchBook</title>
-  <link rel="stylesheet" href="Style/perfil.css">
-</head>
-<body>
   <main class="perfil-main">
     <!-- Seção de informações do usuário -->
     <section class="perfil-header">
@@ -84,15 +46,32 @@
       <div class="card">
         <h2>Lendo no Momento</h2>
         <div class="livro">
-          <img src="/conteudo/dom casmurro .png" alt="Dom Casmurro">
-          <div>
-            <p class="titulo">Dom Casmurro</p>
-            <p class="autor">Machado de Assis</p>
-            <p class="progresso">Progresso: 68%</p>
+          <div class="relative">
+            <div id="carrosel-livros-pg-perfil"
+              class="flex gap-5 overflow-hidden mx-2 transition-transform duration-400 ease-in-out"
+              aria-label="Carrossel de livros">
+              <!-- Cards dos livros via JS -->
+            </div>
           </div>
         </div>
-        <button class="btn-acao">Ver mais</button>
+
+        <div class="progress-bar">
+          <div class="progress-text">
+            <span>Progresso de Leitura</span>
+            <span id="progresso-leitura">67%</span>
+          </div>
+          
+          <div class="progress-container">
+            <div  id="progress-bar"></div>
+          </div>
+        </div>
+        <div>
+          <button class="btn-acao">Ver mais</button>
+        </div>
       </div>
+
+
+
 
       <!-- Livros à Venda -->
       <div class="card">
@@ -128,6 +107,7 @@
       </div>
     </div>
 
+
     <!-- Formulário de Feedback -->
     <section class="feedback">
       <h2>Formulário de Feedback</h2>
@@ -149,36 +129,13 @@
       </form>
     </section>
   </main>
-</body>
-</html>
 
 
+  <!-- FOOTER -->
+  <div id="footer"></div>
 
-
-    <!-- FOOTER -->
-  <footer id="footer">
-    <div class="footer-container">
-      <!-- Logo ou nome do site -->
-      <div class="footer-logo">
-        <img src="conteudo/logo.png" alt="Logo Search Book">
-        <p>Search Book © 2026</p>
-      </div>
-
-      <!-- Links rápidos -->
-      <div class="footer-links">
-        <a href="index.html">Página Inicial</a>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="login.html">Login</a>
-      </div>
-
-      <!-- Contato -->
-      <div class="footer-contact">
-        <p>Email: contato@searchbook.com</p>
-        <p>Telefone: (21) 99999-9999</p>
-      </div>
-    </div>
-  </footer>
-
+  <script src="header-footer.js"></script>
+  <script src="perfil.js"></script>
 </body>
 
 </html>

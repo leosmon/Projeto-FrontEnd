@@ -20,84 +20,35 @@
 
 <body>
   <!-- HEADER -->
-  <header>
-    <div id="header">
-      <!-- Logo -->
-      <a href="index.html">
-        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-      </a>
+  <!-- HEADER -->
+  <div id="header-container"></div>
 
-      <!-- Menu de navegação -->
-      <nav id="menu">
-        <a class="item-menu" href="#">Página Inicial</a>
-        <a class="item-menu" href="#">Avaliações de Livros</a>
-        <a class="item-menu" href="#">Livros em Alta</a>
-      </nav>
+  <div class="container-erro">
 
-      <!-- Botões de login/cadastro -->
-      <div id="botoes-header"> <!-- Correção: antes estava com erro de fechamento -->
-        <a href="login.html"><button class="btn-header">Login</button></a> <!-- Correção: trocado id por classe -->
-        <a href="cadastro.html"><button class="btn-header">Cadastrar</button></a>
-      </div>
+    <img class="erro" src="conteudo/Erro404.jpeg" alt="">
 
-      <!-- Botão hamburguer para display responsivo -->
-      <button id="menu-toggle">☰</button>
-
-      <!-- Menu de navegação responsivo -->
-      <nav id="menu-responsivo">
-        <a class="item-menu" href="index.html">Página Inicial</a>
-        <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-        <a class="item-menu" href="alta.html">Livros em Alta</a>
-        <a class="item-menu" href="login.html">Login</a>
-        <a class="item-menu" href="cadastro.html">Cadastro</a>
-      </nav>
-  </header>
-  </div>
-  </header>
-
-<div class="container-erro">
-
-  <img class="erro" src="conteudo/Erro404.jpeg" alt="">
-
-  <div class ="texto-erro">
-    <h1>Ops! Página Não Encontrada</h1>
-    <p>Não conseguimos encontrar o que você procura</p>
-  </div>
-<div class=erro-btn>
+    <div class="texto-erro">
+      <h1>Ops! Página Não Encontrada</h1>
+      <p>Não conseguimos encontrar o que você procura</p>
+    </div>
+    <div class=erro-btn>
       <a><button class="btn-inicial">Voltar à Pagina Inicial</button></a>
       <a><button class="btn-busca">Buscar Novamente</button></a>
 
-</div>
-<div class="Container-ajuda">
-     <img src="conteudo/ajuda.png" alt="">
-     <div class="texto-ajuda">
-      <p class="ajuda">Precisa de Ajuda! </p><p>contato@seachbook.com.br</P>
-     </div>
-</div>
-
-    <!-- FOOTER -->
-  <footer id="footer">
-    <div class="footer-container">
-      <!-- Logo ou nome do site -->
-      <div class="footer-logo">
-        <img src="conteudo/logo.png" alt="Logo Search Book">
-        <p>Search Book © 2026</p>
-      </div>
-
-      <!-- Links rápidos -->
-      <div class="footer-links">
-        <a href="index.html">Página Inicial</a>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="login.html">Login</a>
-      </div>
-
-      <!-- Contato -->
-      <div class="footer-contact">
-        <p>Email: contato@searchbook.com</p>
-        <p>Telefone: (21) 99999-9999</p>
+    </div>
+    <div class="Container-ajuda">
+      <img src="conteudo/ajuda.png" alt="">
+      <div class="texto-ajuda">
+        <p class="ajuda">Precisa de Ajuda! </p>
+        <p>contato@seachbook.com.br</P>
       </div>
     </div>
-  </footer>
+  </div>
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+
+  <script src="header-footer.js"></script>
 
 </body>
 
