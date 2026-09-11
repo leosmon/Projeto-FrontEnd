@@ -1,3 +1,76 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const cadastro = JSON.parse(localStorage.getItem("cadastro"));
+
+  if (cadastro) {
+    document.getElementById("perfil-nome").textContent = cadastro.nome;
+    document.getElementById("perfil-email").textContent = "@" + cadastro.usuario;
+
+    // btn-login e btn-cadastro são CLASSES no header.html, não IDs
+    document.querySelectorAll(".btn-login").forEach(el => el.style.display = "none");
+    document.querySelectorAll(".btn-cadastro").forEach(el => el.style.display = "none");
+
+    if (cadastro.dataCadastro) {
+      const data = new Date(cadastro.dataCadastro);
+      const mesesPtBr = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+      ];
+      const mes = mesesPtBr[data.getMonth()];
+      const ano = data.getFullYear();
+
+      document.getElementById("perfil-membro").textContent = `🕐 Membro desde: ${mes} de ${ano}`;
+    }
+  }
+});
+
+//ss
+
+async function carregarObras() {
+  const obras = [
+    { titulo: "Dune", link: "Dune.html" }
+  ];
+
+  const container = document.getElementById("carrosel-livros-pg-perfil");
+  container.innerHTML = "";
+
+  for (const obra of obras) {
+    try {
+      const resposta = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(obra.titulo)}&limit=1`);
+      const dados = await resposta.json();
+
+      if (dados.docs.length > 0) {
+        const livro = dados.docs[0];
+        const titulo = livro.title;
+        const autor = livro.author_name ? livro.author_name[0] : "Autor desconhecido";
+        const capaId = livro.cover_i;
+        const capaUrl = capaId
+          ? `https://covers.openlibrary.org/b/id/${capaId}-M.jpg`
+          : "https://via.placeholder.com/150x210?text=Sem+Capa";
+
+        const card = document.createElement("a");
+        card.href = obra.link;
+        card.className = "livro-card-perfil";
+        card.innerHTML = `
+          <div class="livro-capa-perfil">
+            <img src="${capaUrl}" alt="Capa ${titulo}">
+            <div class="livro-overlay-perfil"></div>
+          </div>
+          <div class="livro-info-perfil">
+            <p class="titulo-perfil">${titulo}</p>
+            <p class="autor-perfil">${autor}</p>
+            <span><p class="star">★★★★☆</p></span>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+    } catch (erro) {
+      console.error("Erro ao carregar obra:", obra, erro);
+    }
+  }
+}
+
+carregarObras();
+
 async function carregarLivrosVenda() {
   const container = document.getElementById("lista-livros-venda");
   container.innerHTML = "<p>Carregando livros...</p>";
@@ -27,7 +100,6 @@ async function carregarLivrosVenda() {
         ? `https://covers.openlibrary.org/b/id/${capaId}-S.jpg`
         : null;
 
-      // Open Library não retorna nota de avaliação, então usamos um valor fixo/fictício
       const nota = 4;
       const estrelasHtml = gerarEstrelas(nota);
       const preco = livrosVenda[index].preco;
@@ -70,7 +142,7 @@ async function carregarLivroAtual() {
 
   // Esses dados viriam do seu backend/banco (livro que o usuário está lendo + progresso salvo)
   const livroAtual = {
-    titulo: "Dom Casmurro",
+    titulo: "Dune",
     progresso: 68
   };
 
@@ -98,6 +170,8 @@ async function carregarLivroAtual() {
   progressoValorEl.textContent = `${livroAtual.progresso}%`;
   barraEl.style.width = `${livroAtual.progresso}%`;
 }
+
+document.addEventListener("DOMContentLoaded", carregarLivroAtual); // ⬅️ chamada que faltava
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal-editar-perfil");

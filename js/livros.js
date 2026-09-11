@@ -1,14 +1,18 @@
 async function carregarObras() {
+  const container = document.getElementById("carrosel-livros-pg-inicial");
+  if (!container) return; // sai da função se a página não tiver esse carrossel
+
   const obras = [
     { titulo: "jujutsu kaisen", link: "jujutsu.html" },
     { titulo: "The Hitchhiker's Guide to the Galaxy", link: "hitchhiker.html" },
     { titulo: "Harry Potter", link: "harrypotter.html" },
-    { titulo: "Dune", link:"Dune.html"},
-    { titulo: "bleach", link:"bleach.html"}
+    { titulo: "Dune", link: "Dune.html" },
+    { titulo: "bleach", link: "bleach.html" }
   ];
 
-  const container = document.getElementById("carrosel-livros-pg-inicial");
+
   container.innerHTML = "";
+
 
   for (const obra of obras) {
     try {
@@ -57,7 +61,7 @@ const indicadores = document.getElementById("indicadores");
 
 function atualizarIndicadores(totalSlides) {
   indicadores.innerHTML = "";
-  const totalGrupos = Math.ceil(totalSlides / 3); // grupos de 3 livros
+  const totalGrupos = Math.ceil(totalSlides / 3);
   for (let i = 0; i < totalGrupos; i++) {
     const bolinha = document.createElement("button");
     bolinha.className = i === posicao ? "ativo" : "inativo";
@@ -70,22 +74,25 @@ function atualizarIndicadores(totalSlides) {
   }
 }
 
-btnPrev.addEventListener("click", () => {
-  if (posicao > 0) {
-    posicao--;
-    container.style.transform = `translateX(-${posicao * 100}%)`;
-    atualizarIndicadores(container.children.length);
-  }
-});
+// Só ativa a navegação do carrossel se os elementos existirem nessa página
+if (container && btnPrev && btnNext && indicadores) {
+  btnPrev.addEventListener("click", () => {
+    if (posicao > 0) {
+      posicao--;
+      container.style.transform = `translateX(-${posicao * 100}%)`;
+      atualizarIndicadores(container.children.length);
+    }
+  });
 
-btnNext.addEventListener("click", () => {
-  const totalGrupos = Math.ceil(container.children.length / 3);
-  if (posicao < totalGrupos - 1) {
-    posicao++;
-    container.style.transform = `translateX(-${posicao * 100}%)`;
-    atualizarIndicadores(container.children.length);
-  }
-});
+  btnNext.addEventListener("click", () => {
+    const totalGrupos = Math.ceil(container.children.length / 3);
+    if (posicao < totalGrupos - 1) {
+      posicao++;
+      container.style.transform = `translateX(-${posicao * 100}%)`;
+      atualizarIndicadores(container.children.length);
+    }
+  });
+}
 
 // Inicializa indicadores depois de carregar os livros
 function iniciarCarrossel() {

@@ -92,6 +92,29 @@ function inicializarHeader() {
             }
         });
     }
+        //-----------------------------//
+    // ESTADO DE LOGIN NO HEADER ////
+    //-----------------------------//
+    const logado = localStorage.getItem("logado") === "true";
+    const cadastro = JSON.parse(localStorage.getItem("cadastro"));
+    const nomeLogadoEl = document.getElementById("usuario-logado-nome");
+    const btnLogout = document.getElementById("btn-logout");
+
+    if (logado && cadastro) {
+        document.querySelectorAll(".btn-login, .btn-cadastro").forEach(el => el.style.display = "none");
+
+        if (nomeLogadoEl) {
+            nomeLogadoEl.textContent = "Olá, " + cadastro.nome.split(" ")[0];
+            nomeLogadoEl.style.display = "inline-block";
+        }
+        if (btnLogout) {
+            btnLogout.style.display = "inline-block";
+            btnLogout.addEventListener("click", () => {
+                localStorage.removeItem("logado");
+                window.location.href = "index.html";
+            });
+        }
+    }
 }
 
 // carrega o footer.html no elemento com id "footer"

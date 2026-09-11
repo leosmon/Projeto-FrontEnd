@@ -349,7 +349,7 @@ width: 100%;
 }
 
 body.dark .card {
-  background: #333;
+  background: #1e2939;
   color: #e5e7eb;
 
   border: #333;
@@ -373,11 +373,12 @@ body.dark #comentario {
 }
 
 body.dark .perfil-info{
-  background: #666;
+  background: #1e2939;
   border: none;
 }
 body.dark .perfil-header{
   border: none;
+  border-radius: 2rem;
 }
 body.dark .perfil-email, .perfil-nome{
   border: none;
@@ -386,10 +387,16 @@ body.dark .perfil-email, .perfil-nome{
 
 
 body.dark .feedback {
-  background: #333;
+  background: #1e2939;
   color: #e5e7eb;
 
   border: #333;
+}
+body.dark .grupo-item {
+  background: #1e2939;
+  color: #e5e7eb;
+  border: #909090 1px solid;
+
 }
 
 

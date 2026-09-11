@@ -16,6 +16,52 @@ form.addEventListener("submit", (event) => {
     const usuario = document.getElementById("usuario").value.trim();
     const senha = document.getElementById("senha").value.trim();
     const confirmarSenha = document.getElementById("confirmarSenha").value.trim();
+        // ✅ Validação do nome: 15 a 80 caracteres, apenas letras e espaços
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{15,80}$/;
+    const inputNome = document.getElementById("nome");
+    if (!nomeRegex.test(nome)) {
+        inputNome.setCustomValidity("Nome deve ter entre 15 e 80 letras (sem números)");
+        inputNome.reportValidity();
+        setTimeout(() => inputNome.setCustomValidity(""), 2500);
+        return;
+    } else {
+        inputNome.setCustomValidity("");
+    }
+
+    // ✅ Validação de CPF: dígito verificador
+    const inputCpf = document.getElementById("cpf");
+    if (!validarCPF(cpf)) {
+        inputCpf.setCustomValidity("CPF inválido");
+        inputCpf.reportValidity();
+        setTimeout(() => inputCpf.setCustomValidity(""), 2500);
+        return;
+    } else {
+        inputCpf.setCustomValidity("");
+    }
+
+    // ✅ Validação de login: exatamente 6 letras
+    const inputUsuario = document.getElementById("usuario");
+    const usuarioRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{6}$/;
+    if (!usuarioRegex.test(usuario)) {
+        inputUsuario.setCustomValidity("Usuário deve ter exatamente 6 letras");
+        inputUsuario.reportValidity();
+        setTimeout(() => inputUsuario.setCustomValidity(""), 2500);
+        return;
+    } else {
+        inputUsuario.setCustomValidity("");
+    }
+
+    // ✅ Validação de senha: exatamente 8 letras
+    const inputSenha = document.getElementById("senha");
+    const senhaRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]{8}$/;
+    if (!senhaRegex.test(senha)) {
+        inputSenha.setCustomValidity("Senha deve ter exatamente 8 letras");
+        inputSenha.reportValidity();
+        setTimeout(() => inputSenha.setCustomValidity(""), 2500);
+        return;
+    } else {
+        inputSenha.setCustomValidity("");
+    }
 
     const inputConfirmarSenha = document.getElementById("confirmarSenha");
 
@@ -97,3 +143,31 @@ document.getElementById("cep").addEventListener("blur", () => {
             });
     }
 });
+
+// Algoritmo oficial de validação do dígito verificador do CPF
+function validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, ""); // remove pontos e traço
+
+    if (cpf.length !== 11) return false;
+
+    // Rejeita CPFs com todos os dígitos iguais (ex: 111.111.111-11)
+    if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+        soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(9))) return false;
+
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+        soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(10))) return false;
+
+    return true;
+}

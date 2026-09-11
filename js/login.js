@@ -1,23 +1,23 @@
 const formLogin = document.querySelector("form");
+const mensagemErro = document.getElementById("login-erro");
 
 formLogin.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  // Captura valores digitados
   const usuarioLogin = document.getElementById("usuarioLogin").value.trim();
   const senhaLogin = document.getElementById("senhaLogin").value.trim();
 
-  // Recupera cadastro salvo
   const cadastro = JSON.parse(localStorage.getItem("cadastro"));
 
   if (!cadastro) {
-    alert("Nenhum cadastro encontrado. Faça seu cadastro primeiro.");
+    mostrarErro("Nenhum cadastro encontrado. Faça seu cadastro primeiro.");
     return;
   }
 
-  // Valida usuário e senha
   if (usuarioLogin === cadastro.usuario && senhaLogin === cadastro.senha) {
-    // Tela de sucesso
+    // Marca a sessão como logada (usado pelo header pra mostrar/esconder botões)
+    localStorage.setItem("logado", "true");
+
     document.body.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:Raleway,sans-serif;text-align:center;">
         <h1 style="color:#007BFF;">Login realizado com sucesso!</h1>
@@ -25,11 +25,17 @@ formLogin.addEventListener("submit", (event) => {
       </div>
     `;
 
-    // Redireciona após 3 segundos
     setTimeout(() => {
       window.location.href = "perfil.html";
     }, 3000);
   } else {
-    alert("Usuário ou senha inválidos. Tente novamente.");
+    mostrarErro("Usuário ou senha inválidos. Tente novamente.");
   }
 });
+
+function mostrarErro(texto) {
+  if (mensagemErro) {
+    mensagemErro.textContent = texto;
+    mensagemErro.style.display = "block";
+  }
+}
