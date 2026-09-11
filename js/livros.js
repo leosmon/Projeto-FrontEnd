@@ -1,30 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const cadastro = JSON.parse(localStorage.getItem("cadastro"));
-
-  if (cadastro) {
-    // Atualiza nome e email
-    document.getElementById("perfil-nome").textContent = cadastro.nome;
-    document.getElementById("perfil-email").textContent = cadastro.usuario + "@searchbook.com";
-
-    // Esconde botões login/cadastro
-    document.getElementById("btn-login").style.display = "none";
-    document.getElementById("btn-cadastro").style.display = "none";
-  }
-});
-
-
-
-
-//ss
-
 async function carregarObras() {
   const obras = [
-
-    { titulo: "Dune", link:"Dune.html"}
- 
+    { titulo: "jujutsu kaisen", link: "jujutsu.html" },
+    { titulo: "The Hitchhiker's Guide to the Galaxy", link: "hitchhiker.html" },
+    { titulo: "Harry Potter", link: "harrypotter.html" },
+    { titulo: "Dune", link:"Dune.html"},
+    { titulo: "bleach", link:"bleach.html"}
   ];
 
-  const container = document.getElementById("carrosel-livros-pg-perfil");
+  const container = document.getElementById("carrosel-livros-pg-inicial");
   container.innerHTML = "";
 
   for (const obra of obras) {
@@ -44,17 +27,16 @@ async function carregarObras() {
         // Cria card como link
         const card = document.createElement("a");
         card.href = obra.link; // página de destino
-        card.className = "livro-card-perfil";
+        card.className = "livro-card";
         card.innerHTML = `
-          <div class="livro-capa-perfil">
+          <div class="livro-capa">
             <img src="${capaUrl}" alt="Capa ${titulo}">
-            <div class="livro-overlay-perfil"></div>
+            <div class="livro-overlay"></div>
           </div>
-          <div class="livro-info-perfil">
-            <p class="titulo-perfil">${titulo}</p>
-            <p class="autor-perfil">${autor}</p>
-
-           <span> <p class="star">★★★★☆</p></span>
+          <div class="livro-info">
+            <p class="titulo">${titulo}</p>
+            <p class="autor">${autor}</p>
+            <p class="leitores">180 Leitores</p>
           </div>
         `;
         container.appendChild(card);
@@ -68,7 +50,7 @@ async function carregarObras() {
 carregarObras();
 
 let posicao = 0;
-const container = document.getElementById("carrosel-livros-pg-perfil");
+const container = document.getElementById("carrosel-livros-pg-inicial");
 const btnPrev = document.getElementById("btn-prev");
 const btnNext = document.getElementById("btn-next");
 const indicadores = document.getElementById("indicadores");
@@ -109,9 +91,3 @@ btnNext.addEventListener("click", () => {
 function iniciarCarrossel() {
   atualizarIndicadores(container.children.length);
 }
-
-
-
-
-
-

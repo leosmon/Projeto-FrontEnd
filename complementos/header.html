@@ -32,9 +32,21 @@
       <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
     </div>
   </nav>
-  <div id="acessibilidade-flutuante">
-  <button id="btn-aumentar">A+</button>
-  <button id="btn-diminuir">A-</button>
-  <button id="btn-tema">🌙☀️</button>
+ 
 </div>
  
+  <div id="header-container"></div>
+   <div id="acessibilidade-flutuante">
+  <button id="btn-aumentar">A+</button>
+  <button id="btn-diminuir">A-</button>
+  <div id="acessibilidade-btn">
+  <button id="toggle-theme">☀️ </button>
+</div>
+</div>
+
+<script>
+  const btnTheme = document.getElementById('toggle-theme');
+const body = document.body;
+
+// Verifica se já tem um tema salvo (opcional, mas recomendado)
+

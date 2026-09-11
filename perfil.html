@@ -17,7 +17,7 @@
     rel="stylesheet" />
 
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-
+</head>
 <body>
   <!-- HEADER -->
   <!-- HEADER -->
@@ -25,88 +25,167 @@
 
   <main class="perfil-main">
     <!-- Seção de informações do usuário -->
-    <section class="perfil-header">
-      <div class="perfil-banner"></div>
-      <div class="perfil-info">
-        <div class="perfil-user">
-          <div class="perfil-avatar">AL</div>
-          <div>
-            <h1 class="perfil-nome">Ana Lima</h1>
-            <p class="perfil-email">ana.lima@searchbook.com</p>
-            <span class="perfil-membro">Membro desde: Abril de 2024</span>
-          </div>
-        </div>
-        <button class="btn-editar">Editar Perfil</button>
-      </div>
-    </section>
+   <section class="perfil-header">
+  <div class="perfil-banner">
+    <h1 class="perfil-nome" id="perfil-nome">Ana Lima</h1>
+  </div>
 
+  <div class="perfil-info">
+    <div class="perfil-avatar">AL</div>
+
+    <div class="perfil-dados">
+      <p class="perfil-email" id="perfil-email">@ana.lima</p>
+      <span class="perfil-membro" id="perfil-membro">
+        🕐 Membro desde: Abril de 2024
+      </span>
+    </div>
+
+    <button class="btn-editar" id="btn-editar-perfil">
+      ✏️ Editar Perfil
+    </button>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal-editar-perfil">
+  <div class="modal-conteudo">
+    <div class="modal-header">
+      <h2>Editar Perfil</h2>
+      <button class="modal-fechar" id="btn-fechar-modal">✕</button>
+    </div>
+
+    <form id="form-editar-perfil">
+      <label for="edit-nome">Nome</label>
+      <input type="text" id="edit-nome" placeholder="Seu nome completo" />
+
+      <label for="edit-usuario">Nome de usuário</label>
+      <input type="text" id="edit-usuario" placeholder="usuario" />
+
+      <label for="edit-telefone">Telefone</label>
+      <input type="text" id="edit-telefone" placeholder="(00) 00000-0000" />
+
+      <div class="modal-botoes">
+        <button type="button" class="btn-cancelar" id="btn-cancelar-modal">Cancelar</button>
+        <button type="submit" class="btn-salvar">Salvar alterações</button>
+      </div>
+    </form>
+  </div>
+</div>
     <!-- Grid de cards -->
     <div class="perfil-grid">
       <!-- Lendo no Momento -->
-      <div class="card">
-        <h2>Lendo no Momento</h2>
-        <div class="livro">
-          <div class="relative">
-            <div id="carrosel-livros-pg-perfil"
-              class="flex gap-5 overflow-hidden mx-2 transition-transform duration-400 ease-in-out"
-              aria-label="Carrossel de livros">
-              <!-- Cards dos livros via JS -->
-            </div>
-          </div>
-        </div>
+    <div class="card">
+  <div class="card-header">
+    <h2 class="card-title" style="color:#2563eb;">LENDO NO MOMENTO</h2>
+    <div class="icon-badge azul">📖</div>
+  </div>
 
-        <div class="progress-bar">
-          <div class="progress-text">
-            <span>Progresso de Leitura</span>
-            <span id="progresso-leitura">67%</span>
-          </div>
-          
-          <div class="progress-container">
-            <div  id="progress-bar"></div>
-          </div>
+  <div class="livro-atual">
+    <div class="capa-atual" id="capa-livro-atual"></div>
+    <div class="livro-atual-info">
+      <strong id="titulo-livro-atual">Dom Casmurro</strong>
+      <p id="autor-livro-atual">Machado de Assis</p>
+      <span class="estrelas" id="estrelas-livro-atual">★★★★☆</span>
+    </div>
+  </div>
+
+  <div class="progresso-container">
+    <div class="progresso-topo">
+      <span>Progresso</span>
+      <span class="progresso-porcentagem" id="progresso-valor">68%</span>
+    </div>
+    <div class="barra-progresso-fundo">
+      <div class="barra-progresso-preenchida" id="barra-progresso" style="width: 68%;"></div>
+    </div>
+  </div>
+
+  <button class="btn-outline azul">Ver mais</button>
+</div>
+
+  <!-- CARD 1: Livros à venda (via API) -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title" style="color:#f5821f;">LIVROS À VENDA</h2>
+      <div class="icon-badge laranja">$</div>
+    </div>
+
+    <div id="lista-livros-venda" class="lista-livros">
+      <!-- os livros serão inseridos aqui via JS -->
+    </div>
+
+    <button class="btn-outline laranja">Adicionar Livro</button>
+  </div>
+
+  <!-- CARD 2: Avaliações (fictício) -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title" style="color:#2563eb;">AVALIAÇÕES</h2>
+      <div class="icon-badge azul">★</div>
+    </div>
+
+    <div class="lista-avaliacoes">
+      <div class="avaliacao-item">
+        <div class="avaliacao-topo">
+          <strong>1984</strong>
+          <span class="estrelas">★★★★★</span>
         </div>
-        <div>
-          <button class="btn-acao">Ver mais</button>
-        </div>
+        <p class="avaliacao-texto">Uma obra atemporal e perturbadoramente atual. Leitura obrigatória.</p>
       </div>
 
-
-
-
-      <!-- Livros à Venda -->
-      <div class="card">
-        <h2>Livros à Venda</h2>
-        <ul>
-          <li>O Alquimista — R$25</li>
-          <li>Sapiens — R$38</li>
-          <li>Duna — R$42</li>
-        </ul>
-        <button class="btn-acao">Adicionar Livro</button>
+      <div class="avaliacao-item">
+        <div class="avaliacao-topo">
+          <strong>A Revolução dos Bichos</strong>
+          <span class="estrelas">★★★★☆</span>
+        </div>
+        <p class="avaliacao-texto">Fábula brilhante sobre poder e corrupção. Curto e impactante.</p>
       </div>
 
-      <!-- Avaliações -->
-      <div class="card">
-        <h2>Avaliações</h2>
-        <ul>
-          <li>1984 — ★★★★★</li>
-          <li>A Revolução dos Bichos — ★★★★☆</li>
-          <li>Boa Noite PunPun — ★★★★★</li>
-        </ul>
-        <button class="btn-acao">Ver todas</button>
-      </div>
-
-      <!-- Meus Grupos -->
-      <div class="card">
-        <h2>Meus Grupos</h2>
-        <ul>
-          <li>Clássicos da Literatura Brasileira — 34 membros</li>
-          <li>Ficção Científica Brasil — 87 membros</li>
-          <li>Mangás & Quadrinhos — 52 membros</li>
-        </ul>
-        <button class="btn-acao">Explorar grupos</button>
+      <div class="avaliacao-item">
+        <strong>Boa Noite PunPun</strong>
+        <span class="estrelas">★★★★★</span>
+        <p class="avaliacao-texto">Emocionalmente devastador. Arte e narrativa excepcionais.</p>
       </div>
     </div>
 
+    <button class="btn-outline azul">Ver todas</button>
+  </div>
+
+  <div class="card">
+      <div class="card-header">
+        <h2 class="card-title" style="color:#f5821f;">MEUS GRUPOS</h2>
+        <div class="icon-badge laranja">👥</div>
+      </div>
+
+      <div class="lista-grupos">
+        <div class="grupo-item">
+          <div>
+            <strong>Clássicos da Literatura Brasileira</strong>
+            <p>👤 34 membros</p>
+          </div>
+          <span class="data-grupo">15 Set</span>
+        </div>
+
+        <div class="grupo-item">
+          <div>
+            <strong>Ficção Científica Brasil</strong>
+            <p>👤 87 membros</p>
+          </div>
+          <span class="data-grupo">20 Set</span>
+        </div>
+
+        <div class="grupo-item">
+          <div>
+            <strong>Mangás &amp; Quadrinhos</strong>
+            <p>👤 52 membros</p>
+          </div>
+          <span class="data-grupo">18 Set</span>
+        </div>
+      </div>
+
+      <button class="btn-outline laranja">Explorar grupos</button>
+    </div>
+    <!-- fim do card Meus Grupos -->
+
+  </div>
 
     <!-- Formulário de Feedback -->
     <section class="feedback">
@@ -134,8 +213,8 @@
   <!-- FOOTER -->
   <div id="footer"></div>
 
-  <script src="header-footer.js"></script>
-  <script src="perfil.js"></script>
+  <script src="js/header-footer.js"></script>
+  <script src="js/perfil.js"></script>
 </body>
 
 </html>

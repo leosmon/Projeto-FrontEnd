@@ -51,7 +51,8 @@ form.addEventListener("submit", (event) => {
         celular,
         usuario,
         senha,
-        tiposCadastro
+        tiposCadastro,
+        dataCadastro: new Date().toISOString() // data e hora do cadastro, gerada automaticamente
     };
 
     // Salva no LocalStorage

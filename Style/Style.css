@@ -138,15 +138,6 @@ font-weight: bold;
   .btn-cadastro:hover {
     opacity: 0.9;
   }
-/* Botões de login/cadastro 
-.btn-header {
-  padding: 10px 20px;
-  background-color: #ff8400;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}*/
 
 
 
@@ -614,7 +605,7 @@ font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-
+padding: 5%;
 
 }
 
@@ -629,7 +620,7 @@ font-weight: bold;
   width: 80%;
   padding: 45px;
   border-radius: 25px;
-  margin-bottom: 5%;
+  
 }
 
 /* Elementos decorativos */
@@ -970,4 +961,68 @@ justify-content: center;
   .info-leitores {
     font-size: 60%;
   }
+}
+
+
+
+/* ===========================
+  Modo dark
+   =========================== */
+
+   /* Tema escuro geral */
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+/* Header em modo escuro */
+body.dark #header {
+  background-color: #1e1e1e;
+  box-shadow: #000 0px 0px 10px;
+}
+
+body.dark .item-menu {
+  color: #f1f1f1;
+}
+body.dark .item-menu:hover {
+  color: #ff8400;
+}
+
+/* Barra de busca em modo escuro */
+body.dark #search-bar-background {
+  background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 55%, #2a2a2a 100%);
+}
+
+body.dark #search-bar-container {
+  background: #1e1e1e;
+  border: 2px solid #333;
+}
+
+body.dark .input-box {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark .input-box input {
+  color: #f1f1f1;
+}
+
+body.dark #mais-lidos{
+  background-color: #434343;
+  color: white;
+}
+body.dark .titulo{
+  color: white;
+}
+
+body.dark #search-button{
+  background-color: #ff8400;
+}
+body.dark .footer{
+  background-color: #333333;
+  
+}
+
+body.dark #menu-responsivo{
+  background: #414141
 }

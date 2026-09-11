@@ -186,3 +186,22 @@ h1 {
   text-decoration: none;
 }
 .register a:hover { color: #e06500; }
+
+
+body.dark .login-right{
+  background-color: #5b5b5b;
+}
+body.dark h1{
+  color: #f4ecec;
+}
+
+body.dark p{
+  color: #f4ecec;
+}
+
+body.dark .forgot a{
+  color: #ff8400;
+}
+body.dark .form-container{
+  background: #4a4949;
+}

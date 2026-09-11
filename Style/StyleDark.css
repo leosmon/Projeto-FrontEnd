@@ -1,0 +1,249 @@
+/* ===========================
+   ACESSIBILIDADE
+   =========================== */
+#acessibilidade {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+#acessibilidade button {
+  border: 1px solid #444;
+  background: #1e1e1e;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+
+#acessibilidade button:hover {
+  background: #2a2a2a;
+}
+
+/* Tema escuro */
+body {
+  background: #121212;
+  color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+input, textarea, select, label, button {
+  font-size: inherit;
+  color: #f1f1f1;
+}
+
+/* ===========================
+   HEADER
+   =========================== */
+#header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e1e1e;
+  box-shadow: #000 0px 0px 10px;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#logo-header {
+  width: 120px;
+  height: auto;
+}
+
+#menu {
+  display: flex;
+  gap: 20px;
+}
+
+.item-menu {
+  text-decoration: none;
+  color: #f1f1f1;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.item-menu:hover {
+  color: #ff8400;
+}
+
+.btn-login {
+  color: #00aaff;
+  border: 2px solid #00aaff;
+  border-radius: 999px;
+  padding: 8px 15px;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background: rgba(0, 170, 255, 0.1);
+}
+
+.btn-cadastro {
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #FF8400, #E06500);
+}
+
+.btn-cadastro:hover {
+  opacity: 0.9;
+}
+
+/* ===========================
+   MENU RESPONSIVO
+   =========================== */
+#menu-responsivo {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background: #1e1e1e;
+  transition: all 0.3s ease;
+}
+
+#menu-responsivo.ativo {
+  max-height: 200px;
+  opacity: 1;
+  padding: 10px 0;
+}
+
+#menu-responsivo a:hover {
+  background: #2a2a2a;
+  color: #ff8400;
+}
+
+/* ===========================
+   BARRA DE BUSCA
+   =========================== */
+#search-bar-background {
+  padding: 4rem 1rem;
+  background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 55%, #2a2a2a 100%);
+}
+
+.search-title h2 {
+  color: #f1f1f1;
+}
+
+.search-title .highlight {
+  color: #ff8400;
+}
+
+.search-title p {
+  color: rgba(255,255,255,0.7);
+}
+
+#search-bar-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #1e1e1e;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  padding: 20px;
+}
+
+.input-box {
+  border: 2px solid #333;
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.input-box input {
+  color: #f1f1f1;
+}
+
+/* ===========================
+   CARROSSEL DE LIVROS
+   =========================== */
+#mais-lidos {
+  padding: 3.5rem 1.5rem;
+  background: #1a1a1a;
+}
+
+.section-header .title {
+  color: #f1f1f1;
+}
+
+.info .titulo {
+  color: #f1f1f1;
+}
+
+.info .autor {
+  color: #aaa;
+}
+
+.info .leitores {
+  color: #ff8400;
+}
+
+/* ===========================
+   CALL TO ACTION
+   =========================== */
+.cadastro-container {
+  background: linear-gradient(135deg, #333, #222);
+  color: #f1f1f1;
+}
+
+.cadastro-titulo {
+  color: #fff;
+}
+
+.cadastro-texto {
+  color: rgba(255,255,255,0.8);
+}
+
+.cadastro-botao {
+  background: #fff;
+  color: #ff8400;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+.footer {
+  background-color: #000;
+  color: #f1f1f1;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-logo {
+  color: #fff;
+}
+
+.footer-copy {
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-title {
+  color: #ff8400;
+}
+
+.footer-link {
+  color: rgba(255,255,255,0.7);
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-text {
+  color: rgba(255,255,255,0.7);
+}
+
+.direitos {
+  border-top: 1px solid #333;
+  color: #aaa;
+}
