@@ -189,7 +189,7 @@ h1 {
 
 
 body.dark .login-right{
-  background-color: #5b5b5b;
+  background-color: #1e2939;
 }
 body.dark h1{
   color: #f4ecec;
@@ -214,3 +214,4 @@ body.dark .form-container{
   font-size: 13px;
   margin-bottom: 12px;
 }
+

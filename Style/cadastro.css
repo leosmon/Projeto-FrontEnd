@@ -150,7 +150,7 @@ h2{
     text-align: center;
 }
 body.dark .form-container {
-  background: #333;
+  background: #101828;
   border: none;
 }
 
@@ -159,7 +159,7 @@ body.dark label{
 }
 
 body.dark .grid label{
-  color: #444343;
+  color: #080031;
 }
 
 body.dark .login-link a{

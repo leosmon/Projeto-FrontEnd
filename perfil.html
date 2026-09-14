@@ -31,7 +31,7 @@
   </div>
 
   <div class="perfil-info">
-    <div class="perfil-avatar">AL</div>
+    <div class="perfil-avatar" id="perfil-avatar-iniciais">--</div>
 
     <div class="perfil-dados">
       <p class="perfil-email" id="perfil-email">@ana.lima</p>
@@ -189,24 +189,52 @@
 
     <!-- Formulário de Feedback -->
     <section class="feedback">
-      <h2>Formulário de Feedback</h2>
-      <form>
-        <label for="opiniao">O que você achou?</label>
-        <select id="opiniao">
-          <option value="">Selecione uma opção</option>
-          <option value="excelente">⭐ Excelente</option>
-          <option value="muito_bom">😊 Muito bom</option>
-          <option value="bom">👍 Bom</option>
-          <option value="regular">😐 Regular</option>
-          <option value="ruim">👎 Pode melhorar</option>
-        </select>
+  <h2>Formulário de Feedback</h2>
+  <form id="form-feedback">
+    <label for="opiniao">O que você achou?</label>
+    <select id="opiniao">
+      <option value="">Selecione uma opção</option>
+      <option value="excelente">⭐ Excelente</option>
+      <option value="muito_bom">😊 Muito bom</option>
+      <option value="bom">👍 Bom</option>
+      <option value="regular">😐 Regular</option>
+      <option value="ruim">👎 Pode melhorar</option>
+    </select>
 
-        <label for="comentario">Comentário</label>
-        <textarea id="comentario" rows="3" placeholder="Conte-nos o que você acha..."></textarea>
+    <label for="nota-satisfacao">Nível de satisfação: <span id="nota-satisfacao-valor">5</span></label>
+    <input type="range" id="nota-satisfacao" min="0" max="10" value="5" />
 
-        <button type="submit" class="btn-feedback">Enviar Feedback</button>
-      </form>
-    </section>
+    <fieldset class="feedback-radio">
+      <legend>Você recomendaria o site?</legend>
+      <label><input type="radio" name="recomendaria" value="sim" checked /> Sim</label>
+      <label><input type="radio" name="recomendaria" value="talvez" /> Talvez</label>
+      <label><input type="radio" name="recomendaria" value="nao" /> Não</label>
+    </fieldset>
+
+    <fieldset class="feedback-checkbox">
+      <legend>O que mais te interessa?</legend>
+      <label><input type="checkbox" name="interesse" value="novidades" /> Receber novidades</label>
+      <label><input type="checkbox" name="interesse" value="promocoes" /> Promoções</label>
+      <label><input type="checkbox" name="interesse" value="grupos" /> Grupos de leitura</label>
+    </fieldset>
+
+    <label for="comentario">Comentário</label>
+    <textarea id="comentario" rows="3" placeholder="Conte-nos o que você acha..."></textarea>
+
+    <button type="submit" class="btn-feedback">Enviar Feedback</button>
+  </form>
+
+  <!-- Tela de confirmação, escondida até o envio -->
+  <div id="feedback-confirmacao" class="feedback-confirmacao" style="display:none;">
+    <h3>✅ Feedback enviado com sucesso!</h3>
+    <p><strong>Opinião:</strong> <span id="conf-opiniao"></span></p>
+    <p><strong>Satisfação:</strong> <span id="conf-satisfacao"></span>/10</p>
+    <p><strong>Recomendaria:</strong> <span id="conf-recomendaria"></span></p>
+    <p><strong>Interesses:</strong> <span id="conf-interesses"></span></p>
+    <p><strong>Comentário:</strong> <span id="conf-comentario"></span></p>
+    <button id="btn-novo-feedback" class="btn-outline azul">Enviar outro feedback</button>
+  </div>
+</section>
   </main>
 
 

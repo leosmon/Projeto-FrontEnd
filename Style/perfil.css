@@ -821,3 +821,64 @@ body.dark .grupo-item {
 .btn-salvar:hover {
   background: #1d4ed8;
 }
+
+.btn-logout {
+  background: #f5821f;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;}
+
+  .btn-logout:hover {
+  background: #9e4a01;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;}
+
+  .feedback-radio,
+.feedback-checkbox {
+  border: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.feedback-radio legend,
+.feedback-checkbox legend {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.feedback-radio label,
+.feedback-checkbox label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+#nota-satisfacao {
+  width: 100%;
+  margin: 8px 0 16px;
+}
+
+.feedback-confirmacao {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.feedback-confirmacao h3 {
+  color: #16a34a;
+  margin-bottom: 12px;
+}
+
+.feedback-confirmacao p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}

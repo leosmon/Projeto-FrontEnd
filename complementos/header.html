@@ -1,54 +1,66 @@
 <header id="header" aria-label="Cabeçalho principal">
-   
-    <a href="index.html" aria-label="Ir para página inicial">
-      <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
-    </a>
 
-    <nav id="menu" aria-label="Menu principal">
-      <a class="item-menu" href="index.html">Página Inicial</a>
-      <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-      <a class="item-menu" href="erro.html">Livros em Alta</a>
-    </nav>
+  <a href="index.html" aria-label="Ir para página inicial">
+    <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+  </a>
 
- <div id="botoes-header">
-  <a class="btn-login" href="login.html">Login</a>
-  <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
-  <span id="usuario-logado-nome" class="usuario-logado" style="display:none;"></span>
-  <button id="btn-logout" class="btn-logout" style="display:none;">Sair</button>
-</div>
-
-    
-
-    <button id="menu-toggle" aria-label="Abrir menu responsivo">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <!-- Menu responsivo -->
-  <nav id="menu-responsivo" aria-label="Menu responsivo">
+  <nav id="menu" aria-label="Menu principal">
     <a class="item-menu" href="index.html">Página Inicial</a>
-    <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
-    <a class="item-menu" href="alta.html">Livros em Alta</a>
-    <div class="menu-auth">
-      <a class="btn-login" href="login.html">Login</a>
-      <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+
+    <div class="item-menu-dropdown">
+      <button class="item-menu dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Categorias ▾
+      </button>
+      <div class="submenu">
+        <a href="index.html?categoria=ficcao">Ficção</a>
+        <a href="index.html?categoria=romance">Romance</a>
+        <a href="index.html?categoria=biografia">Biografia</a>
+        <a href="index.html?categoria=quadrinhos">Quadrinhos & Mangás</a>
+      </div>
     </div>
+
+    <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+    <a class="item-menu" href="erro.html">Livros em Alta</a>
   </nav>
- 
-</div>
- 
-  <div id="header-container"></div>
-   <div id="acessibilidade-flutuante">
+
+  <div id="botoes-header">
+    <a class="btn-login" href="login.html">Login</a>
+    <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+
+    <!-- Aparece só quando logado -->
+    <div id="usuario-logado-wrapper" class="usuario-logado-wrapper" style="display:none;">
+      <button id="avatar-usuario" class="avatar-usuario" aria-haspopup="true" aria-expanded="false">
+        <span id="avatar-iniciais">--</span>
+      </button>
+
+      <div id="submenu-usuario" class="submenu-usuario">
+        <div class="submenu-usuario-nome" id="submenu-nome-completo"></div>
+        <a href="perfil.html" class="submenu-usuario-item">👤 Meu Perfil</a>
+        <button id="btn-logout" class="submenu-usuario-item submenu-usuario-sair">🚪 Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="menu-toggle" aria-label="Abrir menu responsivo">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Menu responsivo -->
+<nav id="menu-responsivo" aria-label="Menu responsivo">
+  <a class="item-menu" href="index.html">Página Inicial</a>
+  <a class="item-menu" href="avaliacoes.html">Avaliações de Livros</a>
+  <a class="item-menu" href="alta.html">Livros em Alta</a>
+  <div class="menu-auth">
+    <a class="btn-login" href="login.html">Login</a>
+    <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
+  </div>
+</nav>
+
+<div id="acessibilidade-flutuante">
   <button id="btn-aumentar">A+</button>
   <button id="btn-diminuir">A-</button>
   <div id="acessibilidade-btn">
-  <button id="toggle-theme">☀️ </button>
+    <button id="toggle-theme">☀️</button>
+  </div>
 </div>
-</div>
-
-<script>
-  const btnTheme = document.getElementById('toggle-theme');
-const body = document.body;
-
-// Verifica se já tem um tema salvo (opcional, mas recomendado)
-

@@ -92,23 +92,50 @@ function inicializarHeader() {
             }
         });
     }
-        //-----------------------------//
+      //-----------------------------//
     // ESTADO DE LOGIN NO HEADER ////
     //-----------------------------//
     const logado = localStorage.getItem("logado") === "true";
     const cadastro = JSON.parse(localStorage.getItem("cadastro"));
-    const nomeLogadoEl = document.getElementById("usuario-logado-nome");
+
+    const wrapperUsuario = document.getElementById("usuario-logado-wrapper");
+    const avatarBtn = document.getElementById("avatar-usuario");
+    const avatarIniciais = document.getElementById("avatar-iniciais");
+    const submenuUsuario = document.getElementById("submenu-usuario");
+    const submenuNome = document.getElementById("submenu-nome-completo");
     const btnLogout = document.getElementById("btn-logout");
 
     if (logado && cadastro) {
+        // Esconde login/cadastro, mostra o avatar
         document.querySelectorAll(".btn-login, .btn-cadastro").forEach(el => el.style.display = "none");
+        if (wrapperUsuario) wrapperUsuario.style.display = "block";
 
-        if (nomeLogadoEl) {
-            nomeLogadoEl.textContent = "Olá, " + cadastro.nome.split(" ")[0];
-            nomeLogadoEl.style.display = "inline-block";
+        // Gera as iniciais a partir do nome (ex: "Ana Lima" → "AL")
+        if (avatarIniciais && cadastro.nome) {
+            const partesNome = cadastro.nome.trim().split(" ");
+            const iniciais = partesNome.length > 1
+                ? (partesNome[0][0] + partesNome[partesNome.length - 1][0])
+                : partesNome[0].substring(0, 2);
+            avatarIniciais.textContent = iniciais.toUpperCase();
         }
+
+        if (submenuNome) submenuNome.textContent = cadastro.nome;
+
+        // Abre/fecha o submenu ao clicar no avatar
+        if (avatarBtn && submenuUsuario) {
+            avatarBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                submenuUsuario.classList.toggle("aberto");
+            });
+
+            // Fecha ao clicar em qualquer outro lugar da página
+            document.addEventListener("click", () => {
+                submenuUsuario.classList.remove("aberto");
+            });
+        }
+
+        // Logout
         if (btnLogout) {
-            btnLogout.style.display = "inline-block";
             btnLogout.addEventListener("click", () => {
                 localStorage.removeItem("logado");
                 window.location.href = "index.html";
@@ -116,7 +143,6 @@ function inicializarHeader() {
         }
     }
 }
-
 // carrega o footer.html no elemento com id "footer"
 document.addEventListener("DOMContentLoaded", () => {
     fetch("complementos/footer.html")
@@ -126,3 +152,18 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Erro ao carregar footer:", error));
 });
+
+    //-----------------------------//
+    // SUBMENU DE CATEGORIAS ////
+    //-----------------------------//
+    const dropdownToggle = document.querySelector(".dropdown-toggle");
+    const dropdownWrapper = document.querySelector(".item-menu-dropdown");
+    if (dropdownToggle && dropdownWrapper) {
+        dropdownToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdownWrapper.classList.toggle("aberto");
+        });
+        document.addEventListener("click", () => {
+            dropdownWrapper.classList.remove("aberto");
+        });
+    }
