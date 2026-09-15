@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Book - Avaliações</title>
+  <link rel="stylesheet" href="Style/Style.css" />
+  <link rel="stylesheet" href="Style/perfil.css" />
+  <link rel="stylesheet" href="Style/avaliacoes.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+</head>
+<body>
+  <!-- HEADER -->
+  <div id="header-container"></div>
+
+  <main class="avaliacoes-main">
+
+    <section class="avaliacoes-hero">
+      <p class="tag">AVALIAÇÕES</p>
+      <h1>O que os leitores estão dizendo</h1>
+      <p class="avaliacoes-subtitulo">Opiniões reais de quem já leu — e a sua também pode entrar aqui.</p>
+    </section>
+
+    <!-- Formulário de nova avaliação — só aparece pra quem está logado -->
+    <section class="nova-avaliacao card" id="secao-nova-avaliacao" style="display:none;">
+      <h2>Deixe sua avaliação</h2>
+      <form id="form-nova-avaliacao">
+        <label for="av-titulo">Título do livro</label>
+        <input type="text" id="av-titulo" placeholder="Ex: Dom Casmurro" required />
+
+        <label>Sua nota</label>
+        <div class="estrelas-input" id="estrelas-input">
+          <span class="estrela" data-valor="1">★</span>
+          <span class="estrela" data-valor="2">★</span>
+          <span class="estrela" data-valor="3">★</span>
+          <span class="estrela" data-valor="4">★</span>
+          <span class="estrela" data-valor="5">★</span>
+        </div>
+        <input type="hidden" id="av-nota" value="0" />
+
+        <label for="av-comentario">Comentário</label>
+        <textarea id="av-comentario" rows="3" placeholder="O que você achou do livro?" required></textarea>
+
+        <button type="submit" class="btn-feedback">Publicar Avaliação</button>
+      </form>
+    </section>
+
+    <!-- Aviso pra quem não está logado -->
+    <section class="avaliacoes-login-aviso card" id="aviso-login" style="display:none;">
+      <p>Quer deixar sua avaliação? <a href="login.html">Faça login</a> ou <a href="cadastro.html">cadastre-se</a>.</p>
+    </section>
+
+    <!-- Lista de avaliações -->
+    <section class="lista-avaliacoes-pagina" id="lista-avaliacoes-pagina">
+      <p class="carregando-avaliacoes">Carregando avaliações...</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <div id="acessibilidade-flutuante">
+    <button id="btn-aumentar">A+</button>
+    <button id="btn-diminuir">A-</button>
+    <div id="acessibilidade-btn">
+      <button id="toggle-theme">☀️</button>
+    </div>
+  </div>
+
+  <script src="js/header-footer.js"></script>
+  <script src="js/avaliacoes.js"></script>
+</body>
+</html>

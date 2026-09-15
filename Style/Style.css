@@ -989,17 +989,17 @@ body.dark .item-menu:hover {
 }
 
 /* Barra de busca em modo escuro */
-body.dark #search-bar-background {
+body.dar #search-bar-background {
   background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 55%, #2a2a2a 100%);
 }
 
 body.dark #search-bar-container {
-  background: #1e1e1e;
-  border: 2px solid #333;
+  background: #101828;
+  border: 2px solid #1e2939;
 }
 
 body.dark .input-box {
-  background: #2a2a2a;
+  background: #101828;
   border-color: #444;
 }
 
@@ -1008,7 +1008,7 @@ body.dark .input-box input {
 }
 
 body.dark #mais-lidos{
-  background-color: #434343;
+  background-color: #030712;
   color: white;
 }
 body.dark .titulo{

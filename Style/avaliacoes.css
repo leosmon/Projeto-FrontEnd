@@ -1,0 +1,155 @@
+.avaliacoes-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.avaliacoes-hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.avaliacoes-hero .tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ff8400;
+  margin-bottom: 6px;
+}
+
+.avaliacoes-hero h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.avaliacoes-subtitulo {
+  color: #666;
+}
+
+/* Formulário de nova avaliação */
+.nova-avaliacao {
+  margin-bottom: 24px;
+}
+
+.nova-avaliacao h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.nova-avaliacao label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 14px 0 6px;
+  color: #333;
+}
+
+.nova-avaliacao input[type="text"],
+.nova-avaliacao textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.estrelas-input {
+  display: flex;
+  gap: 6px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.estrelas-input .estrela {
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.estrelas-input .estrela.selecionada {
+  color: #f5821f;
+}
+
+.aviso-nota-vazia {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.avaliacoes-login-aviso {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.avaliacoes-login-aviso a {
+  color: #007BFF;
+  font-weight: 600;
+}
+
+/* Lista de avaliações */
+.lista-avaliacoes-pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avaliacao-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.avaliacao-card-capa {
+  width: 70px;
+  height: 100px;
+  border-radius: 10px;
+  background: #1e3a8a;
+  color: #fff;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  overflow: hidden;
+}
+
+.avaliacao-card-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avaliacao-card-conteudo {
+  flex: 1;
+  min-width: 0;
+}
+
+.avaliacao-autor {
+  font-size: 12px;
+  color: #888;
+  margin: 2px 0 6px;
+}
+
+.avaliacao-meta {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.carregando-avaliacoes {
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+/* Dark mode */
+body.dark .avaliacoes-hero h1 { color: #f1f1f1; }
+body.dark .avaliacoes-subtitulo { color: #ccc; }
+body.dark .nova-avaliacao label { color: #f1f1f1; }
+body.dark .avaliacao-autor { color: #aaa; }
+body.dark .avaliacao-meta { color: #888; }
