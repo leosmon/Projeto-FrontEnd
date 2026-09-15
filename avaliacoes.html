@@ -56,24 +56,38 @@
     </section>
 
     <!-- Lista de avaliações -->
-    <section class="lista-avaliacoes-pagina" id="lista-avaliacoes-pagina">
+        <!-- Grid de livros avaliados -->
+    <section class="grid-avaliacoes-pagina" id="grid-avaliacoes-pagina">
       <p class="carregando-avaliacoes">Carregando avaliações...</p>
     </section>
+
+    <!-- Modal com as avaliações de um livro específico -->
+    <div class="modal-overlay" id="modal-avaliacoes-livro">
+      <div class="modal-conteudo modal-avaliacoes-conteudo">
+        <div class="modal-header">
+          <h2 id="modal-av-titulo">Título do livro</h2>
+          <button class="modal-fechar" id="btn-fechar-modal-av">✕</button>
+        </div>
+
+        <div class="modal-av-resumo">
+          <span class="estrelas" id="modal-av-media-estrelas"></span>
+          <span id="modal-av-media-texto"></span>
+        </div>
+
+        <div class="modal-av-lista" id="modal-av-lista">
+          <!-- avaliações individuais inseridas aqui via JS -->
+        </div>
+      </div>
+    </div>
 
   </main>
 
   <!-- FOOTER -->
   <div id="footer"></div>
 
-  <div id="acessibilidade-flutuante">
-    <button id="btn-aumentar">A+</button>
-    <button id="btn-diminuir">A-</button>
-    <div id="acessibilidade-btn">
-      <button id="toggle-theme">☀️</button>
-    </div>
-  </div>
 
-  <script src="js/header-footer.js"></script>
   <script src="js/avaliacoes.js"></script>
+  <script src="js/header-footer.js"></script>
+  
 </body>
 </html>

@@ -1,12 +1,13 @@
-// Avaliações fictícias iniciais (seed) — só usadas se não houver nada salvo ainda
 const AVALIACOES_SEED = [
   { titulo: "1984", nota: 5, comentario: "Uma obra atemporal e perturbadoramente atual. Leitura obrigatória.", usuario: "leitor_searchbook", data: "2026-08-15T10:00:00.000Z" },
+  { titulo: "1984", nota: 4, comentario: "Impactante, mas um pouco pesado pra ler de uma vez.", usuario: "ana.lima", data: "2026-08-18T10:00:00.000Z" },
   { titulo: "A Revolução dos Bichos", nota: 4, comentario: "Fábula brilhante sobre poder e corrupção. Curto e impactante.", usuario: "leitor_searchbook", data: "2026-08-10T10:00:00.000Z" },
   { titulo: "Boa Noite PunPun", nota: 5, comentario: "Emocionalmente devastador. Arte e narrativa excepcionais.", usuario: "leitor_searchbook", data: "2026-08-05T10:00:00.000Z" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   inicializarFormularioAvaliacao();
+  inicializarModal();
   carregarAvaliacoes();
 });
 
@@ -21,7 +22,6 @@ function inicializarFormularioAvaliacao() {
     avisoLogin.style.display = "block";
   }
 
-  // Estrelas clicáveis
   const estrelasInput = document.getElementById("estrelas-input");
   const estrelas = estrelasInput.querySelectorAll(".estrela");
   const notaHidden = document.getElementById("av-nota");
@@ -49,7 +49,6 @@ function inicializarFormularioAvaliacao() {
     const nota = parseInt(notaHidden.value);
 
     if (nota === 0) {
-      // Sem window.alert() — mensagem inline simples
       let avisoNota = document.getElementById("aviso-nota");
       if (!avisoNota) {
         avisoNota = document.createElement("p");
@@ -71,7 +70,7 @@ function inicializarFormularioAvaliacao() {
     };
 
     const avaliacoesSalvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
-    avaliacoesSalvas.unshift(novaAvaliacao); // adiciona no início (mais recente primeiro)
+    avaliacoesSalvas.unshift(novaAvaliacao);
     localStorage.setItem("avaliacoes", JSON.stringify(avaliacoesSalvas));
 
     form.reset();
@@ -80,61 +79,123 @@ function inicializarFormularioAvaliacao() {
     const avisoNota = document.getElementById("aviso-nota");
     if (avisoNota) avisoNota.remove();
 
-    carregarAvaliacoes(); // recarrega a lista com a nova avaliação incluída
+    carregarAvaliacoes();
   });
 }
 
+function agruparPorLivro(avaliacoes) {
+  const grupos = {};
+  avaliacoes.forEach(av => {
+    const chave = av.titulo.trim().toLowerCase();
+    if (!grupos[chave]) {
+      grupos[chave] = { titulo: av.titulo, avaliacoes: [] };
+    }
+    grupos[chave].avaliacoes.push(av);
+  });
+  return Object.values(grupos);
+}
+
+function calcularMedia(avaliacoes) {
+  const soma = avaliacoes.reduce((acc, av) => acc + av.nota, 0);
+  return soma / avaliacoes.length;
+}
+
+function gerarEstrelasTexto(nota) {
+  const notaArredondada = Math.round(nota);
+  return "★".repeat(notaArredondada) + "☆".repeat(5 - notaArredondada);
+}
+
 async function carregarAvaliacoes() {
-  const container = document.getElementById("lista-avaliacoes-pagina");
+  const container = document.getElementById("grid-avaliacoes-pagina");
   container.innerHTML = "<p class='carregando-avaliacoes'>Carregando avaliações...</p>";
 
   const avaliacoesUsuarios = JSON.parse(localStorage.getItem("avaliacoes")) || [];
   const todasAvaliacoes = [...avaliacoesUsuarios, ...AVALIACOES_SEED];
+  const livrosAgrupados = agruparPorLivro(todasAvaliacoes);
 
   container.innerHTML = "";
 
-  for (const avaliacao of todasAvaliacoes) {
-    const card = document.createElement("div");
-    card.className = "avaliacao-card card";
+  if (livrosAgrupados.length === 0) {
+    container.innerHTML = "<p class='carregando-avaliacoes'>Nenhuma avaliação ainda. Seja o primeiro!</p>";
+    return;
+  }
 
-    // Busca capa/autor do livro na Open Library
+  for (const livro of livrosAgrupados) {
+    const media = calcularMedia(livro.avaliacoes);
+
     let capaUrl = null;
-    let autor = "";
+    let autor = "Autor desconhecido";
     try {
-      const resposta = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(avaliacao.titulo)}&limit=1`);
+      const resposta = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(livro.titulo)}&limit=1`);
       const dados = await resposta.json();
       if (dados.docs && dados.docs.length > 0) {
-        const livro = dados.docs[0];
-        autor = livro.author_name ? livro.author_name[0] : "";
-        if (livro.cover_i) {
-          capaUrl = `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`;
+        const dadosLivro = dados.docs[0];
+        autor = dadosLivro.author_name ? dadosLivro.author_name[0] : autor;
+        if (dadosLivro.cover_i) {
+          capaUrl = `https://covers.openlibrary.org/b/id/${dadosLivro.cover_i}-M.jpg`;
         }
       }
     } catch (erro) {
       console.error("Erro ao buscar capa:", erro);
     }
 
-    const estrelasHtml = "★".repeat(avaliacao.nota) + "☆".repeat(5 - avaliacao.nota);
-    const dataFormatada = new Date(avaliacao.data).toLocaleDateString("pt-BR");
-
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "avaliacao-grid-card";
     card.innerHTML = `
-      <div class="avaliacao-card-capa">
-        ${capaUrl ? `<img src="${capaUrl}" alt="Capa ${avaliacao.titulo}">` : "📘"}
+      <div class="avaliacao-grid-capa">
+        ${capaUrl ? `<img src="${capaUrl}" alt="Capa ${livro.titulo}">` : "📘"}
       </div>
-      <div class="avaliacao-card-conteudo">
-        <div class="avaliacao-topo">
-          <strong>${avaliacao.titulo}</strong>
-          <span class="estrelas">${estrelasHtml}</span>
-        </div>
-        ${autor ? `<p class="avaliacao-autor">${autor}</p>` : ""}
-        <p class="avaliacao-texto">${avaliacao.comentario}</p>
-        <p class="avaliacao-meta">por @${avaliacao.usuario} · ${dataFormatada}</p>
+      <div class="avaliacao-grid-info">
+        <strong>${livro.titulo}</strong>
+        <p class="avaliacao-grid-autor">${autor}</p>
+        <span class="estrelas">${gerarEstrelasTexto(media)}</span>
+        <p class="avaliacao-grid-contagem">${livro.avaliacoes.length} avaliação${livro.avaliacoes.length > 1 ? "ões" : ""}</p>
       </div>
     `;
+
+    card.addEventListener("click", () => abrirModalAvaliacoes(livro, media));
     container.appendChild(card);
   }
+}
 
-  if (todasAvaliacoes.length === 0) {
-    container.innerHTML = "<p class='carregando-avaliacoes'>Nenhuma avaliação ainda. Seja o primeiro!</p>";
-  }
+function inicializarModal() {
+  const modal = document.getElementById("modal-avaliacoes-livro");
+  const btnFechar = document.getElementById("btn-fechar-modal-av");
+
+  btnFechar.addEventListener("click", () => modal.classList.remove("ativo"));
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.remove("ativo");
+  });
+}
+
+function abrirModalAvaliacoes(livro, media) {
+  const modal = document.getElementById("modal-avaliacoes-livro");
+  document.getElementById("modal-av-titulo").textContent = livro.titulo;
+  document.getElementById("modal-av-media-estrelas").textContent = gerarEstrelasTexto(media);
+  document.getElementById("modal-av-media-texto").textContent =
+    `${media.toFixed(1)} de 5 · ${livro.avaliacoes.length} avaliação${livro.avaliacoes.length > 1 ? "ões" : ""}`;
+
+  // Ordena as avaliações mais recentes primeiro (as "principais" ao abrir)
+  const avaliacoesOrdenadas = [...livro.avaliacoes].sort((a, b) => new Date(b.data) - new Date(a.data));
+
+  const listaEl = document.getElementById("modal-av-lista");
+  listaEl.innerHTML = "";
+
+  avaliacoesOrdenadas.forEach(av => {
+    const item = document.createElement("div");
+    item.className = "modal-av-item";
+    const dataFormatada = new Date(av.data).toLocaleDateString("pt-BR");
+    item.innerHTML = `
+      <div class="modal-av-item-topo">
+        <strong>@${av.usuario}</strong>
+        <span class="estrelas">${gerarEstrelasTexto(av.nota)}</span>
+      </div>
+      <p class="modal-av-item-texto">${av.comentario}</p>
+      <p class="modal-av-item-data">${dataFormatada}</p>
+    `;
+    listaEl.appendChild(item);
+  });
+
+  modal.classList.add("ativo");
 }

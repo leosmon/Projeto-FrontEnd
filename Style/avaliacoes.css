@@ -92,64 +92,121 @@
 }
 
 /* Lista de avaliações */
-.lista-avaliacoes-pagina {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+/* Grid de livros avaliados */
+.grid-avaliacoes-pagina {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
 }
 
-.avaliacao-card {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
+.avaliacao-grid-card {
+  background: #fff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: inherit;
 }
 
-.avaliacao-card-capa {
-  width: 70px;
-  height: 100px;
+.avaliacao-grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.avaliacao-grid-capa {
+  width: 100%;
+  height: 180px;
   border-radius: 10px;
   background: #1e3a8a;
   color: #fff;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 32px;
   overflow: hidden;
+  margin-bottom: 12px;
 }
 
-.avaliacao-card-capa img {
+.avaliacao-grid-capa img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.avaliacao-card-conteudo {
-  flex: 1;
-  min-width: 0;
+.avaliacao-grid-info strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
-.avaliacao-autor {
+.avaliacao-grid-autor {
   font-size: 12px;
   color: #888;
-  margin: 2px 0 6px;
+  margin-bottom: 6px;
 }
 
-.avaliacao-meta {
+.avaliacao-grid-contagem {
   font-size: 12px;
   color: #999;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
-.carregando-avaliacoes {
-  text-align: center;
-  color: #888;
-  padding: 20px;
+/* Modal de avaliações de um livro */
+.modal-avaliacoes-conteudo {
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-av-resumo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.modal-av-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-av-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 14px;
+}
+
+.modal-av-item:last-child {
+  border-bottom: none;
+}
+
+.modal-av-item-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.modal-av-item-texto {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.modal-av-item-data {
+  font-size: 11px;
+  color: #999;
 }
 
 /* Dark mode */
-body.dark .avaliacoes-hero h1 { color: #f1f1f1; }
-body.dark .avaliacoes-subtitulo { color: #ccc; }
-body.dark .nova-avaliacao label { color: #f1f1f1; }
-body.dark .avaliacao-autor { color: #aaa; }
-body.dark .avaliacao-meta { color: #888; }
+body.dark .avaliacao-grid-card { background: #1e1e1e; }
+body.dark .avaliacao-grid-autor { color: #aaa; }
+body.dark .avaliacao-grid-contagem { color: #888; }
+body.dark .modal-av-item-texto { color: #ddd; }
+body.dark .modal-av-item { border-color: #333; }
+
