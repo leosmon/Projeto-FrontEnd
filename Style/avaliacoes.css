@@ -204,9 +204,27 @@
 }
 
 /* Dark mode */
-body.dark .avaliacao-grid-card { background: #1e1e1e; }
+body.dark .avaliacao-grid-card { background: #101828; }
 body.dark .avaliacao-grid-autor { color: #aaa; }
 body.dark .avaliacao-grid-contagem { color: #888; }
 body.dark .modal-av-item-texto { color: #ddd; }
 body.dark .modal-av-item { border-color: #333; }
+body.dark .modal-conteudo,.modal-av-item {color: #101828; background-color: #1a2740;}
+body.dark .modal-av-item-texto {color: #cac4c455;}
+body.dark .avaliacao-grid-info strong {color:#8888}
+body.dark .modal-av-item-topo, .modal-header h2{color: #666;}
 
+.modal-av-sinopse {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+body.dark .modal-av-sinopse {
+  color: #565555;
+  border-color: #333;
+  
+}
