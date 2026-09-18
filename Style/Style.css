@@ -584,6 +584,14 @@ font-weight: bold;
   color: #777;
 }
 
+#livro-info #titulo, #autor{
+  margin: 0;
+  text-decoration: none;
+}
+.titulo  {
+  text-decoration: none;
+}
+
 .livro-info .leitores {
   font-size: 0.75rem;
   font-weight: 600;

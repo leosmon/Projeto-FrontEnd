@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 
@@ -96,17 +97,20 @@
                         <div class="row">
                             <div class="field">
                                 <label for="usuario">Usuário (Login)</label>
-                                <input id="usuario" name="usuario" type="text" placeholder="joao.silva">
+                                <input id="usuario" name="usuario" type="text" placeholder="joao.silva"
+                                maxlength="6" pattern="[A-Za-zÀ-ÿ]+" title="O usuário deve conter apenas letras sem numeros (máx. 6 caracteres)">
                             </div>
                             <div class="field">
                                 <label for="senha">Senha</label>
-                                <input id="senha" name="senha" type="password" placeholder="••••••••">
+                                <input id="senha" name="senha" type="password" placeholder="••••••••"
+                                maxlength="8" pattern="[A-Za-zÀ-ÿ]+" title="A senha deve conter apenas letras sem numeros (máx. 8 caracteres)">
                             </div>
                         </div>
                         <div class="row">
                             <div class="field half">
                                 <label for="confirmarSenha">Confirmar Senha</label>
-                                <input id="confirmarSenha" name="confirmarSenha" type="password" placeholder="••••••••">
+                                <input id="confirmarSenha" name="confirmarSenha" type="password" placeholder="••••••••"
+                                maxlength="8" pattern="[A-Za-zÀ-ÿ]+" title="A senha deve conter apenas letras sem numeros (máx. 8 caracteres)">
                             </div>
                         </div>
                     </section>

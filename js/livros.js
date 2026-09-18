@@ -37,10 +37,10 @@ async function carregarObras() {
             <img src="${capaUrl}" alt="Capa ${titulo}">
             <div class="livro-overlay"></div>
           </div>
-          <div class="livro-info">
-            <p class="titulo">${titulo}</p>
-            <p class="autor">${autor}</p>
-            <p class="leitores">180 Leitores</p>
+          <div id="livro-info" class="livro-info">
+            <p id="titulo" class="titulo">${titulo}</p>
+            <p id="autor" class="autor">${autor}</p>
+            <p id="leitores" class="leitores">180 Leitores</p>
           </div>
         `;
         container.appendChild(card);
