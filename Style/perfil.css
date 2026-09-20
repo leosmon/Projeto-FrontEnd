@@ -882,3 +882,20 @@ body.dark .grupo-item {
   font-size: 14px;
   margin-bottom: 6px;
 }
+
+.avaliacao-estrelas {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.avaliacao-estrelas span {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.avaliacao-estrelas span.ativa {
+    color: gold;
+}

@@ -200,3 +200,4 @@ function validarCPF(cpf) {
 
     return true;
 }
+

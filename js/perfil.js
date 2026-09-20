@@ -247,12 +247,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmacaoDiv = document.getElementById("feedback-confirmacao");
   const btnNovoFeedback = document.getElementById("btn-novo-feedback");
 
+  const estrelas = document.querySelectorAll("#avaliacao-estrelas span");
+
+function atualizarEstrelas(nota) {
+  estrelas.forEach(estrela => {
+    estrela.classList.toggle(
+      "ativa",
+      Number(estrela.dataset.valor) <= nota
+    );
+  });
+}
+
+atualizarEstrelas(5);
+
+estrelas.forEach(estrela => {
+  estrela.addEventListener("click", () => {
+    const nota = Number(estrela.dataset.valor);
+
+    rangeSatisfacao.value = nota;
+    valorSatisfacao.textContent = nota;
+
+    atualizarEstrelas(nota);
+  });
+});
+
   if (!formFeedback) return;
 
-  // Atualiza o número ao lado do range em tempo real
-  rangeSatisfacao.addEventListener("input", () => {
-    valorSatisfacao.textContent = rangeSatisfacao.value;
-  });
 
   formFeedback.addEventListener("submit", (e) => {
     e.preventDefault();

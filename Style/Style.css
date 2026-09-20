@@ -5,35 +5,77 @@
 #acessibilidade-flutuante {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 0;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 10px;
-  z-index: 2000; /* fica acima do conteúdo */
+  z-index: 2000;
+}
+ #toggle-acessibilidade{
+  rotate: 180deg;
 }
 
-#acessibilidade-flutuante button {
+.recolhido  #toggle-acessibilidade{
+  rotate: 360deg;
+}
+.btn-toggle-acessibilidade {
   border: 1px solid #ccc;
   background: #f8faff;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: -2px 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.acessibilidade-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+  max-width: 200px;
+  transition: max-width 0.3s ease, opacity 0.3s ease;
+  
+
+  border-radius: 10px;
+}
+
+.acessibilidade-botoes button,
+#acessibilidade-btn button {
+  border: 1px solid #ccc;
+  background: #f8faff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: background 0.3s, transform 0.2s;
 }
 
-#acessibilidade-flutuante button:hover {
-  background: #e8eef8;
-  transform: scale(1.1);
+/* Estado recolhido: esconde os botões, deixa só a setinha */
+#acessibilidade-flutuante.recolhido .acessibilidade-botoes {
+  max-width: 0;
+  opacity: 0;
+  padding-right: 0;
+  pointer-events: none;
 }
+
+#acessibilidade-flutuante.recolhido .toggle-acessibilidade{
+  z-index: 2000;
+}
+
+
 
 
 /* ===========================
    RESET GLOBAL
    =========================== */
+   
 * {
   box-sizing: border-box;
   margin: 0;
@@ -86,7 +128,9 @@ input, textarea, select, label, button {
 /* Menu desktop */
 #menu {
   display: flex;
-  gap: 20px;
+margin-left: 5%;
+  place-content: space-evenly !important;
+  
 }
 
 .item-menu {
@@ -390,13 +434,6 @@ font-weight: bold;
   color: #0056c7;
 }
 
-/* Carrossel */
-#carrosel-livros-pg-inicial {
-  display: flex;
-  gap: 1rem;
-  transform: translateX(0);
-}
-
 #indicadores button {
   border: none;
   border-radius: 9999px;
@@ -423,7 +460,7 @@ font-weight: bold;
 .carrossel-container {
   display: flex;
   gap: 1.25rem;
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   padding: 0 1rem;
 }
@@ -473,6 +510,7 @@ font-weight: bold;
 .btn-prev, .btn-next {
   position: absolute;
   top: 50%;
+  z-index: 10; /* fica acima das imagens */
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
@@ -517,22 +555,89 @@ font-weight: bold;
   width: 24px;
   background: #007BFF;
 }
+/* Preço nos cards de livro */
+.livro-preco-card {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.livro-preco-card strong {
+  color: #007BFF;
+}
+
+/* Card de destaque (primeiro da fileira "Também precisa ler") */
+.livro-card-destaque {
+  flex-shrink: 0;
+  width: 220px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.destaque-titulo {
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.destaque-sinopse-texto {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.destaque-sinopse-texto.expandido {
+  -webkit-line-clamp: unset;
+}
+
+.destaque-ler-mais {
+  background: none;
+  border: none;
+  color: #007BFF;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.destaque-btn-oferta {
+  margin-top: auto;
+  border: 2px solid #007BFF;
+  background: transparent;
+  color: #007BFF;
+  border-radius: 999px;
+  padding: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.destaque-btn-oferta:hover {
+  background: #007BFF;
+  color: #fff;
+}
+
+/* Universos literários — mesma base dos autores, mas foto quadrada/redonda maior e sem "obra" embaixo */
+.universo-foto {
+  background: #ff8400;
+}
+
+body.dark .destaque-sinopse-texto { color: #ccc; }
+body.dark .livro-card-destaque { background: #1e1e1e; border-color: #333; }
 
 /* ===========================
    Livros
    =========================== */
-
-#carrosel-livros-pg-inicial {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  align-items: flex-start;
-  justify-content: center;
-  margin-top: 6%;
-
-  
-}
 
 .livro-card {
   position: relative;
@@ -603,7 +708,84 @@ font-weight: bold;
   color: #ff8400;
 }
 
+/* Correção: .relative não existia */
+.relative {
+  position: relative;
+  overflow: hidden;       /* ✅ agora é AQUI que se esconde o excesso */
+  width: 100%;
+}
+.carrossel-viewport {
+  overflow: hidden;   /* ✅ agora é essa div que corta o excesso */
+  width: 100%;
+}
 
+/* Correção: trilho do carrossel (antes usava classes utilitárias inexistentes) */
+.carrossel-track {
+   display: flex;
+  gap: 1rem;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+
+/* Espaço entre as seções de carrossel */
+#tambem-precisa,
+#universos-literarios,
+#secao-autores {
+  margin-top: 1rem;
+}
+
+/* Cards de autor (diferentes dos cards de livro) */
+.autor-card {
+  flex-shrink: 0;
+  width: 130px;
+  text-align: center;
+}
+
+.autor-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  background: #1e3a8a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.autor-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.autor-nome {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.autor-obra {
+  font-size: 11px;
+  color: #888;
+
+}
+
+/* Container central com margem — o fundo da section continua full-width, só o conteúdo é limitado */
+.secao-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;   /* ✅ garante que o padding não estoure os 1200px */
+}
+
+body.dark .autor-nome { color: #f1f1f1; }
+body.dark .autor-obra { color: #aaa; }
 /* ===========================
    CALL TO ACTION
    =========================== */
@@ -825,24 +1007,35 @@ justify-content: center;
   
 }
 
+.navbar-expand-lg .navbar-nav {
+  flex-direction: row;
+  place-content: center !important;
+  margin-left: 5%;
+}
+
 /* ===========================
    RESPONSIVIDADE
    =========================== */
-@media (max-width: 970px) {
-  #botoes-header {
-    display: none;
+@media  (max-width: 992px) {
+  
+
+  #categoriasDropdown{
+  display: none important;
   }
+#menu{
+  flex-flow: nowrap !important;
+ 
+  }
+  .navbar-nav{
+    margin-left: 7% !important;
+  }
+
 .footer {
     text-align: center;
   }
    .cadastro-titulo {
     font-size: 1.5rem;
   }
-
-  #menu {
-    display: none;
-  }
-
   #menu-toggle {
     display: flex;
     /* mostra botão hamburguer */
@@ -984,8 +1177,8 @@ body.dark {
 }
 
 /* Header em modo escuro */
-body.dark #header {
-  background-color: #101828;
+body.dark #menu  {
+  background: #101828 !important;
   box-shadow: #000 0px 0px 10px;
 }
 
@@ -1113,6 +1306,7 @@ body.dark #menu-responsivo{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 8px;
 }
 
 .avatar-usuario:hover {
@@ -1165,3 +1359,11 @@ body.dark #menu-responsivo{
 .submenu-usuario-sair {
   color: #dc2626;
 }
+
+
+#btn-nav{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+

@@ -5,50 +5,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Search Book - Conectando Leitores</title> <!-- Título mais descritivo -->
-  
 
   <!-- Importação de fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet" />
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <link rel="stylesheet" href="Style/Style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <link rel="stylesheet" href="Style/Style.css" />
 </head>
 
-<body >
-  
+<body>
+
   <!-- HEADER -->
   <div id="header-container"></div>
 
-   </div>
-  
- 
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="conteudo/CRS1.jpeg" class="d-block w-100" alt="...">
+  <!-- CAROUSEL Banner do inicio -->
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="conteudo/CRS1.jpeg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="conteudo/CRS2.jpeg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="conteudo/CRS3.jpeg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="conteudo/CRS4.jpeg" class="d-block w-100" alt="...">
+      </div>
     </div>
-    <div class="carousel-item">
-      <img src="conteudo/CRS2.jpeg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-     <img src="conteudo/CRS3.jpeg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-     <img src="conteudo/CRS4.jpeg" class="d-block w-100" alt="...">
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+
+
   <!-- BARRA DE BUSCA -->
   <section id="search-bar-background" aria-label="Barra de busca de livros">
     <div class="search-title">
@@ -99,54 +100,124 @@
     </div>
   </section>
 
-  <!-- SEÇÃO DE LIVROS -->
-  <section id="mais-lidos" class="mais-lidos" aria-label="Livros mais lidos">
-    <div class="cabecalho">
-      <div>
-        <p class="tag">TENDÊNCIAS</p>
-        <h2>Os Mais Lidos no Momento</h2>
+  <main class="main-content">
+    <!-- SEÇÃO: MAIS LIDOS -->
+    <section id="mais-lidos" class="mais-lidos" aria-label="Livros mais lidos">
+      <div class="secao-conteudo">
+        <div class="section-header">
+          <div>
+            <p class="tag">TENDÊNCIAS</p>
+            <h2 class="title">Os Mais Lidos no Momento</h2>
+          </div>
+          <a href="#" class="ver-todos">Ver todos →</a>
+        </div>
+
+        <div class="relative">
+          <button class="btn-prev" id="btn-prev-mais-lidos" aria-label="Anterior">‹</button>
+
+          <div class="carrossel-">
+            <div id="carrosel-livros-pg-inicial" class="carrossel-track" aria-label="Carrossel de livros"></div>
+          </div>
+
+          <button class="btn-next" id="btn-next-mais-lidos" aria-label="Próximo">›</button>
+        </div>
+        <div class="indicadores" id="indicadores-mais-lidos"></div>
       </div>
-      <a href="#" class="ver-todos">Ver todos →</a>
-    </div>
+    </section>
 
-    <div class="relative">
-      <div id="carrosel-livros-pg-inicial"
-        class="flex gap-5 overflow-hidden mx-2 transition-transform duration-400 ease-in-out"
-        aria-label="Carrossel de livros">
-        <!-- Cards dos livros via JS -->
+       <!-- SEÇÃO: AUTORES -->
+    <section id="secao-autores" class="mais-lidos" aria-label="Autores em destaque">
+      <div class="secao-conteudo">
+        <div class="section-header">
+          <div>
+            <p class="tag">CONHEÇA</p>
+            <h2 class="title">Autores</h2>
+          </div>
+        </div>
+
+        <div class="relative">
+          <button class="btn-prev" id="btn-prev-autores" aria-label="Anterior">‹</button>
+          <div id="carrossel-autores" class="carrossel-track" aria-label="Carrossel de autores">
+          </div>
+          <button class="btn-next" id="btn-next-autores" aria-label="Próximo">›</button>
+        </div>
+        <div class="indicadores" id="indicadores-autores"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SEÇÃO DE CADASTRO -->
-  <section class="cadastro px-6 pb-14" aria-label="Seção de cadastro">
-    <div class="cadastro-container max-w-4xl mx-auto rounded-3xl p-10 text-center relative overflow-hidden">
-      <div class="decorativo decorativo-top"></div>
-      <div class="decorativo decorativo-bottom"></div>
+    <!-- SEÇÃO: UNIVERSOS LITERÁRIOS -->
+    <section id="universos-literarios" class="mais-lidos" aria-label="Universos literários">
+      <div class="secao-conteudo">
+        <div class="section-header">
+          <div>
+            <p class="tag">EXPLORE</p>
+            <h2 class="title">Universos Literários</h2>
+          </div>
+        </div>
 
-      <h2 class="cadastro-titulo">Pronto para começar a leitura?</h2>
-      <p class="cadastro-texto">Cadastre-se gratuitamente e conecte-se a milhares de leitores apaixonados por livros.
-      </p>
+        <div class="relative">
+          <button class="btn-prev" id="btn-prev-universos" aria-label="Anterior">‹</button>
+          <div id="carrossel-universos" class="carrossel-track" aria-label="Carrossel de universos literários">
+          </div>
+          <button class="btn-next" id="btn-next-universos" aria-label="Próximo">›</button>
+        </div>
+        <div class="indicadores" id="indicadores-universos"></div>
+      </div>
+    </section>
 
-      <a href="/cadastro.html" class="cadastro-botao" aria-label="Criar conta grátis">
-        Criar conta grátis
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-          aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
-  </section>
+       <!-- SEÇÃO: TAMBÉM PRECISA LER -->
+    <section id="tambem-precisa" class="mais-lidos" aria-label="Livros que você também precisa ler">
+      <div class="secao-conteudo">
+        <div class="section-header">
+          <div>
+            <p class="tag">RECOMENDADOS</p>
+            <h2 class="title">Livros que Você Também Precisa Ler</h2>
+          </div>
+        </div>
+
+        <div class="relative">
+          <button class="btn-prev" id="btn-prev-tambem-precisa" aria-label="Anterior">‹</button>
+          <div id="carrossel-tambem-precisa" class="carrossel-track" aria-label="Carrossel de recomendados">
+          </div>
+          <button class="btn-next" id="btn-next-tambem-precisa" aria-label="Próximo">›</button>
+        </div>
+        <div class="indicadores" id="indicadores-tambem-precisa"></div>
+      </div>
+    </section>
+
+ 
+
+    <!-- SEÇÃO DE CADASTRO -->
+    <section class="cadastro px-6 pb-14" aria-label="Seção de cadastro">
+      <div class="cadastro-container max-w-4xl mx-auto rounded-3xl p-10 text-center relative overflow-hidden">
+        <div class="decorativo decorativo-top"></div>
+        <div class="decorativo decorativo-bottom"></div>
+
+        <h2 class="cadastro-titulo">Pronto para começar a leitura?</h2>
+        <p class="cadastro-texto">Cadastre-se gratuitamente e conecte-se a milhares de leitores apaixonados por livros.
+        </p>
+
+        <a href="/cadastro.html" class="cadastro-botao" aria-label="Criar conta grátis">
+          Criar conta grátis
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <!-- RODAPÉ -->
   <div id="footer"></div>
- 
-  <script src="js/livros.js"></script>
-  <script src="js/Script.js" defer></script>
-  <script src="js/header-footer.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-  
+
+  <script src="js/header-footer.js"></script>
+  <script src="js/carrrossel.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 </body>
 
 </html>

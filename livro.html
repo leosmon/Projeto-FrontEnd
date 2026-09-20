@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="titulo-aba">Search Book - Detalhes do Livro</title>
+  <link rel="stylesheet" href="Style/Style.css" />
+  <link rel="stylesheet" href="Style/livro.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <main class="livro-detalhe-main">
+    <div class="secao-conteudo">
+      <div id="livro-carregando" class="livro-carregando">Carregando informações do livro...</div>
+
+      <div id="livro-conteudo" class="livro-detalhe-grid" style="display:none;">
+        <div class="livro-detalhe-capa">
+          <img id="livro-capa-img" src="" alt="" />
+        </div>
+
+        <div class="livro-detalhe-info">
+          <h1 id="livro-titulo"></h1>
+          <p class="livro-detalhe-autor" id="livro-autor"></p>
+          <p class="livro-detalhe-meta" id="livro-publicacao"></p>
+
+          <div class="livro-detalhe-assuntos" id="livro-assuntos"></div>
+
+          <h2>Sinopse</h2>
+          <p class="livro-detalhe-sinopse" id="livro-sinopse">Sinopse não disponível para este título.</p>
+
+          <div class="livro-detalhe-acoes">
+            <button class="btn-feedback" id="btn-adicionar-lista">Adicionar à minha lista</button>
+            <a id="link-openlibrary" href="#" target="_blank" rel="noopener" class="btn-outline azul">
+              Ver na Open Library ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="livro-erro" class="livro-carregando" style="display:none;">
+        Não foi possível carregar este livro. <a href="index.html">Voltar à página inicial</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+  <div id="acessibilidade-flutuante" class="recolhido">
+    <button id="toggle-acessibilidade" class="btn-toggle-acessibilidade">‹</button>
+    <div class="acessibilidade-botoes">
+      <button id="btn-aumentar">A+</button>
+      <button id="btn-diminuir">A-</button>
+      <div id="acessibilidade-btn"><button id="toggle-theme">☀️</button></div>
+    </div>
+  </div>
+
+  <script src="js/header-footer.js"></script>
+  <script src="js/livro-detalhe.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

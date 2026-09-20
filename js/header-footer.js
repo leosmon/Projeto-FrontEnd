@@ -29,6 +29,17 @@ function inicializarHeader() {
             menuResponsivo.classList.toggle("ativo");
         });
     }
+        //-----------------------------//
+    // PAINEL DE ACESSIBILIDADE RECOLHÍVEL ////
+    //-----------------------------//
+    const painelAcessibilidade = document.getElementById("acessibilidade-flutuante");
+    const btnToggleAcessibilidade = document.getElementById("toggle-acessibilidade");
+
+    if (painelAcessibilidade && btnToggleAcessibilidade) {
+        btnToggleAcessibilidade.addEventListener("click", () => {
+            painelAcessibilidade.classList.toggle("recolhido");
+        });
+    }
     //-----------------------------//
     // BOTÕES DE ACESSIBILIDADE////
     //-----------------------------//
