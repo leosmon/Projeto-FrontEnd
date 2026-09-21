@@ -1175,15 +1175,19 @@ body.dark {
   background: #030712;
   color: #f1f1f1;
 }
+body.dark .navbar-expand-lg, .navbar-nav,.nav-link_active, .nav-link {
+  color: #e7e5e4;
+}
 
 /* Header em modo escuro */
 body.dark #menu  {
   background: #101828 !important;
   box-shadow: #000 0px 0px 10px;
+  color: #f8f8f8 !important;
 }
 
 body.dark .item-menu {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
 body.dark .item-menu:hover {
   color: #ff8400;
