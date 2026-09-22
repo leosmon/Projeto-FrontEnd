@@ -587,7 +587,7 @@ font-weight: bold;
 
 .destaque-sinopse-texto {
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 12px;
@@ -595,9 +595,6 @@ font-weight: bold;
   line-height: 1.5;
 }
 
-.destaque-sinopse-texto.expandido {
-  -webkit-line-clamp: unset;
-}
 
 .destaque-ler-mais {
   background: none;
@@ -683,6 +680,18 @@ body.dark .livro-card-destaque { background: #1e1e1e; border-color: #333; }
   color: #333;
   font-family: 'Raleway', sans-serif;
 }
+
+.titulo{
+  margin-top: 0px;
+  margin-bottom: 0px !important;
+}
+
+body.light h2.title{
+  color: #585858 !important;
+  }
+body.dark h2.title{
+  color: #e8eef8 !important;
+  }
 
 .livro-info .autor {
   font-size: 0.75rem;
@@ -1164,8 +1173,16 @@ justify-content: center;
   }
 }
 
+body.light .nav-link {
+  color: #171716 !important;
+}
+body.dark .nav-link {
+  color: #797978 !important;
+}
 
-
+.header-container{
+  background:#101828;
+}
 /* ===========================
   Modo dark
    =========================== */
@@ -1175,7 +1192,7 @@ body.dark {
   background: #030712;
   color: #f1f1f1;
 }
-body.dark .navbar-expand-lg, .navbar-nav,.nav-link_active, .nav-link {
+body.dark .navbar-expand-lg, .navbar-nav,.dknav-link_active, .dknav-link {
   color: #e7e5e4;
 }
 
@@ -1196,6 +1213,10 @@ body.dark .item-menu:hover {
 /* Barra de busca em modo escuro */
 body.dar #search-bar-background {
   background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 55%, #2a2a2a 100%);
+}
+
+body.dark .navbar-toggler{
+  border: #343a40 solid !important;
 }
 
 body.dark #search-bar-container {
