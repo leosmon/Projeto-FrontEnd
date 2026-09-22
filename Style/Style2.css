@@ -1,0 +1,1091 @@
+/* ======================================
+ RESET GLOBAL
+====================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f1f1f1;
+  font-size: 16px; /* tamanho base, alterado dinamicamente pelos botões A+/A- */
+}
+
+input, textarea, select, label, button {
+  font-size: inherit;
+}
+
+
+/* ======================================
+ ACESSIBILIDADE
+====================================== */
+#acessibilidade-flutuante {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2000;
+}
+
+#toggle-acessibilidade {
+  rotate: 180deg;
+}
+
+.recolhido #toggle-acessibilidade {
+  rotate: 360deg;
+}
+
+.btn-toggle-acessibilidade {
+  border: 1px solid #ccc;
+  background: #f8faff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: -2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.acessibilidade-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+  max-width: 200px;
+  border-radius: 10px;
+  transition: max-width 0.3s ease, opacity 0.3s ease;
+}
+
+.acessibilidade-botoes button,
+#acessibilidade-btn button {
+  border: 1px solid #ccc;
+  background: #f8faff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#acessibilidade-flutuante.recolhido .acessibilidade-botoes {
+  max-width: 0;
+  opacity: 0;
+  padding-right: 0;
+  pointer-events: none;
+}
+
+#acessibilidade-flutuante.recolhido .btn-toggle-acessibilidade {
+  z-index: 2000;
+}
+
+
+/* ======================================
+ HEADER
+====================================== */
+#header-container {
+  background: #101828;
+}
+#menu{
+  flex-wrap: nowrap;
+}
+#logo-header {
+  width: 120px;
+  height: auto;
+}
+
+/* Menu de categorias e navegação (Bootstrap Navbar) */
+.navbar-expand-lg .navbar-nav {
+  flex-direction: row;
+  place-content: center !important;
+  
+}
+
+.navbar-nav {
+  margin-left: 7% !important;
+  
+}
+
+ul.dropdown-menu[data-bs-popper], .dropdown-menu.show {
+  display: none;
+  background: #f8faff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  margin-left: 5%;
+          display: table-column-group;
+        column-count: 2;
+}
+  
+
+/* Botões de login / cadastro (customizados, dentro do #botoes-header) */
+#botoes-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-login {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 100;
+  color: #007BFF;
+  border: 2px solid #007BFF;
+  border-radius: 999px;
+  padding: 8px 15px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.btn-cadastro {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 100;
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #FF8400, #E06500);
+  transition: opacity 0.3s;
+}
+
+.btn-cadastro:hover {
+  opacity: 0.9;
+}
+
+/* Avatar / submenu do usuário logado */
+.usuario-logado-wrapper {
+  position: relative;
+}
+
+.avatar-usuario {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #1e5fd9;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.avatar-usuario:hover {
+  filter: brightness(1.1);
+}
+
+.submenu-usuario {
+  display: none;
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  padding: 10px 0;
+  z-index: 200;
+}
+
+.submenu-usuario.aberto {
+  display: block;
+}
+
+.submenu-usuario-nome {
+  padding: 8px 16px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 6px;
+}
+
+.submenu-usuario-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.submenu-usuario-item:hover {
+  background: #f3f4f6;
+}
+
+.submenu-usuario-sair {
+  color: #dc2626;
+}
+
+.btn-logout {
+  background: #f5821f;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background: #9e4a01;
+}
+
+
+/* ======================================
+ MENU MOBILE
+====================================== */
+/* O toggle (hambúrguer) e o collapse do menu de categorias são
+   controlados pelo próprio Bootstrap (.navbar-toggler / .collapse).
+   Aqui só ficam ajustes extras que o Bootstrap não cobre sozinho. */
+.dropdown-menu {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+
+/* ======================================
+ BARRA DE BUSCA
+====================================== */
+#search-bar-background {
+  padding: 4rem 1rem;
+  background: linear-gradient(160deg, #001d40 0%, #00347a 55%, #0056c7 100%);
+}
+
+.search-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.search-title h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.search-title .highlight {
+  color: #ff8400;
+}
+
+.search-title p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+#search-bar-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+
+.tipo-busca {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  border: none;
+}
+
+.tipo-busca label {
+  cursor: pointer;
+}
+
+.tipo-busca input {
+  display: none;
+}
+
+.tipo-busca span {
+  display: block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f0f4ff;
+  color: #007BFF;
+  transition: all 0.3s;
+}
+
+.tipo-busca input:checked + span {
+  background: #007BFF;
+  color: #fff;
+  border: none;
+}
+
+.inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  border: 2px solid #e8eef8;
+  background: #f8faff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+#search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #007BFF, #0056c7);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#search-button:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+#search-button:active {
+  transform: scale(0.95);
+}
+
+
+/* ======================================
+ CARROSSEL
+====================================== */
+.secao-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#mais-lidos {
+  padding: 3.5rem 1.5rem;
+  background: #f8faff;
+}
+
+#tambem-precisa,
+#universos-literarios,
+#secao-autores {
+  margin-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.section-header .tag,
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ff8400;
+  margin-bottom: 0.25rem;
+}
+
+.section-header .title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.ver-todos {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.ver-todos:hover {
+  color: #0056c7;
+}
+
+.relative {
+  position: relative;
+  width: 100%;
+  /* SEM overflow:hidden aqui — corta os botões .btn-prev/.btn-next */
+}
+
+.carrossel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carrossel-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s ease-in-out;
+  will-change: transform;
+}
+
+#carrossel-universos,
+#carrossel-autores,
+#carrossel-livros-pg-inicial,
+#carrossel-tambem-precisa {
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+#carrossel-universos:active,
+#carrossel-autores:active,
+#carrossel-livros-pg-inicial:active,
+#carrossel-tambem-precisa:active {
+  cursor: grabbing;
+}
+
+.btn-prev, .btn-next {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.3s, color 0.3s;
+}
+
+.btn-prev { left: -10px; }
+.btn-next { right: -10px; }
+
+.btn-prev:hover, .btn-next:hover {
+  border-color: #007BFF;
+  color: #007BFF;
+}
+
+.indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1.5rem;
+}
+
+.indicadores button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 123, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, width 0.3s;
+}
+
+.indicadores button.ativo {
+  width: 24px;
+  background: #007BFF;
+}
+
+.indicadores button.inativo {
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 123, 255, 0.3);
+}
+
+
+/* ======================================
+ LIVROS
+====================================== */
+.livro-card {
+  position: relative;
+  width: 150px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.livro-capa {
+  height: 210px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.livro-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.livro-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s;
+}
+
+.livro-card:hover .livro-overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.livro-card:hover .livro-capa {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.livro-info .titulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+}
+
+.livro-info .autor {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+.livro-info .leitores {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ff8400;
+}
+
+.livro-preco-card {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.livro-preco-card strong {
+  color: #007BFF;
+}
+
+/* Card de destaque (1º item de "Também precisa ler") */
+.livro-card-destaque {
+  flex-shrink: 0;
+  width: 220px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.destaque-titulo {
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.destaque-sinopse-texto {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.destaque-sinopse-texto.expandido {
+  -webkit-line-clamp: unset;
+}
+
+.destaque-ler-mais {
+  background: none;
+  border: none;
+  color: #007BFF;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 4px;
+}
+
+.destaque-btn-oferta {
+  margin-top: auto;
+  border: 2px solid #007BFF;
+  background: transparent;
+  color: #007BFF;
+  border-radius: 999px;
+  padding: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.destaque-btn-oferta:hover {
+  background: #007BFF;
+  color: #fff;
+}
+
+
+/* ======================================
+ AUTORES E UNIVERSOS
+====================================== */
+.autor-card {
+  flex-shrink: 0;
+  width: 130px;
+  text-align: center;
+}
+
+.autor-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  background: #1e3a8a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.autor-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.universo-foto {
+  background: #ff8400;
+}
+
+.autor-nome {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.autor-obra {
+  font-size: 11px;
+  color: #888;
+}
+
+
+/* ======================================
+ CALL TO ACTION
+====================================== */
+.cadastro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+}
+
+.cadastro-container {
+  background: linear-gradient(135deg, rgb(255, 132, 0), rgb(224, 101, 0));
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 45px;
+  border-radius: 25px;
+}
+
+.decorativo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.decorativo-top {
+  top: -40px;
+  right: -40px;
+  width: 12rem;
+  height: 12rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.decorativo-bottom {
+  bottom: 0;
+  left: -40px;
+  width: 9rem;
+  height: 9rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cadastro-titulo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.cadastro-texto {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.75rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cadastro-botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: #ff8400;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cadastro-botao:hover {
+  background: #f9fafb;
+}
+
+.cadastro-botao:active {
+  transform: scale(0.95);
+}
+
+
+/* ======================================
+ FOOTER
+====================================== */
+.footer {
+  background-color: #021b3a;
+  color: #fff;
+}
+
+.footer-container {
+  display: flex;
+  gap: 25%;
+  justify-content: center;
+  padding: 40px;
+}
+
+.Links-rodape {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo-rodape {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-logo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.footer-brand {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.footer-brand .brand-blue {
+  color: #007BFF;
+}
+
+.footer-brand .brand-orange {
+  color: #ff8400;
+}
+
+.footer-copy {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+.footer-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ff8400;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.direitos {
+  border-top: 1px solid #333;
+  padding: 1rem;
+  margin-top: 1rem;
+  color: #505151;
+  font-size: 12px;
+  align-items: center;
+}
+
+.direitos p {
+  text-align: center;
+  color: #505151;
+  font-size: 12px;
+}
+
+
+/* ======================================
+ DARK MODE
+====================================== */
+body.dark {
+  background: #030712;
+  color: #f1f1f1;
+}
+
+body.dark #menu {
+  background: #101828 !important;
+  color: #f8f8f8 !important;
+}
+
+body.dark .nav-link {
+  color: #797978 !important;
+}
+
+body.dark .nav-link:hover {
+  color: #ff8400 !important;
+}
+
+body.light .nav-link {
+  color: #171716 !important;
+}
+
+body.dark .navbar-toggler {
+  border: #343a40 solid !important;
+}
+
+body.dark .navbar-expand-lg,
+body.dark .dknav-link_active,
+body.dark .dknav-link {
+  color: #e7e5e4;
+}
+
+
+body.dark #search-bar-container {
+  background: #101828;
+  border: 2px solid #1e2939;
+}
+
+body.dark .input-box {
+  background: #101828;
+  border-color: #444;
+}
+
+body.dark .input-box input {
+  color: #f1f1f1;
+}
+
+body.dark #mais-lidos {
+  background-color: #030712;
+  color: white;
+}
+
+body.dark .livro-info .titulo,
+body.dark h2.title {
+  color: #e8eef8 !important;
+}
+
+body.light h2.title {
+  color: #585858 !important;
+}
+
+body.dark #search-button {
+  background-color: #ff8400;
+}
+
+body.dark .footer {
+  background-color: #101828;
+}
+
+body.dark .autor-nome {
+  color: #f1f1f1;
+}
+
+body.dark .autor-obra {
+  color: #aaa;
+}
+
+body.dark .destaque-sinopse-texto {
+  color: #ccc;
+}
+
+body.dark .livro-card-destaque {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+
+/* ======================================
+ RESPONSIVIDADE
+====================================== */
+@media (max-width: 992px) {
+  .footer {
+    text-align: center;
+  }
+
+  .cadastro-titulo {
+    font-size: 1.5rem;
+  }
+
+  #search-bar-container {
+    width: 90%;
+  }
+
+  #search-bar-livro,
+  #search-bar-local {
+    width: 15%;
+  }
+
+  .tipo-busca label {
+    font-size: 70%;
+  }
+
+  .tipo-busca input {
+    width: 16%;
+  }
+
+  #site-title {
+    font-size: 35px;
+  }
+
+  .inputs {
+    flex-direction: row;
+  }
+
+  .livro-card {
+    width: 140px;
+  }
+}
+
+@media (max-width: 843px) {
+  .livro-card {
+    width: 120px;
+  }
+
+  .livro-info .titulo {
+    font-size: 12px;
+  }
+
+  #search-bar-container {
+    flex-direction: column;
+    width: 95%;
+    gap: 10px;
+  }
+
+  .icon {
+    display: none;
+  }
+
+  #search-bar-livro,
+  #search-bar-local {
+    width: 80%;
+    text-align: center;
+  }
+
+  #site-title {
+    font-size: 28px;
+  }
+
+  .capa-livro {
+    width: 80%;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-leitores {
+    font-size: 60%;
+  }
+}

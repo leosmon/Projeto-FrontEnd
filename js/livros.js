@@ -1,3 +1,6 @@
+
+
+
 async function carregarObras() {
   const container = document.getElementById("carrosel-livros-pg-inicial");
   if (!container) return; // sai da função se a página não tiver esse carrossel

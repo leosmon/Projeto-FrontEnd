@@ -1,3 +1,14 @@
+.btn-feedback {
+  background: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
 .livro-detalhe-main {
   padding: 40px 0 80px;
 }

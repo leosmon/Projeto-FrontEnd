@@ -1,3 +1,22 @@
+async function traduzirTexto(texto, idiomaOrigem = "en", idiomaDestino = "pt-BR") {
+  if (!texto) return texto;
+
+  try {
+    const resposta = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(texto)}&langpair=${idiomaOrigem}|${idiomaDestino}`
+    );
+    const dados = await resposta.json();
+
+    if (dados.responseStatus === 200) {
+      return dados.responseData.translatedText;
+    }
+  } catch (erro) {
+    console.error("Erro ao traduzir sinopse:", erro);
+  }
+
+  return texto; // se a tradução falhar, mostra o texto original em inglês em vez de quebrar a página
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const workKey = params.get("id"); // ex: "/works/OL262758W"
@@ -53,8 +72,15 @@ async function carregarLivro(workKey) {
     document.getElementById("livro-capa-img").alt = `Capa de ${obra.title}`;
 
     if (sinopse) {
-      document.getElementById("livro-sinopse").textContent = sinopse;
-    }
+  document.getElementById("livro-sinopse").textContent = "Traduzindo sinopse...";
+
+  // A API grátis tem limite de ~500 caracteres por chamada — corta em pedaços se precisar
+  const sinopseTraduzida = sinopse.length > 480
+    ? await traduzirSinopseLonga(sinopse)
+    : await traduzirTexto(sinopse);
+
+  document.getElementById("livro-sinopse").textContent = sinopseTraduzida;
+}
 
     if (obra.first_publish_date) {
       document.getElementById("livro-publicacao").textContent = `Publicado em ${obra.first_publish_date}`;
@@ -85,4 +111,29 @@ async function carregarLivro(workKey) {
 function mostrarErro() {
   document.getElementById("livro-carregando").style.display = "none";
   document.getElementById("livro-erro").style.display = "block";
+}
+
+// Quebra a sinopse em pedaços de até ~450 caracteres (por frase, pra não cortar no meio)
+// e traduz cada pedaço separadamente, depois junta tudo de volta
+async function traduzirSinopseLonga(texto) {
+  const frases = texto.match(/[^.!?]+[.!?]+/g) || [texto];
+  const blocos = [];
+  let blocoAtual = "";
+
+  frases.forEach(frase => {
+    if ((blocoAtual + frase).length > 450) {
+      blocos.push(blocoAtual);
+      blocoAtual = frase;
+    } else {
+      blocoAtual += frase;
+    }
+  });
+  if (blocoAtual) blocos.push(blocoAtual);
+
+  const traduzidos = [];
+  for (const bloco of blocos) {
+    traduzidos.push(await traduzirTexto(bloco));
+  }
+
+  return traduzidos.join(" ");
 }
