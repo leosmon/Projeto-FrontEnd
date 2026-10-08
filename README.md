@@ -8,9 +8,9 @@ Projeto desenvolvido para a disciplina **Projeto de Desenvolvimento em Front-End
 
 ## 🔗 Acesso
 
-- **Site no ar:** [link do deploy]
-- **Protótipo Figma:** [link do Figma]
-- **Repositório:** [link deste repositório]
+- **Site no ar:**  https://leosmon.github.io/Projeto-FrontEnd/
+- **Protótipo Figma:** https://www.figma.com/make/Z4QyK5Ppb4B00v2Iwvkvj7/SearchBook-interface-design?code-node-id=0-6&p=f&fullscreen=1
+- **Repositório:** https://github.com/leosmon/Projeto-FrontEnd/
 
 ---
 
