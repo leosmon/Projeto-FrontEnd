@@ -1,23 +1,84 @@
-<footer class="footer" role="contentinfo" aria-label="Rodapé do site">
-    <div class="footer-container">
-      <div class="logo-rodape" aria-label="Logo e marca">
-        <img id="logo-header" src="conteudo/logo.png" alt="Logo Search Book" />
+<footer class="footer" aria-label="Rodapé">
+
+  <div class="footer-main">
+
+    <!-- Marca + chamada -->
+    <div class="footer-brand-col">
+      <img src="conteudo/logo.png" alt="Logo Search Book" class="footer-logo-img" />
+      <p class="footer-descricao">
+        A rede social para quem ama ler. Avalie livros, descubra autores e universos
+        literários, compre, venda e troque obras e participe de grupos de leitura.
+      </p>
+      <a href="cadastro.html" class="footer-cta">Criar conta grátis</a>
+    </div>
+
+    <!-- Institucional -->
+    <div class="footer-col">
+      <h4 class="footer-titulo">Institucional</h4>
+      <ul class="footer-lista">
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="avaliacoes.html">Avaliações de Livros</a></li>
+        <li><a href="SebosELivreiros.html">Sebos e Livreiros</a></li>
+        <li><a href="login.html">Entrar</a></li>
+        <li><a href="cadastro.html">Cadastrar</a></li>
+      </ul>
+    </div>
+
+    <!-- Categorias -->
+    <div class="footer-col">
+      <h4 class="footer-titulo">Categorias</h4>
+      <ul class="footer-lista">
+        <li><a href="categoria.html?nome=ficcao">Ficção</a></li>
+        <li><a href="categoria.html?nome=romance">Romance</a></li>
+        <li><a href="categoria.html?nome=fantasia">Fantasia</a></li>
+        <li><a href="categoria.html?nome=classicos">Clássicos</a></li>
+        <li><a href="categoria.html?nome=quadrinhos">Quadrinhos &amp; Mangás</a></li>
+      </ul>
+    </div>
+
+    <!-- Contato (dados fictícios: troque pelos seus) -->
+    <div class="footer-col">
+      <h4 class="footer-titulo">Contato</h4>
+
+      <div class="footer-contato-item">
+        <span class="footer-rotulo">E-mail</span>
+        <a href="mailto:contato@searchbook.com.br">contato@searchbook.com.br</a>
       </div>
 
-      <div class="Links-rodape" aria-label="Links rápidos">
-        <p class="footer-title">Links Rápidos</p>
-        <a class="footer-link" href="/">Página Inicial</a>
-        <a class="footer-link" href="/cadastro">Cadastro</a>
-        <a class="footer-link" href="/login">Login</a>
+      <div class="footer-contato-item">
+        <span class="footer-rotulo">Telefone</span>
+        <a href="tel:+552100000000">(21) 0000-0000</a>
       </div>
 
-      <div class="contatos-rodape" aria-label="Informações de contato">
-        <p class="footer-title">Contato</p>
-        <p class="footer-text">Email: contato@searchbook.com</p>
-        <p class="footer-text">Telefone: (21) 99999-9999</p>
+      <div class="footer-contato-item">
+        <span class="footer-rotulo">Endereço</span>
+        <p>Centro<br />Rio de Janeiro, RJ</p>
       </div>
     </div>
-    <div class="direitos">
-      <p>© 2026 SearchBook. Todos os direitos reservados.</p>
+
+    <!-- Mapa (OpenStreetMap) -->
+    <div class="footer-mapa-col">
+      <div class="footer-mapa">
+        <a class="footer-mapa-tag" target="_blank" rel="noopener"
+           href="https://www.openstreetmap.org/?mlat=-22.9068&amp;mlon=-43.1729#map=15/-22.9068/-43.1729">
+          Como chegar · Rio de Janeiro, RJ
+        </a>
+        <iframe
+          title="Mapa com a localização do Search Book"
+          loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-43.1850%2C-22.9150%2C-43.1600%2C-22.8980&amp;layer=mapnik&amp;marker=-22.9068%2C-43.1729">
+        </iframe>
+      </div>
     </div>
-  </footer>
+
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="footer-base">
+    <div class="footer-base-conteudo">
+      <p>© 2026 <strong>Search Book</strong>. Projeto acadêmico, UNISUAM. Todos os direitos reservados.</p>
+      <p>Catálogo: Open Library · Endereços: ViaCEP</p>
+    </div>
+  </div>
+
+</footer>
