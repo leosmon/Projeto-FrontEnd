@@ -143,4 +143,4 @@ localStorage.clear();
 
 ## 👤 Autor
 
-[Seu Nome Completo] — Curso de Análise e Desenvolvimento de Sistemas, Centro Universitário Augusto Motta (UNISUAM)
+[Leonardo Monteiro] — Curso de Análise e Desenvolvimento de Sistemas, Centro Universitário Augusto Motta (UNISUAM)
