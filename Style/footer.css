@@ -1,0 +1,205 @@
+/* ======================================
+ FOOTER
+====================================== */
+.footer {
+  background-color: #021b3a;
+  color: #fff;
+}
+
+.footer-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 2rem 40px;
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.9fr 1.1fr 1.7fr;
+  gap: 40px;
+}
+
+/* Marca */
+.footer-logo-img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 18px;
+}
+
+.footer-descricao {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 22px;
+  max-width: 340px;
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #FF8400, #E06500);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 12px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.footer-cta:hover {
+  opacity: 0.9;
+}
+
+/* Títulos das colunas (com o tracinho laranja) */
+.footer-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 22px;
+}
+
+.footer-titulo::before {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background: #ff8400;
+}
+
+/* Listas de links */
+.footer-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-lista a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-lista a:hover {
+  color: #ff8400;
+}
+
+/* Contato */
+.footer-contato-item {
+  margin-bottom: 16px;
+}
+
+.footer-rotulo {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3px;
+}
+
+.footer-contato-item a,
+.footer-contato-item p {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.footer-contato-item a:hover {
+  color: #ff8400;
+}
+
+/* Mapa */
+.footer-mapa {
+  position: relative;
+  height: 100%;
+  min-height: 220px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #0b1530;
+}
+
+.footer-mapa iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  border: 0;
+}
+
+.footer-mapa-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  background: #0b1530;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.footer-mapa-tag:hover {
+  background: #16254d;
+}
+
+/* Barra inferior */
+.footer-base {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.footer-base-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 2rem;
+  padding-right: 4.5rem; /* folga pro botão flutuante de acessibilidade, que fica no canto direito */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-base-conteudo strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Footer: tablet */
+@media (max-width: 1100px) {
+  .footer-main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-brand-col,
+  .footer-mapa-col {
+    grid-column: 1 / -1;
+  }
+
+  .footer-mapa {
+    min-height: 240px;
+  }
+}
+
+/* Footer: mobile */
+@media (max-width: 600px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    padding: 40px 1.25rem 28px;
+    gap: 32px;
+  }
+
+  .footer-base-conteudo {
+    flex-direction: column;
+    padding: 20px 1.25rem;
+    padding-right: 4rem;
+  }
+}
