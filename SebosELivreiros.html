@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Book - Sebos e Livreiros</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Mesmos estilos do index.html (ajuste o nome se o seu CSS global for outro) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Style/Style2.css" />
+  <link rel="stylesheet" href="Style/sebos.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header-container"></div>
+
+  <main class="sebos-main">
+    <div class="sebos-container">
+
+      <div class="sebos-topo">
+        <span class="tag">COMUNIDADE</span>
+        <h1 class="sebos-titulo">Sebos e Livreiros</h1>
+        <p class="sebos-subtitulo">Encontre sebos e livreiros pelo nome, pela cidade ou filtrando por estado.</p>
+      </div>
+
+      <div class="sebos-layout">
+
+        <!-- FILTROS -->
+        <aside class="sebos-filtros" aria-label="Filtros">
+
+          <div class="filtro-card">
+            <label for="busca-sebo" class="sebos-sr">Buscar sebo ou livreiro</label>
+            <input id="busca-sebo" class="campo-texto" type="search" placeholder="Nome ou cidade" autocomplete="off" />
+            <button id="btn-buscar" class="btn-buscar" type="button">BUSCAR</button>
+          </div>
+
+          <div class="filtro-card">
+            <button id="toggle-estado" class="filtro-titulo" type="button" aria-expanded="true" aria-controls="bloco-estado">
+              <span>Estado</span>
+              <span id="toggle-estado-icone" aria-hidden="true">−</span>
+            </button>
+
+            <div id="bloco-estado">
+              <label for="busca-estado" class="sebos-sr">Buscar estado</label>
+              <input id="busca-estado" class="campo-texto" type="search" placeholder="Buscar estado" autocomplete="off" />
+              <div id="lista-estados" class="lista-estados"></div>
+              <button id="ver-mais-estados" class="link-btn" type="button">Ver mais estados</button>
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- RESULTADOS -->
+        <section class="sebos-resultados" aria-label="Resultados">
+
+          <div class="sebos-resumo">
+            <p id="sebos-contagem" aria-live="polite"></p>
+            <button id="limpar-filtros" class="link-btn" type="button" hidden>Limpar filtros</button>
+          </div>
+
+          <div class="sebos-cabecalho" aria-hidden="true">
+            <span>Sebos e livreiros</span>
+            <span>Estado</span>
+            <span>Cidade</span>
+            <span>Membro desde</span>
+            <span>Avaliação</span>
+          </div>
+
+          <div id="sebos-lista"></div>
+
+          <div id="sebos-vazio" class="sebos-vazio" hidden>
+            <p>Nenhum sebo ou livreiro encontrado com esses filtros.</p>
+            <button id="vazio-limpar" class="btn-secundario" type="button">Limpar filtros</button>
+          </div>
+
+          <div class="sebos-mais">
+            <button id="btn-mais" class="btn-secundario" type="button">Mostrar mais</button>
+          </div>
+
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RODAPÉ -->
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/header-footer.js"></script>
+  <script src="js/sebos.js"></script>
+</body>
+
+</html>
