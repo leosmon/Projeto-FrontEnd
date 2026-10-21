@@ -93,12 +93,25 @@ function el(id) {
 }
 
 // Filtra pela busca de texto e, se pedido, também pelo estado
+// Um pedaço da busca casa com o sebo se estiver no nome ou na cidade.
+// Sigla de estado (ex.: "RJ") só vale como sigla exata, pra "PR" não casar com "Prosa".
+function casaComBusca(sebo, parte, aceitarNomeDoEstado) {
+  if (parte.length === 2 && ESTADOS[parte.toUpperCase()]) {
+    return normalizar(sebo.uf) === parte;
+  }
+  return normalizar(sebo.nome).includes(parte)
+    || normalizar(sebo.cidade).includes(parte)
+    || (aceitarNomeDoEstado && normalizar(ESTADOS[sebo.uf]).includes(parte));
+}
+
+// Aceita "Niterói", "RJ", "Rio de Janeiro" (cidade ou estado) e "Rio de Janeiro, RJ" (cidade + estado)
 function filtrar({ comEstado }) {
-  const termo = normalizar(filtros.termo);
+  const partes = filtros.termo.split(",").map(normalizar).filter(Boolean);
+  const aceitarNomeDoEstado = partes.length === 1;
+
   return SEBOS_ORDENADOS.filter(s => {
     if (comEstado && filtros.uf && s.uf !== filtros.uf) return false;
-    if (!termo) return true;
-    return normalizar(s.nome).includes(termo) || normalizar(s.cidade).includes(termo);
+    return partes.every(parte => casaComBusca(s, parte, aceitarNomeDoEstado));
   });
 }
 
@@ -297,6 +310,13 @@ function iniciarEventos() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Vindo da busca da home: SebosELivreiros.html?busca=Rio de Janeiro
+  const inicial = (new URLSearchParams(window.location.search).get("busca") || "").trim();
+  if (inicial) {
+    filtros.termo = inicial;
+    el("busca-sebo").value = inicial;
+  }
+
   iniciarEventos();
   renderTudo();
 });
