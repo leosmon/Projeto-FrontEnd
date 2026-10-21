@@ -1,0 +1,512 @@
+/* ======================================
+ BUSCA / RESULTADOS
+====================================== */
+.busca-main,
+.busca-main * {
+  box-sizing: border-box;
+}
+
+.busca-main {
+  padding: 32px 0 72px;
+}
+
+.busca-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.busca-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Barra compacta ---------- */
+.busca-form {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 16px;
+}
+
+.busca-campo,
+.busca-select {
+  height: 46px;
+  border: 2px solid #e8eef8;
+  background: #f8faff;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.busca-campo {
+  flex: 1;
+  min-width: 0;
+}
+
+.busca-campo:focus,
+.busca-select:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+.busca-btn {
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  padding: 0 26px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  background: linear-gradient(135deg, #007BFF, #0056c7);
+  cursor: pointer;
+}
+
+.busca-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 86, 199, 0.35);
+}
+
+.busca-local-aviso {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 14px;
+}
+
+.busca-local-aviso a {
+  color: #007BFF;
+  font-weight: 600;
+}
+
+/* ---------- Cabeçalho do resultado ---------- */
+.busca-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 18px 0 10px;
+}
+
+.busca-titulo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0 0 4px;
+}
+
+.busca-resumo {
+  margin: 0;
+  color: #666;
+  font-size: 0.92rem;
+}
+
+.busca-ordenar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.busca-ordenar select {
+  height: 38px;
+  border: 1px solid #cfd3da;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0 10px;
+  color: #333;
+}
+
+.busca-aviso {
+  background: #fff7ec;
+  border: 1px solid #ffd9a8;
+  color: #7a4300;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 8px 0 4px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Corpo (ordem dos blocos controlada por JS) ---------- */
+.busca-corpo {
+  display: flex;
+  flex-direction: column;
+}
+
+.busca-bloco {
+  margin-top: 26px;
+}
+
+.busca-subtitulo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0 0 14px;
+}
+
+/* ---------- Autores ---------- */
+.autores-linha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.autor-card-busca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: #333;
+}
+
+.autor-card-busca:hover {
+  border-color: #007BFF;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.12);
+}
+
+.autor-foto-busca {
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.autor-foto-busca img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.autor-texto-busca {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.autor-texto-busca strong {
+  font-size: 0.95rem;
+}
+
+.autor-texto-busca small {
+  color: #888;
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Grade de produtos ---------- */
+.grade-livros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+
+.produto {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e1e5ec;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.produto:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.produto-capa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  background: #eef1f6;
+  overflow: hidden;
+}
+
+.produto-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.produto-sem-capa {
+  padding: 16px;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(160deg, #001d40, #0056c7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.produto-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px;
+}
+
+.produto-titulo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.produto-titulo a {
+  color: #222;
+  text-decoration: none;
+}
+
+.produto-titulo a:hover {
+  color: #007BFF;
+}
+
+.produto-autor {
+  font-size: 0.82rem;
+  color: #666;
+  margin: 0 0 4px;
+}
+
+.produto-meta {
+  font-size: 0.75rem;
+  color: #999;
+  margin: 0 0 8px;
+}
+
+.produto-preco {
+  margin: auto 0 10px;
+  font-size: 0.82rem;
+  color: #555;
+  padding-top: 6px;
+}
+
+.produto-preco strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #007BFF;
+}
+
+.produto-selo {
+  display: inline-block;
+  align-self: flex-start;
+  margin: auto 0 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.produto-selo.troca {
+  background: #fff0e0;
+  color: #b35c00;
+}
+
+.produto-selo.leitura {
+  background: #e6f0ff;
+  color: #0056c7;
+}
+
+.produto-btn {
+  text-align: center;
+  border: 2px solid #007BFF;
+  color: #007BFF;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.produto-btn:hover {
+  background: #007BFF;
+  color: #fff;
+}
+
+/* ---------- Carregando (esqueleto) ---------- */
+.produto.esqueleto {
+  height: 380px;
+  background: linear-gradient(90deg, #eceff4 25%, #f6f8fb 50%, #eceff4 75%);
+  background-size: 200% 100%;
+  animation: busca-brilho 1.2s infinite linear;
+  border: none;
+}
+
+@keyframes busca-brilho {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ---------- Mostrar mais / erro ---------- */
+.busca-mais {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.busca-btn-sec {
+  border: 2px solid #007BFF;
+  background: transparent;
+  color: #007BFF;
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.busca-btn-sec:hover {
+  background: #007BFF;
+  color: #fff;
+}
+
+.busca-erro {
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #cfd3da;
+  border-radius: 12px;
+  padding: 40px 20px;
+  margin-top: 26px;
+  color: #555;
+}
+
+.busca-erro p {
+  margin: 0 0 14px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 700px) {
+  .busca-container {
+    padding: 0 1.1rem;
+  }
+
+  .busca-form {
+    flex-wrap: wrap;
+  }
+
+  .busca-campo {
+    flex: 1 1 100%;
+  }
+
+  .busca-select {
+    flex: 1;
+  }
+
+  .busca-btn {
+    flex: 1;
+  }
+
+  .grade-livros {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .produto-capa {
+    height: 190px;
+  }
+
+  .busca-titulo {
+    font-size: 1.3rem;
+  }
+}
+
+/* ---------- Modo escuro ---------- */
+body.dark .busca-form,
+body.dark .produto,
+body.dark .autor-card-busca,
+body.dark .busca-erro {
+  background: #101828;
+  border-color: #1e2939;
+  box-shadow: none;
+}
+
+body.dark .busca-campo,
+body.dark .busca-select,
+body.dark .busca-ordenar select {
+  background: #0b1530;
+  border-color: #1e2939;
+  color: #f1f1f1;
+}
+
+body.dark .busca-titulo,
+body.dark .busca-subtitulo,
+body.dark .produto-titulo a,
+body.dark .autor-card-busca {
+  color: #f1f1f1;
+}
+
+body.dark .busca-resumo,
+body.dark .busca-ordenar,
+body.dark .busca-local-aviso,
+body.dark .produto-autor,
+body.dark .produto-preco,
+body.dark .busca-erro {
+  color: #aab3c5;
+}
+
+body.dark .produto-capa {
+  background: #0b1530;
+}
+
+body.dark .busca-aviso {
+  background: #2a1d0a;
+  border-color: #5a3d12;
+  color: #ffd9a8;
+}
+
+body.dark .produto-btn,
+body.dark .busca-btn-sec {
+  color: #4da3ff;
+  border-color: #4da3ff;
+}
+
+body.dark .produto-btn:hover,
+body.dark .busca-btn-sec:hover {
+  background: #4da3ff;
+  color: #021b3a;
+}
+
+body.dark .produto-preco strong {
+  color: #4da3ff;
+}
+
+body.dark .produto.esqueleto {
+  background: linear-gradient(90deg, #101828 25%, #16213a 50%, #101828 75%);
+  background-size: 200% 100%;
+}
