@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Book - Resultados da busca</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Mesmos estilos do index.html (ajuste o nome se o seu CSS global for outro) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Style/Style2.css" />
+  <link rel="stylesheet" href="Style/busca.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header-container"></div>
+
+  <main class="busca-main">
+    <div class="busca-container">
+
+      <!-- Barra de busca compacta (refazer a pesquisa sem voltar à home) -->
+      <form class="busca-form" action="busca.html" method="get" role="search">
+        <label for="busca-q" class="busca-sr">Autor, livro ou gênero</label>
+        <input id="busca-q" name="q" class="busca-campo" type="search" placeholder="Autor, livro ou gênero" autocomplete="off" />
+
+        <label for="busca-tipo" class="busca-sr">Tipo</label>
+        <select id="busca-tipo" name="tipo" class="busca-select">
+          <option value="venda">Venda</option>
+          <option value="troca">Troca</option>
+          <option value="leitura">Leitura</option>
+        </select>
+
+        <input type="hidden" id="busca-local" name="local" />
+        <button type="submit" class="busca-btn">Pesquisar</button>
+      </form>
+
+      <p id="busca-local-aviso" class="busca-local-aviso" hidden></p>
+
+      <!-- Cabeçalho do resultado -->
+      <div class="busca-cabecalho">
+        <div>
+          <h1 id="busca-titulo" class="busca-titulo">Buscando…</h1>
+          <p id="busca-resumo" class="busca-resumo" aria-live="polite"></p>
+        </div>
+
+        <label class="busca-ordenar" id="busca-ordenar" hidden>
+          <span>Ordenar por</span>
+          <select id="busca-ordem">
+            <option value="relevancia">Mais relevantes</option>
+            <option value="recentes">Mais recentes</option>
+            <option value="titulo">Título (A–Z)</option>
+            <option value="preco">Menor preço</option>
+          </select>
+        </label>
+      </div>
+
+      <p id="busca-aviso" class="busca-aviso" hidden></p>
+
+      <div id="busca-corpo" class="busca-corpo">
+
+        <!-- Autores -->
+        <section id="bloco-autores" class="busca-bloco" hidden>
+          <h2 class="busca-subtitulo">Autores</h2>
+          <div id="lista-autores" class="autores-linha"></div>
+        </section>
+
+        <!-- Livros -->
+        <section id="bloco-livros" class="busca-bloco" hidden>
+          <h2 class="busca-subtitulo" id="titulo-livros">Livros</h2>
+          <div id="grade-livros" class="grade-livros"></div>
+          <div class="busca-mais" id="busca-mais" hidden>
+            <button id="btn-mais" class="busca-btn-sec" type="button">Mostrar mais</button>
+          </div>
+        </section>
+
+        <!-- Semelhantes -->
+        <section id="bloco-semelhantes" class="busca-bloco" hidden>
+          <h2 class="busca-subtitulo" id="titulo-semelhantes">Livros semelhantes</h2>
+          <div id="grade-semelhantes" class="grade-livros"></div>
+        </section>
+
+        <!-- Erro de rede -->
+        <section id="bloco-erro" class="busca-erro" hidden>
+          <p>Não foi possível consultar o catálogo agora. Verifique sua conexão e tente novamente.</p>
+          <button id="btn-tentar" class="busca-btn-sec" type="button">Tentar novamente</button>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- RODAPÉ -->
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/header-footer.js"></script>
+  <script src="js/busca.js"></script>
+</body>
+
+</html>

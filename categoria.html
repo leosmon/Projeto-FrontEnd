@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Book - Categorias</title>
+</head>
+<body>
+  <p>Carregando categoria…</p>
+  <script>
+    // Os links do menu e do rodapé usam categoria.html?nome=ficcao.
+    // Aqui só redirecionamos para a página de busca, que já sabe listar por gênero.
+    const nome = new URLSearchParams(window.location.search).get("nome") || "";
+    const destino = nome ? "busca.html?genero=" + encodeURIComponent(nome) : "busca.html";
+    window.location.replace(destino);
+  </script>
+  <noscript><a href="busca.html">Ir para a busca</a></noscript>
+</body>
+</html>
