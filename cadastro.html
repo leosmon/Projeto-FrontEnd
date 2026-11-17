@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
 
@@ -8,12 +7,12 @@
     <title>Cadastro - SearchBook</title>
     <link rel="stylesheet" href="Style/cadastro.css">
     <link rel="stylesheet" href="Style/Style2.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
     <script src="https://unpkg.com/imask"></script>
-    
-</head> 
+
+</head>
 
 <body>
 
@@ -23,7 +22,6 @@
 
     <main>
         <div class="container">
-            <!-- Título -->
             <h2>Cadastre-se no Search Book</h2>
             <form id="form" aria-label="Formulário de cadastro de usuário">
                 <div class="form-container">
@@ -36,11 +34,13 @@
                                 <label for="nome">Nome</label>
                                 <input id="nome" name="nome" type="text" placeholder="João da Silva"
                                     aria-label="Digite seu nome completo">
+                                <div id="erro-nome" class="msg-erro"></div>
                             </div>
                             <div class="field">
                                 <label for="cpf">CPF</label>
-                                <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00"
+                                <input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" maxlength="14"
                                     aria-label="Digite seu CPF">
+                                <div id="erro-cpf" class="msg-erro"></div>
                             </div>
                         </div>
                     </section>
@@ -51,8 +51,8 @@
                         <div class="row">
                             <div class="field">
                                 <label for="cep">CEP</label>
-                                <input id="cep" name="cep" type="text" placeholder="00000-000"
-                                    aria-label="Digite seu CEP">
+                                <input id="cep" name="cep" type="text" placeholder="00000-000" maxlength="9">
+                                <div id="erro-cep" class="msg-erro"></div>
                             </div>
                             <div class="field">
                                 <button type="button" id="buscar-cep" aria-label="Buscar endereço pelo CEP">Buscar
@@ -60,11 +60,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="field">
+                            <div class="field" style="flex: 2;">
                                 <label for="rua">Rua</label>
                                 <input id="rua" name="rua" type="text" placeholder="Rua das Flores">
                             </div>
-                            <div class="field">
+                            <div class="field" style="flex: 1; max-width: 100px;">
+                                <label for="numero">N°</label>
+                                <input id="numero" name="numero" type="text" placeholder="123">
+                            </div>
+                            <div class="field" style="flex: 2;">
                                 <label for="bairro">Bairro</label>
                                 <input id="bairro" name="bairro" type="text" placeholder="Centro">
                             </div>
@@ -91,7 +95,8 @@
                             </div>
                             <div class="field">
                                 <label for="celular">Celular</label>
-                                <input id ="celular" id="phone-mask" id="celular" name="celular" type="text" placeholder="(21) 99999-9999">
+                                <!-- Corrigido os IDs duplicados do seu código original -->
+                                <input id="celular" name="celular" type="text" placeholder="(21) 99999-9999">
                             </div>
                         </div>
                     </section>
@@ -102,61 +107,34 @@
                         <div class="row">
                             <div class="field">
                                 <label for="usuario">Usuário (Login)</label>
-                                <input id="usuario" name="usuario" type="text" placeholder="joao.silva"
-                                maxlength="6" pattern="[A-Za-zÀ-ÿ]+" title="O usuário deve conter apenas letras sem numeros (máx. 6 caracteres)">
+                                <input id="usuario" name="usuario" type="text" placeholder="joaosil" maxlength="6">
+                                <div id="erro-usuario" class="msg-erro"></div>
                             </div>
                             <div class="field">
                                 <label for="senha">Senha</label>
-                                <input id="senha" name="senha" type="password" placeholder="••••••••"
-                                maxlength="8" pattern="[A-Za-zÀ-ÿ]+" title="A senha deve conter apenas letras sem numeros (máx. 8 caracteres)">
+                                <input id="senha" name="senha" type="password" placeholder="••••••••" maxlength="8">
+                                <div id="erro-senha" class="msg-erro"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="field half">
                                 <label for="confirmarSenha">Confirmar Senha</label>
                                 <input id="confirmarSenha" name="confirmarSenha" type="password" placeholder="••••••••"
-                                maxlength="8" pattern="[A-Za-zÀ-ÿ]+" title="A senha deve conter apenas letras sem numeros (máx. 8 caracteres)">
+                                    maxlength="8">
+                                <div id="erro-confirmarSenha" class="msg-erro"></div>
                             </div>
                         </div>
                     </section>
 
-                    <section aria-label="Preferências">
-                        <p class="section-title">Quero</p>
-                        <div class="grid">
-                            <label for="venda">
-                                <input id="venda" type="checkbox" name="tipo" value="venda">
-                                Quero Vender Livros
-                            </label>
-                            <label for="troca">
-                                <input id="troca" type="checkbox" name="tipo" value="troca">
-                                Quero Trocar Livros
-                            </label>
-                            <label for="compra">
-                                <input id="compra" type="checkbox" name="tipo" value="compra">
-                                Quero Comprar Livros
-                            </label>
-                            <label for="leitura">
-                                <input id="leitura" type="checkbox" name="tipo" value="leitura">
-                                Quero Participar de Grupo de Leitura
-                            </label>
-                        </div>
-                    </section>
-
-                    <!-- Termos -->
-                    <p class="terms">Ao se cadastrar, você concorda com os nossos
-                        <a href="#">Termos de Uso</a> e
-                        <a href="#">Política de Privacidade</a>.
-                    </p>
-
                     <!-- Botão -->
                     <button type="submit" id="cadastro" class="btn-submit">Cadastrar</button>
-                    <p class="login-link">Já tem uma conta? <a href="/login">Faça login</a></p>
                 </div>
             </form>
+        </div>
     </main>
 
     <!-- FOOTER -->
-     <div id="footer"></div>
+    <div id="footer"></div>
 
     <!-- SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -166,7 +144,7 @@
     <script src="js/Script.js" defer></script>
     <script src="js/cadastro.js"></script>
     <script src="js/imask.js"></script>
-    
+
 
 
 

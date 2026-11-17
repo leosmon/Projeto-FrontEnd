@@ -166,3 +166,13 @@ body.dark .login-link a{
   color: #007BFF;
   font-weight: 700;
 }
+
+.msg-erro {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none; /* Fica oculto até que haja um erro */
+}
+input.invalido {
+    border-color: #d9534f !important;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Book - Feedbacks da Comunidade</title>
+    <link rel="stylesheet" href="style.css"> <!-- Ajuste para o nome do seu CSS -->
+    <link rel="stylesheet" href="Style/Style2.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="container">
+        <h2>Feedbacks da Comunidade Search Book</h2>
+        <div id="todos-feedbacks-container" class="grid-feedbacks">
+            <!-- Carregado via JS -->
+        </div>
+        <p><a href="perfil.html">Voltar ao Perfil</a></p>
+    </main>
+        <div id="footer"></div>
+
+
+    <script>
+       document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("todos-feedbacks-container");
+    if (!container) return;
+
+    // Recupera o histórico geral de feedbacks salvos no localStorage
+    const historico = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    if (historico.length === 0) {
+        container.innerHTML = "<p style='text-align: center; color: #666;'>Ainda não há feedbacks cadastrados na plataforma.</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+
+    // Percorre o array e monta o card para cada feedback (Feedback 1, Feedback 2...)
+    historico.forEach((item, index) => {
+        const numeroFeedback = index + 1; 
+        
+        // Formata a data bonitinha
+        const dataFormatada = item.data 
+            ? new Date(item.data).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) 
+            : "Data não registrada";
+
+        const card = document.createElement("div");
+        card.className = "feedback-card-publico";
+        // Estilo base caso queira ajustar depois no seu CSS
+        card.style.cssText = "background: #fff; border: 1px solid #ddd; padding: 20px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
+
+        card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 10px;">
+                <h3 style="margin: 0; color: #ff8400;">Feedback ${numeroFeedback}</h3>
+                <span style="font-size: 13px; color: #888;">Por: <strong>@${item.usuario || "Anônimo"}</strong></span>
+            </div>
+            <p><strong>Opinião:</strong> ${item.opiniao || "Não informada"}</p>
+            <p><strong>Nível de Satisfação:</strong> ${item.satisfacao}/10 ⭐</p>
+            <p><strong>Recomendaria:</strong> ${item.recomendaria || "Não respondido"}</p>
+            <p><strong>Interesses:</strong> ${item.interesses && item.interesses.length ? item.interesses.join(", ") : "Nenhum"}</p>
+            <p><strong>Comentário:</strong> <em>"${item.comentario || "Nenhum comentário adicional."}"</em></p>
+            <div style="text-align: right; margin-top: 10px;">
+                <span style="font-size: 11px; color: #aaa;">Enviado em: ${dataFormatada}</span>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+});
+    </script>
+    <script src="js/header-footer.js"></script>
+</body>
+</html>

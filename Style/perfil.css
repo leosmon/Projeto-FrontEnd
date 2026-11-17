@@ -399,6 +399,12 @@ body.dark .grupo-item {
 
 }
 
+body.dark .feedback-card-publico {
+  background: #1e2939 !important;
+  color: #e5e7eb !important;
+  border: #909090 1px solid !important;
+}
+
 
 
 .cards-container {

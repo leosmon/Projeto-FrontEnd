@@ -33,16 +33,57 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("perfil-membro").textContent = `🕐 Membro desde: ${mes} de ${ano}`;
     }
   }
+
+  // Carregar os feedbacks na tela de perfil assim que a página abrir
+  carregarMeusFeedbacks();
 });
 
+// ✅ Função para carregar e listar os feedbacks do usuário logado (Feedback 1, Feedback 2...)
+function carregarMeusFeedbacks() {
+  const containerFeedbacks = document.getElementById("lista-feedbacks-usuario");
+  if (!containerFeedbacks) return;
 
+  const cadastro = JSON.parse(localStorage.getItem("cadastro"));
+  const historico = JSON.parse(localStorage.getItem("feedbacks")) || [];
 
+  // Filtra apenas os feedbacks do usuário logado (pelo username)
+  const meusFeedbacks = historico.filter(item => item.usuario === cadastro?.usuario);
+
+  if (meusFeedbacks.length === 0) {
+    containerFeedbacks.innerHTML = "<p>Você ainda não enviou nenhum feedback.</p>";
+    return;
+  }
+
+  containerFeedbacks.innerHTML = "";
+
+  meusFeedbacks.forEach((item, index) => {
+    const numeroFeedback = index + 1; // feedback1, feedback2...
+    const dataFormatada = new Date(item.data).toLocaleDateString("pt-BR", {
+      day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit"
+    });
+
+    const cardFeedback = document.createElement("div");
+    cardFeedback.className = "card-feedback-item";
+    cardFeedback.style.cssText = "background: #f9f9f9; border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 8px;";
+    
+    cardFeedback.innerHTML = `
+      <h4 style="margin-top: 0; color: #ff8400;">Feedback ${numeroFeedback}</h4>
+      <p><strong>Opinião:</strong> ${item.opiniao || "Não informada"}</p>
+      <p><strong>Satisfação:</strong> ${item.satisfacao}/10 ⭐</p>
+      <p><strong>Recomendaria:</strong> ${item.recomendaria}</p>
+      <p><strong>Interesses:</strong> ${item.interesses.length ? item.interesses.join(", ") : "Nenhum"}</p>
+      <p><strong>Comentário:</strong> ${item.comentario || "Sem comentário"}</p>
+      <span style="font-size: 12px; color: #777;">Enviado em: ${dataFormatada}</span>
+    `;
+    containerFeedbacks.appendChild(cardFeedback);
+  });
+}
+
+// Carregar Obras em Destaque
 async function carregarObras() {
-  const obras = [
-    { titulo: "Dune", link: "Dune.html" }
-  ];
-
+  const obras = [{ titulo: "Dune", link: "Dune.html" }];
   const container = document.getElementById("carrosel-livros-pg-perfil");
+  if (!container) return;
   container.innerHTML = "";
 
   for (const obra of obras) {
@@ -55,9 +96,7 @@ async function carregarObras() {
         const titulo = livro.title;
         const autor = livro.author_name ? livro.author_name[0] : "Autor desconhecido";
         const capaId = livro.cover_i;
-        const capaUrl = capaId
-          ? `https://covers.openlibrary.org/b/id/${capaId}-M.jpg`
-          : "https://via.placeholder.com/150x210?text=Sem+Capa";
+        const capaUrl = capaId ? `https://covers.openlibrary.org/b/id/${capaId}-M.jpg` : "https://via.placeholder.com/150x210?text=Sem+Capa";
 
         const card = document.createElement("a");
         card.href = obra.link;
@@ -80,11 +119,12 @@ async function carregarObras() {
     }
   }
 }
+document.addEventListener("DOMContentLoaded", carregarObras);
 
-carregarObras();
-
+// Carregar Livros à Venda
 async function carregarLivrosVenda() {
   const container = document.getElementById("lista-livros-venda");
+  if (!container) return;
   container.innerHTML = "<p>Carregando livros...</p>";
 
   const livrosVenda = [
@@ -95,8 +135,7 @@ async function carregarLivrosVenda() {
 
   try {
     const requisicoes = livrosVenda.map(obra =>
-      fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(obra.titulo)}&limit=1`)
-        .then(res => res.json())
+      fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(obra.titulo)}&limit=1`).then(res => res.json())
     );
 
     const resultados = await Promise.all(requisicoes);
@@ -108,9 +147,7 @@ async function carregarLivrosVenda() {
       const livro = dados.docs[0];
       const titulo = livro.title || "Título desconhecido";
       const capaId = livro.cover_i;
-      const capaUrl = capaId
-        ? `https://covers.openlibrary.org/b/id/${capaId}-S.jpg`
-        : null;
+      const capaUrl = capaId ? `https://covers.openlibrary.org/b/id/${capaId}-S.jpg` : null;
 
       const nota = 4;
       const estrelasHtml = gerarEstrelas(nota);
@@ -119,18 +156,12 @@ async function carregarLivrosVenda() {
       const item = document.createElement("div");
       item.className = "livro-item";
       item.innerHTML = `
-        <div class="livro-capa">
-          ${capaUrl ? `<img src="${capaUrl}" alt="Capa ${titulo}">` : "📘"}
-        </div>
-        <div class="livro-info">
-          <strong>${titulo}</strong>
-          <span class="estrelas">${estrelasHtml}</span>
-        </div>
+        <div class="livro-capa">${capaUrl ? `<img src="${capaUrl}" alt="Capa ${titulo}">` : "📘"}</div>
+        <div class="livro-info"><strong>${titulo}</strong><span class="estrelas">${estrelasHtml}</span></div>
         <div class="livro-preco">R$${preco}</div>
       `;
       container.appendChild(item);
     });
-
   } catch (erro) {
     console.error("Erro ao carregar livros:", erro);
     container.innerHTML = "<p>Erro ao carregar livros.</p>";
@@ -144,19 +175,17 @@ function gerarEstrelas(nota) {
 
 document.addEventListener("DOMContentLoaded", carregarLivrosVenda);
 
+// Carregar Livro Atual
 async function carregarLivroAtual() {
   const capaEl = document.getElementById("capa-livro-atual");
   const tituloEl = document.getElementById("titulo-livro-atual");
   const autorEl = document.getElementById("autor-livro-atual");
-  const estrelasEl = document.getElementById("estrelas-livro-atual");
   const progressoValorEl = document.getElementById("progresso-valor");
   const barraEl = document.getElementById("barra-progresso");
 
-  // Esses dados viriam do seu backend/banco (livro que o usuário está lendo + progresso salvo)
-  const livroAtual = {
-    titulo: "Dune",
-    progresso: 68
-  };
+  if (!tituloEl) return;
+
+  const livroAtual = { titulo: "Dune", progresso: 68 };
 
   try {
     const resposta = await fetch(`https://openlibrary.org/search.json?title=${encodeURIComponent(livroAtual.titulo)}&limit=1`);
@@ -164,27 +193,25 @@ async function carregarLivroAtual() {
 
     if (dados.docs && dados.docs.length > 0) {
       const livro = dados.docs[0];
-
       tituloEl.textContent = livro.title || livroAtual.titulo;
       autorEl.textContent = livro.author_name ? livro.author_name[0] : "Autor desconhecido";
 
       const capaId = livro.cover_i;
-      if (capaId) {
-        const capaUrl = `https://covers.openlibrary.org/b/id/${capaId}-M.jpg`;
-        capaEl.style.backgroundImage = `url(${capaUrl})`;
+      if (capaId && capaEl) {
+        capaEl.style.backgroundImage = `url(https://covers.openlibrary.org/b/id/${capaId}-M.jpg)`;
       }
     }
   } catch (erro) {
     console.error("Erro ao carregar livro atual:", erro);
   }
 
-  // Progresso e nota vêm do seu sistema (localStorage, banco de dados, etc), não da API
-  progressoValorEl.textContent = `${livroAtual.progresso}%`;
-  barraEl.style.width = `${livroAtual.progresso}%`;
+  if (progressoValorEl) progressoValorEl.textContent = `${livroAtual.progresso}%`;
+  if (barraEl) barraEl.style.width = `${livroAtual.progresso}%`;
 }
 
-document.addEventListener("DOMContentLoaded", carregarLivroAtual); // ⬅️ chamada que faltava
+document.addEventListener("DOMContentLoaded", carregarLivroAtual);
 
+// Modal de Editar Perfil
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal-editar-perfil");
   const btnEditar = document.getElementById("btn-editar-perfil");
@@ -192,11 +219,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCancelar = document.getElementById("btn-cancelar-modal");
   const formEditar = document.getElementById("form-editar-perfil");
 
+  if (!btnEditar || !modal) return;
+
   const inputNome = document.getElementById("edit-nome");
   const inputUsuario = document.getElementById("edit-usuario");
   const inputTelefone = document.getElementById("edit-telefone");
 
-  // Abre o modal e preenche com os dados atuais
   btnEditar.addEventListener("click", () => {
     const cadastro = JSON.parse(localStorage.getItem("cadastro"));
     if (cadastro) {
@@ -207,23 +235,13 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("ativo");
   });
 
-  // Fecha o modal
-  function fecharModal() {
-    modal.classList.remove("ativo");
-  }
-
+  function fecharModal() { modal.classList.remove("ativo"); }
   btnFechar.addEventListener("click", fecharModal);
   btnCancelar.addEventListener("click", fecharModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) fecharModal(); });
 
-  // Fecha clicando fora do card do modal
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) fecharModal();
-  });
-
-  // Salva as alterações
   formEditar.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const cadastro = JSON.parse(localStorage.getItem("cadastro")) || {};
 
     cadastro.nome = inputNome.value.trim();
@@ -232,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("cadastro", JSON.stringify(cadastro));
 
-    // Atualiza a tela sem precisar recarregar a página
     document.getElementById("perfil-nome").textContent = cadastro.nome;
     document.getElementById("perfil-email").textContent = "@" + cadastro.usuario;
 
@@ -240,43 +257,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// ✅ Gestão do Formulário de Feedback e Interação por Estrelas (1 a 10)
 document.addEventListener("DOMContentLoaded", () => {
   const formFeedback = document.getElementById("form-feedback");
+  if (!formFeedback) return;
+
   const rangeSatisfacao = document.getElementById("nota-satisfacao");
   const valorSatisfacao = document.getElementById("nota-satisfacao-valor");
   const confirmacaoDiv = document.getElementById("feedback-confirmacao");
   const btnNovoFeedback = document.getElementById("btn-novo-feedback");
-
   const estrelas = document.querySelectorAll("#avaliacao-estrelas span");
 
-function atualizarEstrelas(nota) {
+  function atualizarEstrelas(nota) {
+    estrelas.forEach(estrela => {
+      estrela.classList.toggle("ativa", Number(estrela.dataset.valor) <= nota);
+    });
+  }
+
+  atualizarEstrelas(5);
+
   estrelas.forEach(estrela => {
-    estrela.classList.toggle(
-      "ativa",
-      Number(estrela.dataset.valor) <= nota
-    );
+    estrela.addEventListener("click", () => {
+      const nota = Number(estrela.dataset.valor);
+      rangeSatisfacao.value = nota;
+      valorSatisfacao.textContent = nota;
+      atualizarEstrelas(nota);
+    });
   });
-}
-
-atualizarEstrelas(5);
-
-estrelas.forEach(estrela => {
-  estrela.addEventListener("click", () => {
-    const nota = Number(estrela.dataset.valor);
-
-    rangeSatisfacao.value = nota;
-    valorSatisfacao.textContent = nota;
-
-    atualizarEstrelas(nota);
-  });
-});
-
-  if (!formFeedback) return;
-
 
   formFeedback.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    const cadastro = JSON.parse(localStorage.getItem("cadastro")) || {};
     const opiniao = document.getElementById("opiniao").value;
     const satisfacao = rangeSatisfacao.value;
     const recomendaria = document.querySelector('input[name="recomendaria"]:checked')?.value || "não respondido";
@@ -286,6 +298,7 @@ estrelas.forEach(estrela => {
     document.querySelectorAll('input[name="interesse"]:checked').forEach(el => interesses.push(el.value));
 
     const dadosFeedback = {
+      usuario: cadastro.usuario || "desconhecido",
       opiniao,
       satisfacao,
       recomendaria,
@@ -294,7 +307,7 @@ estrelas.forEach(estrela => {
       data: new Date().toISOString()
     };
 
-    // Salva no localStorage (histórico simples de feedbacks)
+    // Salva no localStorage em formato de array dinâmico
     const historico = JSON.parse(localStorage.getItem("feedbacks")) || [];
     historico.push(dadosFeedback);
     localStorage.setItem("feedbacks", JSON.stringify(historico));
@@ -306,18 +319,22 @@ estrelas.forEach(estrela => {
     document.getElementById("conf-interesses").textContent = interesses.length ? interesses.join(", ") : "nenhum selecionado";
     document.getElementById("conf-comentario").textContent = comentario || "sem comentário";
 
-    // Troca o formulário pela confirmação
+    // Oculta o formulário e mostra a confirmação
     formFeedback.style.display = "none";
     confirmacaoDiv.style.display = "block";
+
+    // Atualiza imediatamente a lista de feedbacks embaixo do perfil
+    carregarMeusFeedbacks();
   });
 
-  // Permite enviar um novo feedback, voltando ao formulário
   if (btnNovoFeedback) {
     btnNovoFeedback.addEventListener("click", () => {
       formFeedback.reset();
+      rangeSatisfacao.value = 5;
       valorSatisfacao.textContent = "5";
+      atualizarEstrelas(5);
       confirmacaoDiv.style.display = "none";
-      formFeedback.style.display = "flex";
+      formFeedback.style.display = "block";
     });
   }
 });

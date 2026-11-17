@@ -113,6 +113,11 @@ input, textarea, select, label, button {
   
 }
 
+#navbarNavDropdown{
+  background: #f8faff !important;
+  background-color: white !important;
+}
+
 .navbar-nav {
   margin-left: 7% !important;
   
@@ -1002,6 +1007,16 @@ body.dark .destaque-sinopse-texto {
 body.dark .livro-card-destaque {
   background: #1e1e1e;
   border-color: #333;
+}
+
+body.dark .submenu-usuario-nome{
+  color:black;
+}
+
+body.dark .feedback-card-publico {
+  background: #1e2939 !important;
+  color: #e5e7eb !important;
+  border: #909090 1px solid !important;
 }
 
 
