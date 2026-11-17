@@ -1019,6 +1019,11 @@ body.dark .feedback-card-publico {
   border: #909090 1px solid !important;
 }
 
+body.dark #navbarNavDropdown{
+     background: #101828 !important;
+    color:white;
+}
+
 
 /* ======================================
  RESPONSIVIDADE
