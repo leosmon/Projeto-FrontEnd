@@ -42,7 +42,29 @@ function normalizarHandleUsuario(valor) {
 
 function obterUsuarioLogado() {
   try {
-    return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+    const raw = localStorage.getItem("usuarioLogado");
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return null;
+
+    // Se houver um cadastro correspondente em "usuarios", mescla para manter dados atualizados
+    const listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
+    if (Array.isArray(listaUsuarios)) {
+      const handle = normalizarHandleUsuario(parsed.usuario || parsed.login || parsed.email);
+      const encontrado = listaUsuarios.find(u => {
+        const uHandle = normalizarHandleUsuario(u.usuario || u.login);
+        const uEmail = String(u.email || "").trim().toLowerCase();
+        const pEmail = String(parsed.email || "").trim().toLowerCase();
+        return (parsed.id && u.id === parsed.id) ||
+          (handle && uHandle === handle) ||
+          (pEmail && uEmail === pEmail);
+      });
+      if (encontrado) {
+        return { ...encontrado, ...parsed };
+      }
+    }
+
+    return parsed;
   } catch (_) {
     return null;
   }
@@ -207,13 +229,16 @@ function atualizarCabecalhoPerfil(usuario) {
   const bioEl = document.getElementById("perfil-bio");
   const metaEl = document.getElementById("perfil-meta");
 
-  if (nomeEl && usuario.nome) nomeEl.textContent = usuario.nome;
+  const nomeExibido = usuario.nome || usuario.nomeCompleto || usuario.usuario || "Usuário";
+  const handleLimpo = normalizarHandleUsuario(usuario.usuario || usuario.login || "");
+
+  if (nomeEl) nomeEl.textContent = nomeExibido;
   if (emailEl) {
-    const handle = usuario.usuario ? `@${normalizarHandleUsuario(usuario.usuario)}` : "";
+    const handle = handleLimpo ? `@${handleLimpo}` : "";
     const partesContato = [handle, usuario.email].filter(Boolean);
     emailEl.textContent = partesContato.join(" • ") || "@usuario";
   }
-  if (avatarEl) avatarEl.textContent = gerarIniciaisNome(usuario.nome);
+  if (avatarEl) avatarEl.textContent = gerarIniciaisNome(nomeExibido);
 
   const dataRef = usuario.dataCadastro || usuario.membroDesde;
   if (membroEl && dataRef) {
@@ -250,12 +275,17 @@ function atualizarCabecalhoPerfil(usuario) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const logado = localStorage.getItem("logado") === "true";
   const usuarioLogado = obterUsuarioLogado();
+  const logadoFlag = localStorage.getItem("logado");
 
-  if (!logado || !usuarioLogado) {
+  // Só redireciona se não houver nenhum usuário logado
+  if (!usuarioLogado || logadoFlag === "false") {
     window.location.href = "login.html";
     return;
+  }
+
+  if (logadoFlag !== "true") {
+    localStorage.setItem("logado", "true");
   }
 
   const leiturasIniciais = Array.isArray(usuarioLogado.leituraAtualLista) && usuarioLogado.leituraAtualLista.length
