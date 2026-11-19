@@ -46,23 +46,74 @@
       </div>
     </section>
 
-    <!-- Modal: Editar Perfil -->
+    <!-- Modal: Editar Cadastro Completo -->
     <div class="modal-overlay" id="modal-editar-perfil">
-      <div class="modal-conteudo">
+      <div class="modal-conteudo modal-conteudo-amplo">
         <div class="modal-header">
-          <h2>Editar Perfil</h2>
+          <h2>Editar Cadastro Completo</h2>
           <button class="modal-fechar" id="btn-fechar-modal" type="button">✕</button>
         </div>
 
-        <form id="form-editar-perfil">
-          <label for="edit-nome">Nome</label>
-          <input type="text" id="edit-nome" placeholder="Seu nome completo" />
+        <form id="form-editar-perfil" novalidate>
+          <div class="modal-grid-2col">
+            <div>
+              <label for="edit-nome">Nome completo *</label>
+              <input type="text" id="edit-nome" minlength="3" maxlength="60" placeholder="Seu nome completo" required />
+            </div>
+            <div>
+              <label for="edit-usuario">Nome de usuário (@) * <small style="font-weight:400;color:#64748b;">(3 a 20 caracteres)</small></label>
+              <input type="text" id="edit-usuario" minlength="3" maxlength="20" placeholder="ex: ana.lima" required />
+            </div>
+          </div>
 
-          <label for="edit-usuario">Nome de usuário</label>
-          <input type="text" id="edit-usuario" placeholder="usuario" />
+          <div class="modal-grid-2col">
+            <div>
+              <label for="edit-email">E-mail *</label>
+              <input type="email" id="edit-email" maxlength="80" placeholder="voce@exemplo.com" required />
+            </div>
+            <div>
+              <label for="edit-telefone">Telefone</label>
+              <input type="text" id="edit-telefone" maxlength="15" placeholder="(00) 00000-0000" />
+            </div>
+          </div>
 
-          <label for="edit-telefone">Telefone</label>
-          <input type="text" id="edit-telefone" placeholder="(00) 00000-0000" />
+          <div class="modal-grid-2col">
+            <div>
+              <label for="edit-nascimento">Data de nascimento</label>
+              <input type="date" id="edit-nascimento" />
+            </div>
+            <div>
+              <label for="edit-localizacao">Cidade / Estado</label>
+              <input type="text" id="edit-localizacao" maxlength="50" placeholder="Ex: Rio de Janeiro, RJ" />
+            </div>
+          </div>
+
+          <div class="modal-grid-2col">
+            <div>
+              <label for="edit-senha">Nova senha <small style="font-weight:400;color:#64748b;">(deixe em branco para manter)</small></label>
+              <input type="password" id="edit-senha" minlength="6" maxlength="32" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+            </div>
+            <div>
+              <label for="edit-confirmar-senha">Confirmar nova senha</label>
+              <input type="password" id="edit-confirmar-senha" minlength="6" maxlength="32" placeholder="Repita a nova senha" autocomplete="new-password" />
+            </div>
+          </div>
+
+          <div class="modal-grid-2col">
+            <div>
+              <label for="edit-membro-desde">Membro desde</label>
+              <input type="date" id="edit-membro-desde" />
+            </div>
+            <div>
+              <label for="edit-interesses">Interesses literários</label>
+              <input type="text" id="edit-interesses" maxlength="100" placeholder="Ex: Ficção científica, Mangás" />
+            </div>
+          </div>
+
+          <label for="edit-bio">Bio / Sobre você <small style="font-weight:400;color:#64748b;">(máx. 180 caracteres)</small></label>
+          <textarea id="edit-bio" rows="3" maxlength="180" placeholder="Conte um pouco sobre suas leituras..."></textarea>
+
+          <p id="erro-editar-perfil" class="erro-form-modal" style="display: none;"></p>
 
           <div class="modal-botoes">
             <button type="button" class="btn-cancelar" id="btn-cancelar-modal">Cancelar</button>
