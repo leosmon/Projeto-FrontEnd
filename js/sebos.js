@@ -214,6 +214,19 @@ function criarLinha(sebo) {
   }
   linha.appendChild(avaliacao);
 
+
+  linha.style.cursor = "pointer";
+  linha.setAttribute("role", "button");
+  linha.setAttribute("tabindex", "0");
+  linha.setAttribute("aria-label", `Ver endereço e detalhes de ${sebo.nome}`);
+
+  linha.addEventListener("click", () => abrirModalSebo(sebo));
+  linha.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      abrirModalSebo(sebo);
+    }
+  });
   return linha;
 }
 
@@ -307,6 +320,23 @@ function iniciarEventos() {
     el("bloco-estado").hidden = aberto;
     el("toggle-estado-icone").textContent = aberto ? "+" : "−";
   });
+
+  const modalSebo = el("modal-sebo");
+  const btnFecharModal = el("btn-fechar-modal-sebo");
+
+  if (btnFecharModal) {
+    btnFecharModal.addEventListener("click", fecharModalSebo);
+  }
+
+  if (modalSebo) {
+    modalSebo.addEventListener("click", (e) => {
+      if (e.target === modalSebo) fecharModalSebo();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") fecharModalSebo();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -320,3 +350,52 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarEventos();
   renderTudo();
 });
+
+
+const RUAS_FICTICIAS = [
+  "Rua das Letras, 142 - Centro",
+  "Av. Rio Branco, 890 - Loja B",
+  "Rua dos Alfarrábios, 55 - Vila Literária",
+  "Praça da República, 310 - Sala 4",
+  "Rua Quintino Bocaiúva, 720 - Centro",
+  "Av. Sete de Setembro, 1204 - Galeria Cultural",
+  "Rua Visconde de Inhaúma, 88 - Sobrado",
+  "Travessa do Ouvidor, 34 - Centro Histórico"
+];
+
+function obterDetalhesSebo(sebo) {
+  const idx = SEBOS.findIndex(s => s.nome === sebo.nome && s.cidade === sebo.cidade);
+  const base = idx >= 0 ? idx : 0;
+  const rua = RUAS_FICTICIAS[base % RUAS_FICTICIAS.length];
+  const ddd = { SP: "11", RJ: "21", MG: "31", PR: "41", SC: "48", GO: "62", BA: "71", RS: "51", PE: "81", DF: "61" }[sebo.uf] || "21";
+  const telFinal = String(3200 + base * 17).padStart(4, "0");
+
+  return {
+    endereco: sebo.endereco || `${rua} — ${sebo.cidade}/${sebo.uf}`,
+    horario: sebo.horario || "Segunda a Sábado, das 09h às 18h",
+    telefone: sebo.telefone || `(${ddd}) 9${telFinal}-${String(1100 + base * 23).slice(-4)}`
+  };
+}
+
+function abrirModalSebo(sebo) {
+  const modal = el("modal-sebo");
+  if (!modal) return;
+
+  const detalhes = obterDetalhesSebo(sebo);
+  el("modal-sebo-nome").textContent = sebo.nome;
+  el("modal-sebo-local").textContent = `${sebo.cidade} - ${ESTADOS[sebo.uf] || sebo.uf} (${sebo.uf})`;
+  el("modal-sebo-endereco").textContent = detalhes.endereco;
+  el("modal-sebo-horario").textContent = detalhes.horario;
+  el("modal-sebo-telefone").textContent = detalhes.telefone;
+  el("modal-sebo-desde").textContent = formatarData(sebo.desde);
+  el("modal-sebo-avaliacao").textContent = sebo.recomendam === null
+    ? "Ainda não há recomendações"
+    : `${sebo.recomendam}% recomendam`;
+
+  modal.hidden = false;
+}
+
+function fecharModalSebo() {
+  const modal = el("modal-sebo");
+  if (modal) modal.hidden = true;
+}

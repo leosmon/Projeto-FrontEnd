@@ -96,3 +96,78 @@
 body.dark .livro-detalhe-autor { color: #ccc; }
 body.dark .livro-detalhe-sinopse { color: #ddd; }
 body.dark .assunto-tag { background: #1e2939; }
+
+/* ======================================
+   AVALIAÇÕES NA PÁGINA DO LIVRO - TEMA CLARO
+====================================== */
+.livro-avaliacoes-secao {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+
+.livro-avaliacoes-secao h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+#livro-avaliacoes-resumo {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 14px;
+}
+
+#livro-avaliacoes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.livro-avaliacao-item {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #1e293b;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.livro-avaliacao-item small {
+  color: #64748b;
+}
+
+
+/* ======================================
+   AVALIAÇÕES NA PÁGINA DO LIVRO - TEMA ESCURO (body.dark)
+====================================== */
+body.dark .livro-avaliacoes-secao {
+  border-top-color: #263248;
+  color: #e2e8f0  !important;
+}
+
+body.dark .livro-avaliacoes-secao h2 {
+  color: #f8fafc !important;
+}
+
+body.dark #livro-avaliacoes-resumo {
+  color: #94a3b8 !important;
+}
+
+body.dark .livro-avaliacao-item p {
+  
+  color: #f1f5f9 !important;
+  
+}
+body.dark .livro-avaliacao-item  {
+  
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important
+  
+}
+
+body.dark .livro-avaliacao-item small {
+  color: #94a3b8;
+}

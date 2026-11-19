@@ -13,10 +13,10 @@
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-   <link rel="stylesheet" href="Style/Style2.css" />
-  <link rel="stylesheet" href="Style/footer.css"/>
+  <link rel="stylesheet" href="Style/Style2.css" />
+  <link rel="stylesheet" href="Style/footer.css" />
   <script src="js/pesquisa.js"></script>
- 
+
 </head>
 
 <body>
@@ -62,11 +62,7 @@
 
     <div id="search-bar-container">
       <!-- Tipo de busca -->
-      <fieldset class="tipo-busca" aria-label="Tipo de busca">
-        <label><input type="radio" name="tipo" value="venda" checked> <span>Venda</span></label>
-        <label><input type="radio" name="tipo" value="troca"> <span>Troca</span></label>
-        <label><input type="radio" name="tipo" value="leitura"> <span>Leitura</span></label>
-      </fieldset>
+
 
       <!-- Inputs -->
       <div class="inputs">
@@ -112,13 +108,13 @@
             <p class="tag">TENDÊNCIAS</p>
             <h2 class="title">Os Mais Lidos no Momento</h2>
           </div>
-          <a href="#" class="ver-todos">Ver todos →</a>
+          <a href="busca.html" class="ver-todos">Ver todos →</a>
         </div>
 
         <div class="relative">
           <button class="btn-prev" id="btn-prev-mais-lidos" aria-label="Anterior">‹</button>
 
-          <div class="carrossel-">
+          <div class="carrossel-viewport">
             <div id="carrosel-livros-pg-inicial" class="carrossel-track" aria-label="Carrossel de livros"></div>
           </div>
 

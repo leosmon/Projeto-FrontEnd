@@ -100,6 +100,47 @@ function formatarPreco(valor) {
   return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+function urlCapaLivro(capaId) {
+  return capaId
+    ? `https://covers.openlibrary.org/b/id/${capaId}-M.jpg`
+    : "https://via.placeholder.com/150x210?text=Sem+Capa";
+}
+
+function adicionarLivroAoCarrinho(livro) {
+  const precoNumerico = precoDe(livro.key);
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+  const itemExistente = carrinho.find(
+    (item) => item.titulo === livro.titulo || (livro.key && item.id === livro.key)
+  );
+
+  if (itemExistente) {
+    itemExistente.quantidade += 1;
+  } else {
+    carrinho.push({
+      id: livro.key,
+      titulo: livro.titulo,
+      preco: precoNumerico,
+      capa: urlCapaLivro(livro.capa),
+      quantidade: 1
+    });
+  }
+
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+  const avisoCarrinho = $("busca-carrinho-aviso");
+  if (avisoCarrinho) {
+    avisoCarrinho.innerHTML = "";
+    avisoCarrinho.appendChild(document.createTextNode(`✔ "${livro.titulo}" adicionado ao carrinho. `));
+    const linkCarrinho = criar("a", "", "Ir para o carrinho →");
+    linkCarrinho.href = "carrinho.html";
+    linkCarrinho.style.color = "#007BFF";
+    linkCarrinho.style.textDecoration = "underline";
+    avisoCarrinho.appendChild(linkCarrinho);
+    avisoCarrinho.hidden = false;
+  }
+}
+
 async function pegar(url) {
   const resposta = await fetch(url);
   if (!resposta.ok) throw new Error("HTTP " + resposta.status);
@@ -271,6 +312,18 @@ function criarCardLivro(livro) {
   const botao = criar("a", "produto-btn", "Ver detalhes");
   botao.href = linkLivro(livro);
   info.appendChild(botao);
+
+  const btnCarrinho = criar("button", "produto-btn produto-btn-carrinho", "🛒 Adicionar ao carrinho");
+  btnCarrinho.type = "button";
+  btnCarrinho.addEventListener("click", () => {
+    adicionarLivroAoCarrinho(livro);
+    const textoOriginal = btnCarrinho.textContent;
+    btnCarrinho.textContent = "✔ Adicionado!";
+    setTimeout(() => {
+      btnCarrinho.textContent = textoOriginal;
+    }, 1800);
+  });
+  info.appendChild(btnCarrinho);
 
   card.appendChild(info);
   return card;

@@ -115,25 +115,38 @@ document.addEventListener("DOMContentLoaded", () => {
         if (document.querySelector("input[value='compra']")?.checked) tiposCadastro.push("compra");
         if (document.querySelector("input[value='leitura']")?.checked) tiposCadastro.push("leitura");
 
-        // Cria objeto JSON
-        const dados = {
-            nome,
-            cpf,
-            cep,
-            rua,
-            bairro,
-            cidade,
-            estado,
-            telefone,
-            celular,
-            usuario,
-            senha,
-            tiposCadastro,
-            dataCadastro: new Date().toISOString()
-        };
+       // 1. Verifica se o login já existe na lista de usuários cadastrados
+const listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+const loginJaExiste = listaUsuarios.some(
+    (u) => u.usuario.toLowerCase() === usuario.toLowerCase()
+);
 
-        // Salva no LocalStorage com segurança
-        localStorage.setItem("cadastro", JSON.stringify(dados));
+if (loginJaExiste) {
+    mostrarErro(inputUsuario, "erro-usuario", "Este nome de usuário já está em uso. Escolha outro.");
+    return;
+}
+
+// 2. Se passou em todas as validações, empilha o novo usuário no array
+const novoUsuario = {
+    id: Date.now(), // Identificador único
+    nome,
+    cpf,
+    cep,
+    rua,
+    numero,
+    bairro,
+    cidade,
+    estado,
+    telefone,
+    celular,
+    usuario,
+    senha,
+    tiposCadastro,
+    dataCadastro: new Date().toISOString()
+};
+
+listaUsuarios.push(novoUsuario);
+localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
 
         // Tela de sucesso
         document.body.innerHTML = `

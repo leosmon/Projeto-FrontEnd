@@ -160,12 +160,17 @@ function inicializarFormularioAvaliacao() {
       return;
     }
 
-    const cadastro = JSON.parse(localStorage.getItem("cadastro"));
+    // ✅ ÚNICA ALTERAÇÃO NECESSÁRIA: lê usuarioLogado em vez de cadastro
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    const nomeUsuario = (logado && usuarioLogado)
+      ? (usuarioLogado.usuario || usuarioLogado.nome || "anônimo")
+      : "anônimo";
+
     const novaAvaliacao = {
       titulo,
       nota,
       comentario,
-      usuario: cadastro ? cadastro.usuario : "anônimo",
+      usuario: nomeUsuario,
       data: new Date().toISOString()
     };
 

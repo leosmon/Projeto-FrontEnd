@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Book - Meus Pedidos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="Style/Style2.css">
+    <link rel="stylesheet" href="Style/pedidos.css">
+</head>
+<body>
+
+    <div id="header-container"></div>
+
+    <main class="pedidos-main">
+        <h2 class="pedidos-titulo">📦 Meus Pedidos</h2>
+        <div id="container-meus-pedidos"></div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const logado = localStorage.getItem("logado") === "true";
+            const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+            if (!logado || !usuarioLogado) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const container = document.getElementById("container-meus-pedidos");
+            const todosPedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+            const meusPedidos = todosPedidos.filter(p => p.usuario === usuarioLogado.usuario);
+
+            if (meusPedidos.length === 0) {
+                container.innerHTML = "<p class='pedidos-vazio'>Você ainda não realizou nenhuma compra.</p>";
+                return;
+            }
+
+            container.innerHTML = "";
+
+            [...meusPedidos].reverse().forEach(pedido => {
+                const dataObj = new Date(pedido.data);
+                const dataFormatada = Number.isNaN(dataObj.getTime())
+                    ? ""
+                    : ` (${dataObj.toLocaleDateString("pt-BR")})`;
+
+                const listaLivrosHtml = (pedido.itens || [])
+                    .map(i => {
+                        const subtotal = (Number(i.preco || 0) * Number(i.quantidade || 1)).toFixed(2).replace(".", ",");
+                        return `<li>${i.quantidade}x <strong>${i.titulo}</strong> — R$ ${subtotal}</li>`;
+                    })
+                    .join("");
+
+                const totalFormatado = Number(pedido.total || 0).toFixed(2).replace(".", ",");
+
+                const card = document.createElement("div");
+                card.className = "pedido-card";
+                card.innerHTML = `
+                    <div class="pedido-topo">
+                        <span><strong>Pedido ${pedido.numeroPedido}</strong>${dataFormatada}</span>
+                        <span class="pedido-status">${pedido.status || "Confirmado"}</span>
+                    </div>
+                    <ul class="pedido-itens">${listaLivrosHtml}</ul>
+                    <div class="pedido-rodape">
+                        <span>Pagamento: ${pedido.pagamento || "Não informado"}</span>
+                        <strong class="pedido-total">Total: R$ ${totalFormatado}</strong>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+    </script>
+    <script src="js/header-footer.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

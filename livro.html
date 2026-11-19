@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="Style/livro.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Style/avaliacoes.css">
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,11 +41,31 @@
           <h2>Sinopse</h2>
           <p class="livro-detalhe-sinopse" id="livro-sinopse">Sinopse não disponível para este título.</p>
 
+          <p class="livro-detalhe-preco" style="font-size: 24px; font-weight: 800; color: #ff8400; margin: 15px 0;">
+            R$ <span id="livro-preco">39,90</span>
+          </p>
+
           <div class="livro-detalhe-acoes">
-            <button class="btn-feedback" id="btn-adicionar-lista">+ Adicionar à minha lista</button>
+            <button class="btn-feedback" id="btn-adicionar-carrinho">🛒 Adicionar ao Carrinho</button>
             <a id="link-openlibrary" href="#" target="_blank" rel="noopener" class="btn-outline azul">
-              Ver na Open Library ↗
+              
             </a>
+          </div>
+          <!-- Avaliações do Livro -->
+          <section id="livro-avaliacoes-secao" class="livro-avaliacoes-secao"
+            style="margin-top: 28px; padding-top: 20px; border-top: 1px solid;">
+            <h2 style="font-size: 20px; margin-bottom: 8px;">Avaliações dos leitores</h2>
+            <p id="livro-avaliacoes-resumo" >
+              Nenhuma avaliação registrada para este título ainda.
+            </p>
+            <div id="livro-avaliacoes-lista" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </section>
+
+          <!-- Aviso visual discreto quando adicionado ao carrinho (sem alert) -->
+          <div id="aviso-carrinho"
+            style="display: none; color: #28a745; font-weight: 600; margin-top: 12px; font-size: 14px;">
+            ✅ Livro adicionado ao carrinho! <a href="carrinho.html"
+              style="color: #007BFF; text-decoration: underline;">Ir para o carrinho</a>
           </div>
         </div>
       </div>
@@ -54,18 +77,12 @@
   </main>
 
   <div id="footer"></div>
-  <div id="acessibilidade-flutuante" class="recolhido">
-    <button id="toggle-acessibilidade" class="btn-toggle-acessibilidade">‹</button>
-    <div class="acessibilidade-botoes">
-      <button id="btn-aumentar">A+</button>
-      <button id="btn-diminuir">A-</button>
-      <div id="acessibilidade-btn"><button id="toggle-theme">☀️</button></div>
-    </div>
-  </div>
+
 
   <script src="js/header-footer.js"></script>
   <script src="js/livro-detalhe.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

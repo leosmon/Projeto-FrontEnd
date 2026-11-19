@@ -1,20 +1,16 @@
 <!doctype html>
-<html lang="pt-BR"> <!-- Correção: idioma ajustado para português -->
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search Book</title> <!-- Correção: título mais descritivo -->
-
-  <script src="script.js"></script>
-
+  <title>Search Book - Perfil</title>
 
   <!-- Importação de fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@400;500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet" />
-
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -44,17 +40,18 @@
           </span>
         </div>
 
-        <button class="btn-editar" id="btn-editar-perfil">
+        <button class="btn-editar" id="btn-editar-perfil" type="button">
           ✏️ Editar Perfil
         </button>
       </div>
     </section>
 
+    <!-- Modal: Editar Perfil -->
     <div class="modal-overlay" id="modal-editar-perfil">
       <div class="modal-conteudo">
         <div class="modal-header">
           <h2>Editar Perfil</h2>
-          <button class="modal-fechar" id="btn-fechar-modal">✕</button>
+          <button class="modal-fechar" id="btn-fechar-modal" type="button">✕</button>
         </div>
 
         <form id="form-editar-perfil">
@@ -74,6 +71,116 @@
         </form>
       </div>
     </div>
+
+    <!-- Modal: Editar Leitura Atual / Progresso (até 2 livros) -->
+    <div class="modal-overlay" id="modal-leitura-atual">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2>Atualizar Leituras (até 2)</h2>
+          <button class="modal-fechar" id="btn-fechar-leitura" type="button">✕</button>
+        </div>
+        <form id="form-leitura-atual">
+          <label for="slot-leitura-index">Slot de leitura</label>
+          <select id="slot-leitura-index">
+            <option value="0">Livro 1</option>
+            <option value="1">Livro 2</option>
+          </select>
+
+          <label for="input-livro-atual">Título do livro</label>
+          <input type="text" id="input-livro-atual" required />
+
+          <label for="input-autor-atual">Autor</label>
+          <input type="text" id="input-autor-atual" required />
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label for="input-pagina-atual">Página atual</label>
+              <input type="number" id="input-pagina-atual" min="0" placeholder="Ex: 140" />
+            </div>
+            <div>
+              <label for="input-total-paginas">Total de páginas</label>
+              <input type="number" id="input-total-paginas" min="1" placeholder="Ex: 300" />
+            </div>
+          </div>
+
+          <p class="hint-progresso-modal" id="preview-progresso-texto"
+            style="margin-top: 8px; font-size: 12px; color: #2563eb; font-weight: 600;">
+            Progresso calculado: 68%
+          </p>
+
+          <div class="modal-botoes">
+            <button type="button" class="btn-cancelar" id="btn-cancelar-leitura">Cancelar</button>
+            <button type="submit" class="btn-salvar">Salvar leitura</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Adicionar Livro à Venda -->
+    <div class="modal-overlay" id="modal-adicionar-livro">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2>Novo Livro à Venda</h2>
+          <button class="modal-fechar" id="btn-fechar-livro" type="button">✕</button>
+        </div>
+        <form id="form-adicionar-livro">
+          <label for="novo-livro-titulo">Título</label>
+          <input type="text" id="novo-livro-titulo" placeholder="Ex: Capitães da Areia" required />
+
+          <label for="novo-livro-preco">Preço (R$)</label>
+          <input type="number" id="novo-livro-preco" step="0.01" min="1" placeholder="34.90" required />
+
+          <div class="modal-botoes">
+            <button type="button" class="btn-cancelar" id="btn-cancelar-livro">Cancelar</button>
+            <button type="submit" class="btn-salvar">Publicar livro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Ver Todos os Livros à Venda -->
+    <div class="modal-overlay" id="modal-todos-livros-venda">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2>Todos os Livros à Venda</h2>
+          <button class="modal-fechar" id="btn-fechar-todos-venda" type="button">✕</button>
+        </div>
+        <div id="lista-todos-livros-venda"
+          style="display: flex; flex-direction: column; gap: 12px; max-height: 340px; overflow-y: auto;"></div>
+        <div class="modal-botoes">
+          <button type="button" class="btn-salvar" id="btn-fechar-todos-venda-rodape">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Explorar e Cadastrar Grupos de Leitura (Discord) -->
+    <div class="modal-overlay" id="modal-grupos-leitura">
+      <div class="modal-conteudo">
+        <div class="modal-header">
+          <h2>Grupos de Leitura</h2>
+          <button class="modal-fechar" id="btn-fechar-grupos" type="button">✕</button>
+        </div>
+
+        <form id="form-cadastrar-grupo"
+          style="margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #e2e8f0;">
+          <label for="novo-grupo-nome">Nome do grupo</label>
+          <input type="text" id="novo-grupo-nome" placeholder="Ex: Clube de Ficção - Discord" required />
+
+          <label for="novo-grupo-link">Link do grupo (Discord / comunidade)</label>
+          <input type="url" id="novo-grupo-link" placeholder="https://discord.gg/seu-convite" required />
+          <p id="erro-grupo-form" style="display:none; color:#dc2626; font-size:12px; margin-top:6px;"></p>
+
+          <button type="submit" class="btn-salvar" style="width:100%; margin-top:12px;">+ Cadastrar grupo</button>
+        </form>
+
+        <div id="lista-grupos-disponiveis" style="display: flex; flex-direction: column; gap: 10px;"></div>
+
+        <div class="modal-botoes">
+          <button type="button" class="btn-cancelar" id="btn-concluir-grupos">Concluir</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Grid de cards -->
     <div class="perfil-grid">
       <!-- Lendo no Momento -->
@@ -102,10 +209,10 @@
           </div>
         </div>
 
-        <button class="btn-outline azul">Ver mais</button>
+        <button class="btn-outline azul" id="btn-ver-mais-leitura" type="button">Ver mais</button>
       </div>
 
-      <!-- CARD 1: Livros à venda (via API) -->
+      <!-- CARD 1: Livros à venda -->
       <div class="card">
         <div class="card-header">
           <h2 class="card-title" style="color:#f5821f;">LIVROS À VENDA</h2>
@@ -116,10 +223,13 @@
           <!-- os livros serão inseridos aqui via JS -->
         </div>
 
-        <button class="btn-outline laranja">Adicionar Livro</button>
+        <div class="acoes-card-venda">
+          <button type="button" id="btn-abrir-add-livro" class="btn-outline laranja">Adicionar Livro</button>
+          <button type="button" id="btn-ver-todos-venda" class="btn-outline azul" style="display:none;">Ver todos</button>
+        </div>
       </div>
 
-      <!-- CARD 2: Avaliações (fictício) -->
+      <!-- CARD 2: Avaliações -->
       <div class="card">
         <div class="card-header">
           <h2 class="card-title" style="color:#2563eb;">AVALIAÇÕES</h2>
@@ -150,9 +260,10 @@
           </div>
         </div>
 
-        <button class="btn-outline azul">Ver todas</button>
+        <button class="btn-outline azul" id="btn-ver-todas-avaliacoes" type="button">Ver todas</button>
       </div>
 
+      <!-- CARD 3: Meus Grupos -->
       <div class="card">
         <div class="card-header">
           <h2 class="card-title" style="color:#f5821f;">MEUS GRUPOS</h2>
@@ -185,10 +296,8 @@
           </div>
         </div>
 
-        <button class="btn-outline laranja">Explorar grupos</button>
+        <button class="btn-outline laranja" id="btn-explorar-grupos" type="button">Explorar grupos</button>
       </div>
-      <!-- fim do card Meus Grupos -->
-
     </div>
 
     <!-- Formulário de Feedback -->
@@ -253,15 +362,15 @@
         <p><strong>Recomendaria:</strong> <span id="conf-recomendaria"></span></p>
         <p><strong>Interesses:</strong> <span id="conf-interesses"></span></p>
         <p><strong>Comentário:</strong> <span id="conf-comentario"></span></p>
-        <button id="btn-novo-feedback" class="btn-outline azul">Enviar outro feedback</button>
+        <button id="btn-novo-feedback" class="btn-outline azul" type="button">Enviar outro feedback</button>
       </div>
-    </section>
 
-    
+      <!-- Histórico de feedbacks do usuário -->
+      
+    </section>
   </main>
 
-
-  <!-- FOOTER -->
+  <!-- RODAPÉ -->
   <div id="footer"></div>
 
   <script src="js/header-footer.js"></script>

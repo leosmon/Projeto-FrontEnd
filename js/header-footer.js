@@ -1,6 +1,4 @@
-
-
-   //-----------------------------//
+//-----------------------------//
     // CARREGA O HEADER NAS PAGINAS////
     //-----------------------------//
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,7 +27,8 @@ function inicializarHeader() {
             menuResponsivo.classList.toggle("ativo");
         });
     }
-        //-----------------------------//
+
+    //-----------------------------//
     // PAINEL DE ACESSIBILIDADE RECOLHÍVEL ////
     //-----------------------------//
     const painelAcessibilidade = document.getElementById("acessibilidade-flutuante");
@@ -40,8 +39,9 @@ function inicializarHeader() {
             painelAcessibilidade.classList.toggle("recolhido");
         });
     }
+
     //-----------------------------//
-    // BOTÕES DE ACESSIBILIDADE////
+    // BOTÕES DE ACESSIBILIDADE (FONTE) ////
     //-----------------------------//
     let currentSize = 16;
     const btnAumentar = document.getElementById("btn-aumentar");
@@ -69,16 +69,13 @@ function inicializarHeader() {
         });
     }
 
-
-       //-----------------------------//
-    // BOTÕES DE BOTAO ALTERNAR TEMA////
     //-----------------------------//
-   
+    // BOTÃO ALTERNAR TEMA ////
+    //-----------------------------//
     const btnTheme = document.getElementById('toggle-theme');
     const body = document.body;
 
     if (btnTheme) {
-        // Verifica tema salvo, se estiver usando localStorage
         const temaSalvo = localStorage.getItem('tema');
         if (temaSalvo === 'dark') {
             body.classList.add('dark');
@@ -103,11 +100,12 @@ function inicializarHeader() {
             }
         });
     }
-      //-----------------------------//
+
+    //-----------------------------//
     // ESTADO DE LOGIN NO HEADER ////
     //-----------------------------//
     const logado = localStorage.getItem("logado") === "true";
-    const cadastro = JSON.parse(localStorage.getItem("cadastro"));
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
     const wrapperUsuario = document.getElementById("usuario-logado-wrapper");
     const avatarBtn = document.getElementById("avatar-usuario");
@@ -116,21 +114,21 @@ function inicializarHeader() {
     const submenuNome = document.getElementById("submenu-nome-completo");
     const btnLogout = document.getElementById("btn-logout");
 
-    if (logado && cadastro) {
+    if (logado && usuarioLogado) {
         // Esconde login/cadastro, mostra o avatar
         document.querySelectorAll(".btn-login, .btn-cadastro").forEach(el => el.style.display = "none");
         if (wrapperUsuario) wrapperUsuario.style.display = "block";
 
-        // Gera as iniciais a partir do nome (ex: "Ana Lima" → "AL")
-        if (avatarIniciais && cadastro.nome) {
-            const partesNome = cadastro.nome.trim().split(" ");
+        // Gera as iniciais a partir do nome
+        if (avatarIniciais && usuarioLogado.nome) {
+            const partesNome = usuarioLogado.nome.trim().split(" ");
             const iniciais = partesNome.length > 1
                 ? (partesNome[0][0] + partesNome[partesNome.length - 1][0])
                 : partesNome[0].substring(0, 2);
             avatarIniciais.textContent = iniciais.toUpperCase();
         }
 
-        if (submenuNome) submenuNome.textContent = cadastro.nome;
+        if (submenuNome) submenuNome.textContent = usuarioLogado.nome;
 
         // Abre/fecha o submenu ao clicar no avatar
         if (avatarBtn && submenuUsuario) {
@@ -139,7 +137,6 @@ function inicializarHeader() {
                 submenuUsuario.classList.toggle("aberto");
             });
 
-            // Fecha ao clicar em qualquer outro lugar da página
             document.addEventListener("click", () => {
                 submenuUsuario.classList.remove("aberto");
             });
@@ -149,23 +146,14 @@ function inicializarHeader() {
         if (btnLogout) {
             btnLogout.addEventListener("click", () => {
                 localStorage.removeItem("logado");
+                localStorage.removeItem("usuarioLogado");
                 window.location.href = "index.html";
             });
         }
     }
-}
-// carrega o footer.html no elemento com id "footer"
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("complementos/footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer").innerHTML = data;
-        })
-        .catch(error => console.error("Erro ao carregar footer:", error));
-});
 
     //-----------------------------//
-    // SUBMENU DE CATEGORIAS ////
+    // SUBMENU DE CATEGORIAS (Movido para dentro para garantir carregamento) ////
     //-----------------------------//
     const dropdownToggle = document.querySelector(".dropdown-toggle");
     const dropdownWrapper = document.querySelector(".item-menu-dropdown");
@@ -178,3 +166,16 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownWrapper.classList.remove("aberto");
         });
     }
+}
+
+//-----------------------------//
+// CARREGA O FOOTER NAS PAGINAS ////
+//-----------------------------//
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("complementos/footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.error("Erro ao carregar footer:", error));
+});

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Book - Carrinho e Pagamento</title>
+    <link rel="stylesheet" href="Style/Style2.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <style>
+        .checkout-container { max-width: 900px; margin: 2rem auto; padding: 1.5rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; }
+        .item-carrinho { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding: 10px 0; }
+        .box-pagamento { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
+        .metodo-campos { margin-top: 15px; display: none; }
+        .metodo-campos.ativo { display: block; }
+        .aviso-ui { color: #d9534f; font-size: 13px; margin-top: 8px; display: none; }
+
+        body.dark .box-pagamento{
+    background: #101828 !important;
+    color: #f9f7f7 !important;
+}
+
+body.dark .box-pagamento h3{
+    color: #f9f7f7 !important;
+}
+
+body.dark .box-pagamento h4{
+    color: #f9f7f7 !important;
+}
+
+body.dark .box-pagamento p{
+    color: #f9f7f7 !important;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="header-container"></div>
+    <main class="checkout-container">
+        <!-- Lista de Livros no Carrinho -->
+        <section>
+            <h2>Seu Carrinho</h2>
+            <div id="lista-itens-carrinho"></div>
+            <h3 style="margin-top: 1rem;">Total: R$ <span id="valor-total">0,00</span></h3>
+        </section>
+
+        <!-- Seção de Pagamento -->
+        <section class="box-pagamento">
+            <h3>Pagamento</h3>
+            <form id="form-pagamento">
+                <label>Forma de Pagamento:</label><br>
+                <select id="forma-pagamento" style="width: 100%; padding: 8px; margin: 8px 0;">
+                    <option value="">Selecione...</option>
+                    <option value="pix">PIX (Aprovação Imediata)</option>
+                    <option value="cartao">Cartão de Crédito</option>
+                </select>
+
+                <!-- Campos Cartão -->
+                <div id="campos-cartao" class="metodo-campos">
+                    <input type="text" id="num-cartao" placeholder="Número do Cartão (16 dígitos)" maxlength="16" style="width:100%; padding:8px; margin-bottom:8px;">
+                    <input type="text" id="nome-cartao" placeholder="Nome impresso no cartão" style="width:100%; padding:8px; margin-bottom:8px;">
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="validade-cartao" placeholder="MM/AA" maxlength="5" style="width:50%; padding:8px;">
+                        <input type="text" id="cvv-cartao" placeholder="CVV" maxlength="3" style="width:50%; padding:8px;">
+                    </div>
+                </div>
+
+                <!-- Campos PIX -->
+                <div id="campos-pix" class="metodo-campos">
+                    <p style="font-size: 13px;">Código Copia e Cola gerado ao finalizar:</p>
+                    <code style="display:block; background:#eee; padding:8px; font-size:11px; word-break:break-all;">00020126360014BR.GOV.BCB.PIX0114searchbook@pix.com5204000053039865802BR</code>
+                </div>
+
+                <div id="erro-pagamento" class="aviso-ui"></div>
+
+                <button type="submit" style="width: 100%; padding: 12px; background: #ff8400; color: #fff; border: none; border-radius: 6px; margin-top: 15px; cursor: pointer; font-weight: bold;">
+                    Finalizar Compra
+                </button>
+            </form>
+        </section>
+    </main>
+  <div id="footer"></div>
+<script src="js/header-footer.js"></script>
+    <script src="js/carrinho.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

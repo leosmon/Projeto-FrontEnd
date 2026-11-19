@@ -510,3 +510,38 @@ body.dark .produto.esqueleto {
   background: linear-gradient(90deg, #101828 25%, #16213a 50%, #101828 75%);
   background-size: 200% 100%;
 }
+/* Botão de Adicionar ao Carrinho nos cards da busca */
+.produto-btn-carrinho {
+  background-color: #ff8400;
+  color: #ffffff;
+  border: none;
+  margin-top: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.produto-btn-carrinho:hover {
+  background-color: #e07400;
+  color: #ffffff;
+}
+
+.produto-btn-carrinho:active {
+  transform: scale(0.98);
+}
+
+/* Faixa de aviso quando um livro é adicionado ao carrinho */
+#busca-carrinho-aviso {
+  background-color: #eafaf1;
+  border: 1px solid #28a745;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+/* Ajuste para o modo escuro (acessibilidade) */
+body.dark #busca-carrinho-aviso {
+  background-color: #163322;
+  border-color: #34c759;
+  color: #d4f7e2 !important;
+}

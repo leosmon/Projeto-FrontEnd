@@ -70,25 +70,32 @@
 
 
   </div>
-  <!-- Botões de login e cadastro -->
-  <div id="botoes-header">
+ <!-- Botões de login, cadastro e o avatar do usuário logado -->
+  <div id="botoes-header" style="display: flex; align-items: center; gap: 10px;">
     <a class="btn-login" href="login.html">Login</a>
     <a class="btn-cadastro" href="cadastro.html">Cadastrar</a>
 
-    <!-- Aparece só quando logado -->
-    <div id="usuario-logado-wrapper" class="usuario-logado-wrapper" style="display:none;">
-      <button id="avatar-usuario" class="avatar-usuario" aria-haspopup="true" aria-expanded="false">
-        <span id="avatar-iniciais">--</span>
+    <!-- Bloco do Usuário Logado (Oculto por padrão, o JS exibe quando logado) -->
+    <div id="usuario-logado-wrapper" style="display: none; position: relative;">
+      <button id="avatar-usuario" style="background: #ff8400; color: white; border: none; border-radius: 50%; width: 42px; height: 42px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+        <span id="avatar-iniciais">US</span>
       </button>
 
-      <div id="submenu-usuario" class="submenu-usuario">
-        <div class="submenu-usuario-nome" id="submenu-nome-completo"></div>
-        <a href="perfil.html" class="submenu-usuario-item">👤 Meu Perfil</a>
-        <button id="btn-logout" class="submenu-usuario-item submenu-usuario-sair">🚪 Sair</button>
+      <!-- Submenu / Dropdown do Usuário -->
+      <div id="submenu-usuario" class="submenu-usuario" style="display: none; position: absolute; right: 0; top: 50px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; z-index: 1050; padding: 8px 0;">
+        <div style="padding: 10px 15px; border-bottom: 1px solid #eee; text-align: center;">
+          <strong id="submenu-nome-completo" style="color: #333; font-size: 14px;">Nome do Usuário</strong>
+        </div>
+        <a href="perfil.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 14px;">👤 Meu Perfil</a>
+        <a href="meus-pedidos.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 14px;">📦 Meus Pedidos</a>
+        <a href="carrinho.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 14px;">🛒 Meu Carrinho</a>
+        <button id="btn-logout" style="width: 100%; text-align: left; padding: 10px 15px; background: none; border: none; color: #d9534f; cursor: pointer; font-size: 14px; border-top: 1px solid #eee; margin-top: 5px;">🚪 Sair</button>
       </div>
     </div>
-  
   </div>
+
+</nav>
+</header>
   
 </nav>
 <div class="collapse navbar-collapse" id="navbarNavDropdown">
