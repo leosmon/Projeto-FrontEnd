@@ -8,7 +8,6 @@
   transition: background 0.3s ease;
 }
 
-
 .livro-detalhe-main {
   padding: 40px 0 80px;
 }
@@ -28,7 +27,7 @@
 .livro-detalhe-capa img {
   width: 100%;
   border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .livro-detalhe-info h1 {
@@ -86,6 +85,7 @@
   .livro-detalhe-grid {
     grid-template-columns: 1fr;
   }
+
   .livro-detalhe-capa img {
     max-width: 220px;
     margin: 0 auto;
@@ -107,6 +107,15 @@ body.dark .assunto-tag { background: #1e2939; }
   color: #1e293b;
 }
 
+.livro-av-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
 .livro-avaliacoes-secao h2 {
   font-size: 20px;
   font-weight: 700;
@@ -114,13 +123,16 @@ body.dark .assunto-tag { background: #1e2939; }
   color: #0f172a;
 }
 
-#livro-avaliacoes-resumo {
+#livro-avaliacoes-resumo,
+.livro-av-resumo {
   font-size: 14px;
   color: #475569;
-  margin-bottom: 14px;
+  margin: 0;
+  font-weight: 600;
 }
 
-#livro-avaliacoes-lista {
+#livro-avaliacoes-lista,
+.livro-av-lista {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -135,39 +147,237 @@ body.dark .assunto-tag { background: #1e2939; }
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
-.livro-avaliacao-item small {
+.livro-avaliacao-item small,
+.livro-av-data {
   color: #64748b;
+  font-size: 12px;
 }
 
+.livro-av-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.livro-av-estrelas {
+  color: #f59e0b;
+  font-size: 14px;
+}
+
+.livro-av-comentario {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #1e293b;
+}
+
+/* Botões e link de login das avaliações */
+.btn-deixar-av-livro {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-deixar-av-livro:hover {
+  background: #1d4ed8;
+}
+
+.link-login-av-livro {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #f5821f;
+  color: #f5821f;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.link-login-av-livro:hover {
+  background: #f5821f;
+  color: #ffffff;
+}
+
+.btn-ver-todas-av {
+  margin-top: 14px;
+  border: 2px solid #2563eb;
+  background: transparent;
+  color: #2563eb;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ver-todas-av:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Modais das avaliações do livro */
+.modal-av-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 16px;
+}
+
+.modal-av-overlay.ativo {
+  display: flex;
+}
+
+.modal-av-box {
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.modal-av-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.modal-av-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.modal-av-fechar {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.modal-av-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.modal-av-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-av-erro {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.modal-av-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-modal-av-cancelar {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #cbd5e1;
+  background: transparent;
+  color: #334155;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-modal-av-salvar {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-modal-av-salvar:hover {
+  background: #1d4ed8;
+}
 
 /* ======================================
    AVALIAÇÕES NA PÁGINA DO LIVRO - TEMA ESCURO (body.dark)
 ====================================== */
 body.dark .livro-avaliacoes-secao {
   border-top-color: #263248;
-  color: #e2e8f0  !important;
+  color: #e2e8f0 !important;
 }
 
 body.dark .livro-avaliacoes-secao h2 {
   color: #f8fafc !important;
 }
 
-body.dark #livro-avaliacoes-resumo {
+body.dark #livro-avaliacoes-resumo,
+body.dark .livro-av-resumo {
   color: #94a3b8 !important;
 }
 
-body.dark .livro-avaliacao-item p {
-  
+body.dark .livro-avaliacao-item p,
+body.dark .livro-av-comentario {
   color: #f1f5f9 !important;
-  
-}
-body.dark .livro-avaliacao-item  {
-  
-  background: #0f172a !important;
-  border: 1px solid #1e293b !important
-  
 }
 
-body.dark .livro-avaliacao-item small {
+body.dark .livro-avaliacao-item {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+}
+
+body.dark .livro-avaliacao-item small,
+body.dark .livro-av-data,
+body.dark .modal-av-fechar {
   color: #94a3b8;
+}
+
+body.dark .modal-av-box {
+  background: #101828;
+  color: #f8fafc;
+  border: 1px solid #1e2939;
+}
+
+body.dark .modal-av-input {
+  background: #1e2939;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark .btn-modal-av-cancelar {
+  border-color: #475569;
+  color: #cbd5e1;
 }
