@@ -19,6 +19,18 @@ const PERFIS_SEED_PUBLICOS = {
       { titulo: "1984", preco: 32.0, capa: "" },
       { titulo: "A Revolução dos Bichos", preco: 24.5, capa: "" }
     ],
+    avaliacoes: [
+      {
+        titulo: "1984",
+        nota: 4,
+        comentario: "Impactante, mas um pouco pesado pra ler de uma vez."
+      },
+      {
+        titulo: "Harry Potter and the Philosopher's Stone",
+        nota: 5,
+        comentario: "Reli depois de anos e continua mágico do mesmo jeito."
+      }
+    ],
     grupos: [
       { nome: "Clássicos da Literatura Brasileira", membros: 34, data: "15 Set", link: "" },
       { nome: "Ficção Científica Brasil", membros: 87, data: "20 Set", link: "" }
@@ -42,6 +54,13 @@ const PERFIS_SEED_PUBLICOS = {
     ],
     vendas: [
       { titulo: "Fundação", preco: 38.0, capa: "" }
+    ],
+    avaliacoes: [
+      {
+        titulo: "Dune",
+        nota: 5,
+        comentario: "Construção de mundo impressionante. Ficção científica no seu melhor."
+      }
     ],
     grupos: [
       { nome: "Ficção Científica Brasil", membros: 87, data: "20 Set", link: "" }
@@ -115,7 +134,7 @@ function montarDadosCompletosUsuario(handleAlvo) {
   const nomeFinal = base.nome || handleAlvo;
   const usuarioFinal = normalizarHandle(base.usuario || handleAlvo);
 
-  // Leituras
+  // 1. Leituras
   const leiturasPorUsuario = lerJsonSeguro("leiturasPorUsuario", {});
   let leituras = Array.isArray(leiturasPorUsuario[usuarioFinal]) ? leiturasPorUsuario[usuarioFinal] : null;
   if (!leituras && bateComLogado) {
@@ -127,7 +146,7 @@ function montarDadosCompletosUsuario(handleAlvo) {
     leituras = Array.isArray(seed?.leituras) ? seed.leituras : [];
   }
 
-  // Livros à venda
+  // 2. Livros à venda
   const todasVendas = lerJsonSeguro("livrosVenda", lerJsonSeguro("livrosAVenda", []));
   const vendasDoUsuario = Array.isArray(todasVendas)
     ? todasVendas.filter(item => normalizarHandle(item.vendedor || item.usuario) === usuarioFinal)
@@ -136,7 +155,14 @@ function montarDadosCompletosUsuario(handleAlvo) {
     ? vendasDoUsuario
     : (Array.isArray(seed?.vendas) ? seed.vendas : []);
 
-  // Grupos que participa
+  // 3. Avaliações feitas por esse usuário
+  const todasAvaliacoes = lerJsonSeguro("avaliacoes", []);
+  const avaliacoesSalvasDoUsuario = Array.isArray(todasAvaliacoes)
+    ? todasAvaliacoes.filter(av => normalizarHandle(av.usuario) === usuarioFinal)
+    : [];
+  const avaliacoes = [...avaliacoesSalvasDoUsuario, ...(seed?.avaliacoes || [])];
+
+  // 4. Grupos que participa
   const gruposSalvos = lerJsonSeguro("gruposLeitura", lerJsonSeguro("grupos", []));
   let grupos = [];
   if (Array.isArray(gruposSalvos) && gruposSalvos.length > 0) {
@@ -158,6 +184,7 @@ function montarDadosCompletosUsuario(handleAlvo) {
     interessesPerfil: base.interessesPerfil || [],
     leituras,
     vendas,
+    avaliacoes,
     grupos,
     ehProprioPerfil: Boolean(bateComLogado)
   };
@@ -236,6 +263,30 @@ function renderizarVendas(vendas) {
     });
 
     container.appendChild(row);
+  });
+}
+
+function renderizarAvaliacoes(avaliacoes) {
+  const container = document.getElementById("visita-avaliacoes");
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (!avaliacoes || avaliacoes.length === 0) {
+    container.innerHTML = `<p class="visita-vazio">Nenhuma avaliação registrada ainda.</p>`;
+    return;
+  }
+
+  avaliacoes.forEach(av => {
+    const item = document.createElement("div");
+    item.className = "visita-avaliacao-item";
+    item.innerHTML = `
+      <div class="visita-avaliacao-topo">
+        <strong>${av.titulo || "Livro"}</strong>
+        <span class="visita-estrelas">${formatarEstrelas(av.nota)}</span>
+      </div>
+      <p class="visita-avaliacao-texto">${av.comentario || ""}</p>
+    `;
+    container.appendChild(item);
   });
 }
 
@@ -350,6 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderizarLeituras(dados.leituras);
   renderizarVendas(dados.vendas);
+  renderizarAvaliacoes(dados.avaliacoes);
   renderizarGrupos(dados.grupos);
 
   document.getElementById("usuario-conteudo").style.display = "block";
