@@ -13,6 +13,8 @@ const TABELA_PRECOS_POR_TITULO = {
 };
 
 let precoAtualLivro = 44.90;
+let tituloLivroAtual = "";
+let modaisAvaliacaoProntos = false;
 
 function obterPrecoDeterministico(workKey, titulo) {
   if (workKey && TABELA_PRECOS_POR_ID[workKey] !== undefined) {
@@ -51,12 +53,12 @@ async function traduzirTexto(texto, idiomaOrigem = "en", idiomaDestino = "pt-BR"
     console.error("Erro ao traduzir sinopse:", erro);
   }
 
-  return texto; // se a tradução falhar, mostra o texto original em inglês em vez de quebrar a página
+  return texto;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const workKey = params.get("id"); // ex: "/works/OL262758W"
+  const workKey = params.get("id");
   const precoParam = parseFloat(params.get("preco"));
 
   if (!Number.isNaN(precoParam) && precoParam > 0) {
@@ -66,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   configurarBotaoCarrinho();
+  configurarModaisAvaliacaoDetalhe();
 
   if (!workKey) {
     mostrarErro();
@@ -80,12 +83,10 @@ async function carregarLivro(workKey) {
   const conteudo = document.getElementById("livro-conteudo");
 
   try {
-    // Detalhes da obra (sinopse, assuntos)
     const respostaObra = await fetch(`https://openlibrary.org${workKey}.json`);
     if (!respostaObra.ok) throw new Error("Obra não encontrada");
     const obra = await respostaObra.json();
 
-    // Nome do(s) autor(es) — precisa de uma segunda chamada, pois a obra só traz a "key" do autor
     let nomeAutor = "Autor desconhecido";
     if (obra.authors && obra.authors.length > 0) {
       const autorKey = obra.authors[0].author?.key || obra.authors[0].key;
@@ -98,19 +99,17 @@ async function carregarLivro(workKey) {
       }
     }
 
-    // Capa
     const capaId = obra.covers && obra.covers.length > 0 ? obra.covers[0] : null;
     const capaUrl = capaId
       ? `https://covers.openlibrary.org/b/id/${capaId}-L.jpg`
       : "https://via.placeholder.com/300x450?text=Sem+Capa";
 
-    // Sinopse — pode vir como string OU como objeto { value: "..." }
     let sinopse = null;
     if (obra.description) {
       sinopse = typeof obra.description === "string" ? obra.description : obra.description.value;
     }
 
-    // Preenche a página
+    tituloLivroAtual = obra.title || "";
     document.getElementById("titulo-aba").textContent = `Search Book - ${obra.title}`;
     document.getElementById("livro-titulo").textContent = obra.title;
     renderizarAvaliacoesLivro(obra.title);
@@ -118,7 +117,6 @@ async function carregarLivro(workKey) {
     document.getElementById("livro-capa-img").src = capaUrl;
     document.getElementById("livro-capa-img").alt = `Capa de ${obra.title}`;
 
-    // Define o preço fixo do livro (respeitando ?preco= na URL se vier de algum link)
     const params = new URLSearchParams(window.location.search);
     const precoParam = parseFloat(params.get("preco"));
     if (!Number.isNaN(precoParam) && precoParam > 0) {
@@ -129,12 +127,9 @@ async function carregarLivro(workKey) {
 
     if (sinopse) {
       document.getElementById("livro-sinopse").textContent = "Traduzindo sinopse...";
-
-      // A API grátis tem limite de ~500 caracteres por chamada — corta em pedaços se precisar
       const sinopseTraduzida = sinopse.length > 480
         ? await traduzirSinopseLonga(sinopse)
         : await traduzirTexto(sinopse);
-
       document.getElementById("livro-sinopse").textContent = sinopseTraduzida;
     }
 
@@ -142,7 +137,6 @@ async function carregarLivro(workKey) {
       document.getElementById("livro-publicacao").textContent = `Publicado em ${obra.first_publish_date}`;
     }
 
-    // Assuntos/gêneros (como tags)
     const assuntosEl = document.getElementById("livro-assuntos");
     assuntosEl.innerHTML = "";
     if (obra.subjects && obra.subjects.length > 0) {
@@ -210,8 +204,6 @@ function mostrarErro() {
   document.getElementById("livro-erro").style.display = "block";
 }
 
-// Quebra a sinopse em pedaços de até ~450 caracteres (por frase, pra não cortar no meio)
-// e traduz cada pedaço separadamente, depois junta tudo de volta
 async function traduzirSinopseLonga(texto) {
   const frases = texto.match(/[^.!?]+[.!?]+/g) || [texto];
   const blocos = [];
@@ -279,27 +271,175 @@ function formatarEstrelasDetalhe(nota) {
   return "★".repeat(arredondada) + "☆".repeat(5 - arredondada);
 }
 
-function renderizarAvaliacoesLivro(tituloLivro) {
-  const resumoEl = document.getElementById("livro-avaliacoes-resumo");
-  const listaEl = document.getElementById("livro-avaliacoes-lista");
-  if (!resumoEl || !listaEl) return;
+function obterUsuarioLogadoDetalhe() {
+  const logado = localStorage.getItem("logado") === "true";
+  if (!logado) return null;
+  try {
+    return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+  } catch (_) {
+    return null;
+  }
+}
 
+function obterAvaliacoesFiltradasLivro(tituloLivro) {
   const alvo = normalizarTituloComparacao(tituloLivro);
   const avaliacoesSalvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
   const todas = [...avaliacoesSalvas, ...AVALIACOES_DETALHE_SEED];
 
-  // Filtra avaliações cujo título bate exatamente ou contém o título do livro
-  const doLivro = todas
+  return todas
     .filter(av => {
       const t = normalizarTituloComparacao(av.titulo);
       return t && alvo && (t === alvo || t.includes(alvo) || alvo.includes(t));
     })
     .sort((a, b) => new Date(b.data || 0) - new Date(a.data || 0));
+}
 
+function criarElementoAvaliacaoDetalhe(av) {
+  const card = document.createElement("div");
+  card.className = "livro-avaliacao-item";
+  const dataFormatada = av.data ? new Date(av.data).toLocaleDateString("pt-BR") : "";
+
+  card.innerHTML = `
+    <div class="livro-av-topo">
+      <strong>@${av.usuario || "leitor"}</strong>
+      <span class="livro-av-estrelas">${formatarEstrelasDetalhe(av.nota)}</span>
+    </div>
+    <p class="livro-av-comentario">${av.comentario}</p>
+    ${dataFormatada ? `<small class="livro-av-data">${dataFormatada}</small>` : ""}
+  `;
+  return card;
+}
+
+function atualizarBotaoAcaoAvaliacao() {
+  const containerAcao = document.getElementById("livro-av-acao-usuario");
+  const modalForm = document.getElementById("modal-form-av-livro");
+  const erroEl = document.getElementById("erro-av-detalhe");
+  if (!containerAcao) return;
+
+  const usuario = obterUsuarioLogadoDetalhe();
+
+  if (usuario) {
+    containerAcao.innerHTML = `
+      <button type="button" id="btn-abrir-form-av-livro" class="btn-deixar-av-livro">
+        ✍️ Deixar sua avaliação
+      </button>
+    `;
+    document.getElementById("btn-abrir-form-av-livro")?.addEventListener("click", () => {
+      if (!obterUsuarioLogadoDetalhe()) {
+        atualizarBotaoAcaoAvaliacao();
+        return;
+      }
+      if (erroEl) {
+        erroEl.style.display = "none";
+        erroEl.textContent = "";
+      }
+      modalForm?.classList.add("ativo");
+    });
+  } else {
+    containerAcao.innerHTML = `
+      <a href="login.html" class="link-login-av-livro">
+        Faça login pra deixar sua avaliação
+      </a>
+    `;
+  }
+}
+
+function configurarModaisAvaliacaoDetalhe() {
+  if (modaisAvaliacaoProntos) return;
+  modaisAvaliacaoProntos = true;
+
+  const btnVerTodas = document.getElementById("btn-ver-todas-av-livro");
+  const modalTodas = document.getElementById("modal-todas-av-livro");
+  const listaModalTodas = document.getElementById("modal-todas-av-lista");
+  const btnFecharTodas = document.getElementById("btn-fechar-todas-av");
+
+  const modalForm = document.getElementById("modal-form-av-livro");
+  const btnFecharForm = document.getElementById("btn-fechar-form-av");
+  const btnCancelarForm = document.getElementById("btn-cancelar-form-av");
+  const formAv = document.getElementById("form-avaliacao-detalhe");
+  const erroEl = document.getElementById("erro-av-detalhe");
+
+  btnVerTodas?.addEventListener("click", () => {
+    if (!modalTodas || !listaModalTodas) return;
+    const todas = obterAvaliacoesFiltradasLivro(tituloLivroAtual);
+    listaModalTodas.innerHTML = "";
+    todas.forEach(av => listaModalTodas.appendChild(criarElementoAvaliacaoDetalhe(av)));
+    modalTodas.classList.add("ativo");
+  });
+
+  const fecharTodas = () => modalTodas?.classList.remove("ativo");
+  btnFecharTodas?.addEventListener("click", fecharTodas);
+  modalTodas?.addEventListener("click", e => {
+    if (e.target === modalTodas) fecharTodas();
+  });
+
+  const fecharForm = () => {
+    formAv?.reset();
+    if (erroEl) {
+      erroEl.style.display = "none";
+      erroEl.textContent = "";
+    }
+    modalForm?.classList.remove("ativo");
+  };
+  btnFecharForm?.addEventListener("click", fecharForm);
+  btnCancelarForm?.addEventListener("click", fecharForm);
+  modalForm?.addEventListener("click", e => {
+    if (e.target === modalForm) fecharForm();
+  });
+
+  formAv?.addEventListener("submit", e => {
+    e.preventDefault();
+    const usuarioAtual = obterUsuarioLogadoDetalhe();
+    if (!usuarioAtual) {
+      if (erroEl) {
+        erroEl.textContent = "Você precisa estar logado para enviar uma avaliação.";
+        erroEl.style.display = "block";
+      }
+      return;
+    }
+
+    const nota = Number(document.getElementById("select-nota-detalhe")?.value) || 5;
+    const comentario = document.getElementById("textarea-comentario-detalhe")?.value.trim() || "";
+
+    if (!comentario) {
+      if (erroEl) {
+        erroEl.textContent = "Escreva um comentário antes de enviar.";
+        erroEl.style.display = "block";
+      }
+      return;
+    }
+
+    const novaAvaliacao = {
+      titulo: tituloLivroAtual || "Livro",
+      nota,
+      comentario,
+      usuario: usuarioAtual.usuario || "leitor",
+      data: new Date().toISOString()
+    };
+
+    const salvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+    salvas.push(novaAvaliacao);
+    localStorage.setItem("avaliacoes", JSON.stringify(salvas));
+
+    fecharForm();
+    renderizarAvaliacoesLivro(tituloLivroAtual);
+  });
+}
+
+function renderizarAvaliacoesLivro(tituloLivro) {
+  const resumoEl = document.getElementById("livro-avaliacoes-resumo");
+  const listaEl = document.getElementById("livro-avaliacoes-lista");
+  const btnVerTodas = document.getElementById("btn-ver-todas-av-livro");
+  if (!resumoEl || !listaEl) return;
+
+  atualizarBotaoAcaoAvaliacao();
+
+  const doLivro = obterAvaliacoesFiltradasLivro(tituloLivro);
   listaEl.innerHTML = "";
 
   if (doLivro.length === 0) {
     resumoEl.textContent = "Ainda não há avaliações para este livro.";
+    if (btnVerTodas) btnVerTodas.style.display = "none";
     return;
   }
 
@@ -308,22 +448,11 @@ function renderizarAvaliacoesLivro(tituloLivro) {
 
   resumoEl.textContent = `${formatarEstrelasDetalhe(Math.round(Number(media)))} · ${media} de 5 (${doLivro.length} ${doLivro.length === 1 ? "avaliação" : "avaliações"})`;
 
-  doLivro.forEach(av => {
-    const card = document.createElement("div");
-    card.className = "livro-avaliacao-item";
-    card.style.cssText = "background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px;";
-
-    const dataFormatada = av.data ? new Date(av.data).toLocaleDateString("pt-BR") : "";
-
-    card.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-        <strong style="font-size: 14px;">@${av.usuario || "leitor"}</strong>
-        <span style="color: #f59e0b; font-size: 14px;">${formatarEstrelasDetalhe(av.nota)}</span>
-      </div>
-      <p style="margin: 0 0 6px; font-size: 14px; line-height: 1.45;">${av.comentario}</p>
-      ${dataFormatada ? `<small style="color: #64748b; font-size: 12px;">${dataFormatada}</small>` : ""}
-    `;
-
-    listaEl.appendChild(card);
+  doLivro.slice(0, 3).forEach(av => {
+    listaEl.appendChild(criarElementoAvaliacaoDetalhe(av));
   });
+
+  if (btnVerTodas) {
+    btnVerTodas.style.display = doLivro.length > 3 ? "inline-block" : "none";
+  }
 }
