@@ -19,26 +19,149 @@ const AVALIACOES_PERFIL_PADRAO = [
   { titulo: "Boa Noite PunPun", nota: 5, comentario: "Emocionalmente devastador. Arte e narrativa excepcionais." }
 ];
 
+const REGRAS_CADASTRO_PERFIL = {
+  NOME_MIN: 3,
+  NOME_MAX: 60,
+  USUARIO_MIN: 3,
+  USUARIO_MAX: 20,
+  USUARIO_REGEX: /^[a-z0-9._]+$/,
+  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  SENHA_MIN: 6,
+  BIO_MAX: 180
+};
+
+const HANDLES_RESERVADOS_SISTEMA = ["admin", "suporte", "searchbook"];
 const LIMITE_LIVROS_CARD_VENDA = 3;
 
+function normalizarHandleUsuario(valor) {
+  return String(valor || "")
+    .trim()
+    .replace(/^@+/, "")
+    .toLowerCase();
+}
+
 function obterUsuarioLogado() {
-  return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+  try {
+    return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function migrarDadosQuandoTrocarHandle(handleAntigo, handleNovo) {
+  if (!handleAntigo || !handleNovo || handleAntigo === handleNovo) return;
+
+  try {
+    const leiturasPorUsuario = JSON.parse(localStorage.getItem("leiturasPorUsuario")) || {};
+    if (leiturasPorUsuario[handleAntigo]) {
+      leiturasPorUsuario[handleNovo] = leiturasPorUsuario[handleAntigo];
+      delete leiturasPorUsuario[handleAntigo];
+      localStorage.setItem("leiturasPorUsuario", JSON.stringify(leiturasPorUsuario));
+    }
+  } catch (_) {}
+
+  try {
+    const vendas = JSON.parse(localStorage.getItem("livrosVenda")) || [];
+    if (Array.isArray(vendas)) {
+      const atualizadas = vendas.map(v => {
+        if (normalizarHandleUsuario(v.usuario) === handleAntigo || normalizarHandleUsuario(v.vendedor) === handleAntigo) {
+          return { ...v, usuario: handleNovo, vendedor: handleNovo };
+        }
+        return v;
+      });
+      localStorage.setItem("livrosVenda", JSON.stringify(atualizadas));
+    }
+  } catch (_) {}
+
+  try {
+    const avaliacoes = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+    if (Array.isArray(avaliacoes)) {
+      const atualizadas = avaliacoes.map(a =>
+        normalizarHandleUsuario(a.usuario) === handleAntigo ? { ...a, usuario: handleNovo } : a
+      );
+      localStorage.setItem("avaliacoes", JSON.stringify(atualizadas));
+    }
+  } catch (_) {}
+
+  try {
+    const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    if (Array.isArray(pedidos)) {
+      const atualizados = pedidos.map(p =>
+        normalizarHandleUsuario(p.usuario) === handleAntigo ? { ...p, usuario: handleNovo } : p
+      );
+      localStorage.setItem("pedidos", JSON.stringify(atualizados));
+    }
+  } catch (_) {}
+}
+
+function sincronizarLeiturasPublicas(listaLeituras, handleUsuario) {
+  const handle = normalizarHandleUsuario(handleUsuario || obterUsuarioLogado()?.usuario);
+  if (!handle) return;
+
+  try {
+    const leiturasPorUsuario = JSON.parse(localStorage.getItem("leiturasPorUsuario")) || {};
+    leiturasPorUsuario[handle] = listaLeituras;
+    localStorage.setItem("leiturasPorUsuario", JSON.stringify(leiturasPorUsuario));
+  } catch (_) {}
+}
+
+function sincronizarVendasPublicas(listaVendas, handleUsuario) {
+  const handle = normalizarHandleUsuario(handleUsuario || obterUsuarioLogado()?.usuario);
+  if (!handle) return;
+
+  try {
+    const todasVendas = JSON.parse(localStorage.getItem("livrosVenda")) || [];
+    const deOutros = Array.isArray(todasVendas)
+      ? todasVendas.filter(item => {
+          const dono = normalizarHandleUsuario(item.vendedor || item.usuario || "");
+          return dono && dono !== handle;
+        })
+      : [];
+
+    const marcadasDoUsuario = (Array.isArray(listaVendas) ? listaVendas : []).map(item => ({
+      ...item,
+      usuario: handle,
+      vendedor: handle
+    }));
+
+    localStorage.setItem("livrosVenda", JSON.stringify([...marcadasDoUsuario, ...deOutros]));
+  } catch (_) {}
 }
 
 function salvarUsuarioLogado(dadosAtualizados) {
   const atual = obterUsuarioLogado() || {};
-  const loginAntigo = atual.usuario;
-  const merged = { ...atual, ...dadosAtualizados };
+  const handleAntigo = normalizarHandleUsuario(atual.usuario);
+  const handleNovo = normalizarHandleUsuario(dadosAtualizados.usuario || atual.usuario);
+
+  const merged = {
+    ...atual,
+    ...dadosAtualizados,
+    ...(handleNovo ? { usuario: handleNovo, id: atual.id || handleNovo } : {})
+  };
 
   localStorage.setItem("usuarioLogado", JSON.stringify(merged));
 
   const listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
   if (Array.isArray(listaUsuarios)) {
-    const idx = listaUsuarios.findIndex(u => u.usuario === loginAntigo || u.usuario === merged.usuario);
+    const idx = listaUsuarios.findIndex(
+      u => (u.id && u.id === merged.id) || normalizarHandleUsuario(u.usuario) === handleAntigo || normalizarHandleUsuario(u.usuario) === handleNovo
+    );
     if (idx >= 0) {
       listaUsuarios[idx] = { ...listaUsuarios[idx], ...merged };
       localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
     }
+  }
+
+  if (handleAntigo && handleNovo && handleAntigo !== handleNovo) {
+    migrarDadosQuandoTrocarHandle(handleAntigo, handleNovo);
+  }
+
+  if (Array.isArray(merged.leituraAtualLista)) {
+    sincronizarLeiturasPublicas(merged.leituraAtualLista, merged.usuario);
+  }
+
+  if (Array.isArray(merged.livrosVenda)) {
+    sincronizarVendasPublicas(merged.livrosVenda, merged.usuario);
   }
 
   return merged;
@@ -58,7 +181,6 @@ function gerarEstrelas(nota) {
   return "★".repeat(arredondada) + "☆".repeat(5 - arredondada);
 }
 
-// Porcentagem determinística baseada no texto/página quando não há total de páginas informado
 function calcularProgressoLeitura(titulo, paginaAtual, totalPaginas) {
   const pag = Number(paginaAtual);
   const tot = Number(totalPaginas);
@@ -72,7 +194,7 @@ function calcularProgressoLeitura(titulo, paginaAtual, totalPaginas) {
   for (let i = 0; i < baseTexto.length; i++) {
     hash = (hash * 31 + baseTexto.charCodeAt(i)) % 85;
   }
-  return 15 + hash; // faixa fixa entre 15% e 99%
+  return 15 + hash;
 }
 
 function atualizarCabecalhoPerfil(usuario) {
@@ -82,13 +204,20 @@ function atualizarCabecalhoPerfil(usuario) {
   const emailEl = document.getElementById("perfil-email");
   const avatarEl = document.getElementById("perfil-avatar-iniciais");
   const membroEl = document.getElementById("perfil-membro");
+  const bioEl = document.getElementById("perfil-bio");
+  const metaEl = document.getElementById("perfil-meta");
 
   if (nomeEl && usuario.nome) nomeEl.textContent = usuario.nome;
-  if (emailEl && usuario.usuario) emailEl.textContent = "@" + usuario.usuario;
+  if (emailEl) {
+    const handle = usuario.usuario ? `@${normalizarHandleUsuario(usuario.usuario)}` : "";
+    const partesContato = [handle, usuario.email].filter(Boolean);
+    emailEl.textContent = partesContato.join(" • ") || "@usuario";
+  }
   if (avatarEl) avatarEl.textContent = gerarIniciaisNome(usuario.nome);
 
-  if (membroEl && usuario.dataCadastro) {
-    const data = new Date(usuario.dataCadastro);
+  const dataRef = usuario.dataCadastro || usuario.membroDesde;
+  if (membroEl && dataRef) {
+    const data = new Date(String(dataRef).length === 10 ? `${dataRef}T12:00:00` : dataRef);
     if (!Number.isNaN(data.getTime())) {
       const mesesPtBr = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -96,6 +225,27 @@ function atualizarCabecalhoPerfil(usuario) {
       ];
       membroEl.textContent = `🕐 Membro desde: ${mesesPtBr[data.getMonth()]} de ${data.getFullYear()}`;
     }
+  }
+
+  if (bioEl) {
+    bioEl.textContent = usuario.bio ? `“${usuario.bio}”` : "";
+    bioEl.style.display = usuario.bio ? "block" : "none";
+  }
+
+  if (metaEl) {
+    const interessesLista = Array.isArray(usuario.interessesPerfil)
+      ? usuario.interessesPerfil
+      : (typeof usuario.interessesPerfil === "string"
+          ? usuario.interessesPerfil.split(",").map(s => s.trim()).filter(Boolean)
+          : []);
+
+    const partesMeta = [];
+    if (usuario.localizacao) partesMeta.push(`📍 ${usuario.localizacao}`);
+    if (usuario.telefone) partesMeta.push(`📞 ${usuario.telefone}`);
+    if (interessesLista.length) partesMeta.push(`🏷️ ${interessesLista.join(", ")}`);
+
+    metaEl.textContent = partesMeta.join("  |  ");
+    metaEl.style.display = partesMeta.length ? "block" : "none";
   }
 }
 
@@ -151,14 +301,13 @@ document.addEventListener("DOMContentLoaded", () => {
   inicializarFormularioFeedback();
 });
 
-// 1. LENDO NO MOMENTO (até 2 livros + página atual + porcentagem)
+// 1. LENDO NO MOMENTO
 async function carregarLeiturasAtuais() {
   const usuario = obterUsuarioLogado();
   const leituras = (usuario?.leituraAtualLista || []).slice(0, 2);
   const card = document.getElementById("btn-ver-mais-leitura")?.closest(".card");
   if (!card) return;
 
-  // Remove blocos extras anteriores caso esteja re-renderizando
   card.querySelectorAll(".bloco-leitura-dinamico").forEach(el => el.remove());
 
   const corpoAntigo = card.querySelector(".livro-atual");
@@ -314,7 +463,7 @@ function inicializarModalLeitura() {
   });
 }
 
-// 2. LIVROS À VENDA (limitado a 3 no card + botão "Ver todos" + botão "+ Carrinho" padronizado)
+// 2. LIVROS À VENDA
 function adicionarAoCarrinhoPerfil(titulo, precoNum, capaUrl, btnEl) {
   const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
   const existente = carrinho.find(c => c.titulo === titulo);
@@ -457,8 +606,14 @@ function inicializarModalAdicionarLivro() {
     if (!titulo || Number.isNaN(preco) || preco <= 0) return;
 
     const usuario = obterUsuarioLogado() || {};
-    const listaAtual = Array.isArray(usuario.livrosVenda) ? usuario.livrosVenda : [];
-    listaAtual.unshift({ titulo, preco: Number(preco.toFixed(2)) });
+    const handle = normalizarHandleUsuario(usuario.usuario);
+    const listaAtual = Array.isArray(usuario.livrosVenda) ? [...usuario.livrosVenda] : [];
+    listaAtual.unshift({
+      titulo,
+      preco: Number(preco.toFixed(2)),
+      usuario: handle,
+      vendedor: handle
+    });
 
     salvarUsuarioLogado({ livrosVenda: listaAtual });
     fechar();
@@ -473,7 +628,7 @@ function renderAvaliacoesPerfil() {
 
   const usuario = obterUsuarioLogado();
   const salvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
-  const doUsuario = salvas.filter(av => av.usuario === usuario?.usuario);
+  const doUsuario = salvas.filter(av => normalizarHandleUsuario(av.usuario) === normalizarHandleUsuario(usuario?.usuario));
   const exibicao = (doUsuario.length ? doUsuario : AVALIACOES_PERFIL_PADRAO).slice(0, 3);
 
   container.innerHTML = "";
@@ -491,7 +646,7 @@ function renderAvaliacoesPerfil() {
   });
 }
 
-// 4. MEUS GRUPOS (com cadastro de nome + link tipo Discord)
+// 4. MEUS GRUPOS
 function obterTodosGruposDoUsuario(usuario) {
   const custom = Array.isArray(usuario?.gruposCustom) ? usuario.gruposCustom : [];
   return [...custom, ...GRUPOS_CATALOGO];
@@ -696,7 +851,7 @@ function carregarMeusFeedbacks() {
 
   const usuarioLogado = obterUsuarioLogado();
   const historico = JSON.parse(localStorage.getItem("feedbacks")) || [];
-  const meusFeedbacks = historico.filter(item => item.usuario === usuarioLogado?.usuario);
+  const meusFeedbacks = historico.filter(item => normalizarHandleUsuario(item.usuario) === normalizarHandleUsuario(usuarioLogado?.usuario));
 
   if (meusFeedbacks.length === 0) {
     containerFeedbacks.innerHTML = "<p>Você ainda não enviou nenhum feedback.</p>";
@@ -730,52 +885,238 @@ function carregarMeusFeedbacks() {
   });
 }
 
-// 6. MODAL EDITAR PERFIL
+// 6. MODAL EDITAR CADASTRO COMPLETO + VALIDAÇÕES
+function aplicarMascaraTelefone(valor) {
+  const digitos = String(valor || "").replace(/\D/g, "").slice(0, 11);
+  if (digitos.length === 0) return "";
+  if (digitos.length <= 2) return `(${digitos}`;
+  if (digitos.length <= 6) return `(${digitos.slice(0, 2)}) ${digitos.slice(2)}`;
+  if (digitos.length <= 10) {
+    return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 6)}-${digitos.slice(6)}`;
+  }
+  return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 7)}-${digitos.slice(7)}`;
+}
+
+function usuarioJaExisteEmOutroCadastro(novoHandle, usuarioAtual) {
+  const handleAtual = normalizarHandleUsuario(usuarioAtual?.usuario);
+  if (novoHandle === handleAtual) return false;
+  if (HANDLES_RESERVADOS_SISTEMA.includes(novoHandle)) return true;
+
+  const listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  if (!Array.isArray(listaUsuarios)) return false;
+
+  return listaUsuarios.some(u => {
+    const h = normalizarHandleUsuario(u.usuario);
+    if (!h) return false;
+    if (usuarioAtual?.id && u.id && u.id === usuarioAtual.id) return false;
+    if (handleAtual && h === handleAtual) return false;
+    return h === novoHandle;
+  });
+}
+
+function emailJaExisteEmOutroCadastro(novoEmail, usuarioAtual) {
+  const emailNorm = String(novoEmail || "").trim().toLowerCase();
+  const emailAtual = String(usuarioAtual?.email || "").trim().toLowerCase();
+  if (!emailNorm || emailNorm === emailAtual) return false;
+
+  const listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  if (!Array.isArray(listaUsuarios)) return false;
+
+  return listaUsuarios.some(u => {
+    const e = String(u.email || "").trim().toLowerCase();
+    if (!e) return false;
+    if (usuarioAtual?.id && u.id && u.id === usuarioAtual.id) return false;
+    return e === emailNorm;
+  });
+}
+
 function inicializarModalEditarPerfil() {
   const modal = document.getElementById("modal-editar-perfil");
   const btnEditar = document.getElementById("btn-editar-perfil");
   const btnFechar = document.getElementById("btn-fechar-modal");
   const btnCancelar = document.getElementById("btn-cancelar-modal");
   const formEditar = document.getElementById("form-editar-perfil");
+  const erroEl = document.getElementById("erro-editar-perfil");
 
   if (!btnEditar || !modal) return;
 
   const inputNome = document.getElementById("edit-nome");
   const inputUsuario = document.getElementById("edit-usuario");
+  const inputEmail = document.getElementById("edit-email");
   const inputTelefone = document.getElementById("edit-telefone");
+  const inputNascimento = document.getElementById("edit-nascimento");
+  const inputLocalizacao = document.getElementById("edit-localizacao");
+  const inputSenha = document.getElementById("edit-senha");
+  const inputConfirmarSenha = document.getElementById("edit-confirmar-senha");
+  const inputMembroDesde = document.getElementById("edit-membro-desde");
+  const inputInteresses = document.getElementById("edit-interesses");
+  const inputBio = document.getElementById("edit-bio");
+
+  const exibirErro = (msg) => {
+    if (!erroEl) return;
+    erroEl.textContent = msg;
+    erroEl.style.display = "block";
+  };
+
+  const limparErro = () => {
+    if (!erroEl) return;
+    erroEl.textContent = "";
+    erroEl.style.display = "none";
+  };
+
+  const fecharModal = () => {
+    limparErro();
+    if (inputSenha) inputSenha.value = "";
+    if (inputConfirmarSenha) inputConfirmarSenha.value = "";
+    modal.classList.remove("ativo");
+  };
+
+  inputUsuario?.addEventListener("input", () => {
+    inputUsuario.value = inputUsuario.value
+      .replace(/^@+/, "")
+      .replace(/[^a-zA-Z0-9._]/g, "")
+      .toLowerCase()
+      .slice(0, REGRAS_CADASTRO_PERFIL.USUARIO_MAX);
+  });
+
+  inputTelefone?.addEventListener("input", () => {
+    inputTelefone.value = aplicarMascaraTelefone(inputTelefone.value);
+  });
 
   btnEditar.addEventListener("click", () => {
+    limparErro();
     const usuarioAtual = obterUsuarioLogado() || {};
+
     inputNome.value = usuarioAtual.nome || "";
-    inputUsuario.value = usuarioAtual.usuario || "";
-    inputTelefone.value = usuarioAtual.telefone || "";
+    inputUsuario.value = normalizarHandleUsuario(usuarioAtual.usuario || "");
+    if (inputEmail) inputEmail.value = usuarioAtual.email || "";
+    if (inputTelefone) inputTelefone.value = aplicarMascaraTelefone(usuarioAtual.telefone || "");
+    if (inputNascimento) inputNascimento.value = usuarioAtual.dataNascimento || usuarioAtual.nascimento || "";
+    if (inputLocalizacao) inputLocalizacao.value = usuarioAtual.localizacao || "";
+    if (inputSenha) inputSenha.value = "";
+    if (inputConfirmarSenha) inputConfirmarSenha.value = "";
+
+    if (inputMembroDesde) {
+      const baseData = usuarioAtual.dataCadastro || usuarioAtual.membroDesde;
+      if (baseData) {
+        const d = new Date(String(baseData).length === 10 ? `${baseData}T12:00:00` : baseData);
+        inputMembroDesde.value = Number.isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
+      } else {
+        inputMembroDesde.value = "";
+      }
+    }
+
+    if (inputInteresses) {
+      const lista = Array.isArray(usuarioAtual.interessesPerfil)
+        ? usuarioAtual.interessesPerfil.join(", ")
+        : (usuarioAtual.interessesPerfil || "");
+      inputInteresses.value = lista;
+    }
+
+    if (inputBio) inputBio.value = usuarioAtual.bio || "";
+
     modal.classList.add("ativo");
   });
 
-  const fecharModal = () => modal.classList.remove("ativo");
-  if (btnFechar) btnFechar.addEventListener("click", fecharModal);
-  if (btnCancelar) btnCancelar.addEventListener("click", fecharModal);
+  btnFechar?.addEventListener("click", fecharModal);
+  btnCancelar?.addEventListener("click", fecharModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) fecharModal(); });
 
-  if (formEditar) {
-    formEditar.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const usuarioAtual = obterUsuarioLogado() || {};
+  formEditar?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    limparErro();
 
-      const novoNome = inputNome.value.trim() || usuarioAtual.nome || "";
-      const novoUsuario = inputUsuario.value.trim() || usuarioAtual.usuario || "";
-      const novoTelefone = inputTelefone.value.trim();
+    const usuarioAtual = obterUsuarioLogado() || {};
+    const novoNome = inputNome.value.trim();
+    const novoUsuario = normalizarHandleUsuario(inputUsuario.value);
+    const novoEmail = inputEmail ? inputEmail.value.trim().toLowerCase() : (usuarioAtual.email || "");
+    const novoTelefone = inputTelefone ? inputTelefone.value.trim() : "";
+    const digitosTelefone = novoTelefone.replace(/\D/g, "");
+    const novaNascimento = inputNascimento ? inputNascimento.value : "";
+    const novaLocalizacao = inputLocalizacao ? inputLocalizacao.value.trim() : "";
+    const novaSenha = inputSenha ? inputSenha.value : "";
+    const confirmarSenha = inputConfirmarSenha ? inputConfirmarSenha.value : "";
+    const novaBio = inputBio ? inputBio.value.trim().slice(0, REGRAS_CADASTRO_PERFIL.BIO_MAX) : "";
 
-      const atualizado = salvarUsuarioLogado({
-        nome: novoNome,
-        usuario: novoUsuario,
-        telefone: novoTelefone
-      });
+    if (novoNome.length < REGRAS_CADASTRO_PERFIL.NOME_MIN || novoNome.length > REGRAS_CADASTRO_PERFIL.NOME_MAX) {
+      exibirErro(`O nome deve ter entre ${REGRAS_CADASTRO_PERFIL.NOME_MIN} e ${REGRAS_CADASTRO_PERFIL.NOME_MAX} caracteres.`);
+      inputNome.focus();
+      return;
+    }
 
-      atualizarCabecalhoPerfil(atualizado);
-      fecharModal();
+    if (novoUsuario.length < REGRAS_CADASTRO_PERFIL.USUARIO_MIN || novoUsuario.length > REGRAS_CADASTRO_PERFIL.USUARIO_MAX) {
+      exibirErro(`O nome de usuário deve ter entre ${REGRAS_CADASTRO_PERFIL.USUARIO_MIN} e ${REGRAS_CADASTRO_PERFIL.USUARIO_MAX} caracteres.`);
+      inputUsuario.focus();
+      return;
+    }
+
+    if (!REGRAS_CADASTRO_PERFIL.USUARIO_REGEX.test(novoUsuario)) {
+      exibirErro("O nome de usuário só pode conter letras minúsculas, números, ponto (.) ou sublinhado (_).");
+      inputUsuario.focus();
+      return;
+    }
+
+    if (usuarioJaExisteEmOutroCadastro(novoUsuario, usuarioAtual)) {
+      exibirErro(`O nome de usuário "@${novoUsuario}" já está em uso por outra conta.`);
+      inputUsuario.focus();
+      return;
+    }
+
+    if (novoEmail && !REGRAS_CADASTRO_PERFIL.EMAIL_REGEX.test(novoEmail)) {
+      exibirErro("Informe um endereço de e-mail válido.");
+      inputEmail?.focus();
+      return;
+    }
+
+    if (novoEmail && emailJaExisteEmOutroCadastro(novoEmail, usuarioAtual)) {
+      exibirErro("Este e-mail já está cadastrado em outra conta.");
+      inputEmail?.focus();
+      return;
+    }
+
+    if (digitosTelefone.length > 0 && (digitosTelefone.length < 10 || digitosTelefone.length > 11)) {
+      exibirErro("Informe um telefone válido com DDD (10 ou 11 dígitos).");
+      inputTelefone?.focus();
+      return;
+    }
+
+    if (novaSenha.length > 0 || confirmarSenha.length > 0) {
+      if (novaSenha.length < REGRAS_CADASTRO_PERFIL.SENHA_MIN) {
+        exibirErro(`A nova senha deve ter no mínimo ${REGRAS_CADASTRO_PERFIL.SENHA_MIN} caracteres.`);
+        inputSenha?.focus();
+        return;
+      }
+      if (novaSenha !== confirmarSenha) {
+        exibirErro("A confirmação de senha não confere com a nova senha.");
+        inputConfirmarSenha?.focus();
+        return;
+      }
+    }
+
+    const interessesArray = inputInteresses
+      ? inputInteresses.value.split(",").map(s => s.trim()).filter(Boolean)
+      : (usuarioAtual.interessesPerfil || []);
+
+    const novaDataCadastro = inputMembroDesde && inputMembroDesde.value
+      ? `${inputMembroDesde.value}T12:00:00.000Z`
+      : usuarioAtual.dataCadastro;
+
+    const atualizado = salvarUsuarioLogado({
+      nome: novoNome,
+      usuario: novoUsuario,
+      email: novoEmail,
+      telefone: novoTelefone,
+      dataNascimento: novaNascimento,
+      localizacao: novaLocalizacao,
+      bio: novaBio,
+      interessesPerfil: interessesArray,
+      ...(novaDataCadastro ? { dataCadastro: novaDataCadastro } : {}),
+      ...(novaSenha.length >= REGRAS_CADASTRO_PERFIL.SENHA_MIN ? { senha: novaSenha } : {})
     });
-  }
+
+    atualizarCabecalhoPerfil(atualizado);
+    fecharModal();
+  });
 }
 
 // 7. FORMULÁRIO DE FEEDBACK
