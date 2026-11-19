@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="titulo-aba-usuario">Search Book - Perfil do Leitor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <link rel="stylesheet" href="Style/Style2.css" />
+  <link rel="stylesheet" href="Style/usuario.css" />
+</head>
+
+<body>
+
+  <div id="header-container"></div>
+
+  <main class="usuario-main">
+    <div id="usuario-nao-encontrado" class="usuario-aviso-box" style="display: none;">
+      <h2>Leitor não encontrado</h2>
+      <p id="texto-usuario-nao-encontrado">Não encontramos um perfil para esse usuário.</p>
+      <div id="sugestoes-perfis" class="sugestoes-perfis"></div>
+      <a href="index.html" class="btn-voltar-home">Voltar ao início</a>
+    </div>
+
+    <div id="usuario-conteudo" style="display: none;">
+      <!-- Base do perfil -->
+      <section class="visita-header">
+        <div class="visita-banner">
+          <div class="visita-banner-topo">
+            <h1 class="visita-nome" id="visita-nome">Leitor</h1>
+            <span class="visita-badge" id="visita-badge">Perfil público</span>
+          </div>
+        </div>
+
+        <div class="visita-info">
+          <div class="visita-avatar" id="visita-avatar">--</div>
+
+          <div class="visita-dados">
+            <p class="visita-handle" id="visita-handle">@usuario</p>
+            <span class="visita-membro" id="visita-membro">🕐 Membro desde: 2024</span>
+            <p class="visita-bio" id="visita-bio"></p>
+            <p class="visita-meta" id="visita-meta"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grid com 3 blocos principais: Lendo, À Venda e Grupos -->
+      <div class="visita-grid">
+        <!-- 1. Livros que está lendo -->
+        <section class="visita-card">
+          <div class="visita-card-header">
+            <h2 class="visita-card-titulo azul">LENDO NO MOMENTO</h2>
+            <span class="visita-badge-icone azul">📖</span>
+          </div>
+          <div id="visita-leituras" class="visita-lista"></div>
+        </section>
+
+        <!-- 2. O que está vendendo -->
+        <section class="visita-card">
+          <div class="visita-card-header">
+            <h2 class="visita-card-titulo laranja">LIVROS À VENDA</h2>
+            <span class="visita-badge-icone laranja">$</span>
+          </div>
+          <div id="visita-vendas" class="visita-lista"></div>
+          <p id="visita-aviso-carrinho" class="visita-aviso-carrinho" style="display: none;">
+            ✅ Adicionado ao carrinho! <a href="carrinho.html">Ver carrinho</a>
+          </p>
+        </section>
+
+        <!-- 3. Grupos que participa -->
+        <section class="visita-card">
+          <div class="visita-card-header">
+            <h2 class="visita-card-titulo laranja">GRUPOS QUE PARTICIPA</h2>
+            <span class="visita-badge-icone laranja">👥</span>
+          </div>
+          <div id="visita-grupos" class="visita-lista"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/header-footer.js"></script>
+  <script src="js/usuario-perfil.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
