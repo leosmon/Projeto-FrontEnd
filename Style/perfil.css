@@ -563,3 +563,346 @@ body {
 }
 
 .feedback-confirmacao h3 {
+  color: #16a34a;
+  margin-bottom: 12px;
+}
+
+.feedback-confirmacao p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.avaliacao-estrelas {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.avaliacao-estrelas span {
+  font-size: 28px;
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.avaliacao-estrelas span.ativa {
+  color: gold;
+}
+
+
+/* ======================================
+   MODAIS DO PERFIL
+====================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.ativo {
+  display: flex;
+}
+
+.modal-conteudo {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: modalAparecer 0.25s ease;
+}
+
+.modal-conteudo-amplo {
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 540px) {
+  .modal-grid-2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@keyframes modalAparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.modal-fechar {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-conteudo form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.modal-conteudo form input[type="text"],
+.modal-conteudo form input[type="email"],
+.modal-conteudo form input[type="password"],
+.modal-conteudo form input[type="date"],
+.modal-conteudo form input[type="number"],
+.modal-conteudo form input[type="url"],
+.modal-conteudo form textarea,
+.modal-conteudo form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #f8fafc;
+  color: #0f172a;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-conteudo form input[type="text"]:focus,
+.modal-conteudo form input[type="email"]:focus,
+.modal-conteudo form input[type="password"]:focus,
+.modal-conteudo form input[type="date"]:focus,
+.modal-conteudo form input[type="number"]:focus,
+.modal-conteudo form input[type="url"]:focus,
+.modal-conteudo form textarea:focus,
+.modal-conteudo form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.erro-form-modal {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.modal-conteudo form input[type="range"] {
+  width: 100%;
+  accent-color: #2563eb;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+#lista-grupos-disponiveis {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#lista-grupos-disponiveis label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  font-size: 13px;
+  margin: 0;
+  text-transform: none;
+  font-weight: 500;
+  color: #1e293b;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#lista-grupos-disponiveis label:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+#lista-grupos-disponiveis input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2563eb;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.modal-botoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-cancelar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 30px;
+  border: 2px solid #ccc;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-salvar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-salvar:hover {
+  background: #1d4ed8;
+}
+
+
+/* ======================================
+   TEMA ESCURO (body.dark)
+====================================== */
+body.dark .card {
+  background: #1e2939;
+  color: #e5e7eb;
+  border-color: #333;
+}
+
+body.dark .perfil-info {
+  background: #1e2939;
+  border: none;
+}
+
+body.dark .perfil-header {
+  border: none;
+  border-radius: 20px;
+}
+
+body.dark .perfil-email,
+body.dark .perfil-nome {
+  color: #ffffff;
+}
+
+body.dark .perfil-bio {
+  color: #cbd5e1;
+}
+
+body.dark .perfil-meta {
+  color: #94a3b8;
+}
+
+body.dark .feedback {
+  background: #1e2939;
+  color: #e5e7eb;
+  border-color: #333;
+}
+
+body.dark #opiniao,
+body.dark #comentario {
+  background-color: #334155;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+body.dark .grupo-item {
+  background: #1e2939;
+  color: #e5e7eb;
+  border: 1px solid #475569;
+}
+
+body.dark .feedback-card-publico {
+  background: #1e2939 !important;
+  color: #e5e7eb !important;
+  border: 1px solid #909090 !important;
+}
+
+body.dark .modal-conteudo {
+  background: #101828;
+  color: #f1f5f9;
+  border: 1px solid #1e2939;
+}
+
+body.dark .modal-header h2 {
+  color: #f8fafc;
+}
+
+body.dark .modal-fechar {
+  color: #94a3b8;
+}
+
+body.dark .modal-fechar:hover {
+  color: #ffffff;
+}
+
+body.dark .modal-conteudo form label {
+  color: #cbd5e1;
+}
+
+body.dark .modal-conteudo form input[type="text"],
+body.dark .modal-conteudo form input[type="email"],
+body.dark .modal-conteudo form input[type="password"],
+body.dark .modal-conteudo form input[type="date"],
+body.dark .modal-conteudo form input[type="number"],
+body.dark .modal-conteudo form input[type="url"],
+body.dark .modal-conteudo form textarea,
+body.dark .modal-conteudo form select {
+  background: #1e2939;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+body.dark #lista-grupos-disponiveis label {
+  background: #1e2939;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+body.dark #lista-grupos-disponiveis label:hover {
+  background: #273549;
+  border-color: #3b82f6;
+}
+
+body.dark .btn-cancelar {
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+body.dark .btn-cancelar:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body.dark .link-grupo-discord {
+  color: #818cf8;
+}
