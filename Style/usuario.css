@@ -1,0 +1,346 @@
+.usuario-main {
+  max-width: 1160px;
+  margin: 2rem auto;
+  padding: 0 1.25rem 3rem;
+  min-height: 60vh;
+  font-family: 'Raleway', sans-serif;
+}
+
+.visita-header {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  overflow: visible;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+}
+
+.visita-banner {
+  height: 125px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, #0a1e42, #1e88f5 58%, #f5821f 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 24px;
+}
+
+.visita-banner-topo {
+  width: 100%;
+  margin-left: 105px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.visita-nome {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.visita-badge {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.visita-info {
+  position: relative;
+  padding: 16px 24px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.visita-avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #1e5fd9;
+  color: #ffffff;
+  font-size: 1.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  position: absolute;
+  top: -46px;
+  left: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.visita-dados {
+  margin-left: 105px;
+}
+
+.visita-handle {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.visita-membro {
+  font-size: 0.8rem;
+  color: #f5821f;
+  font-weight: 700;
+}
+
+.visita-bio {
+  margin: 8px 0 2px;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: #334155;
+}
+
+.visita-meta {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.visita-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .visita-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visita-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.visita-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.visita-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.visita-card-titulo {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.visita-card-titulo.azul { color: #2563eb; }
+.visita-card-titulo.laranja { color: #f5821f; }
+
+.visita-badge-icone {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.visita-badge-icone.azul { background: #dbeafe; color: #2563eb; }
+.visita-badge-icone.laranja { background: #fdecd9; color: #f5821f; }
+
+.visita-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.visita-leitura-item,
+.visita-venda-item,
+.visita-grupo-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.visita-leitura-topo,
+.visita-venda-item,
+.visita-grupo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.visita-leitura-item p,
+.visita-grupo-item p,
+.visita-preco {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.visita-preco {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.visita-estrelas {
+  color: #f59e0b;
+  font-size: 0.9rem;
+}
+
+.visita-barra-fundo {
+  width: 100%;
+  height: 7px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.visita-barra-preenchida {
+  height: 100%;
+  background: linear-gradient(90deg, #1e3a8a, #3b9ef5);
+  border-radius: 999px;
+}
+
+.visita-pct-texto {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.76rem;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.visita-btn-carrinho {
+  border: 1px solid #f5821f;
+  background: transparent;
+  color: #f5821f;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.visita-btn-carrinho:hover {
+  background: #f5821f;
+  color: #ffffff;
+}
+
+.visita-data-grupo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f5821f;
+}
+
+.visita-link-grupo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #5865f2;
+  text-decoration: none;
+}
+
+.visita-vazio {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.visita-aviso-carrinho {
+  margin: 12px 0 0;
+  font-size: 0.84rem;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.usuario-aviso-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+}
+
+.sugestoes-perfis {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.chip-perfil-sugerido {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.btn-voltar-home {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+/* Modo Escuro */
+body.dark .visita-header,
+body.dark .visita-card,
+body.dark .usuario-aviso-box {
+  background: #101828;
+  border-color: #1e2939;
+  color: #f1f5f9;
+}
+
+body.dark .visita-avatar {
+  border-color: #101828;
+}
+
+body.dark .visita-handle,
+body.dark .visita-meta,
+body.dark .visita-leitura-item p,
+body.dark .visita-grupo-item p,
+body.dark .visita-vazio {
+  color: #94a3b8;
+}
+
+body.dark .visita-bio {
+  color: #cbd5e1;
+}
+
+body.dark .visita-leitura-item,
+body.dark .visita-venda-item,
+body.dark .visita-grupo-item {
+  background: #1e2939;
+  border-color: #334155;
+}
+
+body.dark .chip-perfil-sugerido {
+  background: #1e2939;
+  color: #93c5fd;
+}
