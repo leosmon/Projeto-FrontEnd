@@ -1,3 +1,6 @@
+/* ======================================
+   BASE E LAYOUT DA PÁGINA DE PERFIL
+====================================== */
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -13,78 +16,117 @@ body {
   gap: 2rem;
 }
 
-/* Header */
+
+/* ======================================
+   CABEÇALHO E BANNER DO PERFIL
+====================================== */
 .perfil-header {
+  position: relative;
+  margin-bottom: 60px;
   background: #fff;
   border: 1px solid #e8eef8;
-  border-radius: 1rem;
-  overflow: hidden;
+  border-radius: 20px;
+  overflow: visible;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .perfil-banner {
-  height: 100px;
-  background: linear-gradient(135deg, #001d40, #007BFF 60%, #FF8400 100%);
+  height: 140px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, #0a1e42, #1e88f5 55%, #f5821f 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 24px;
+}
+
+.perfil-banner .perfil-nome {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 0 110px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 .perfil-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 1rem;
-}
-
-.perfil-user {
+  position: relative;
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  padding: 16px 24px 20px;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .perfil-avatar {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #007BFF, #0056c7);
+  background: #1e5fd9;
   color: #fff;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 4px solid #fff;
+  position: absolute;
+  top: -50px;
+  left: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.perfil-nome {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #333;
+.perfil-dados {
+  margin-left: 110px;
 }
 
 .perfil-email {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 14px;
+  color: #555;
+  margin: 0;
 }
 
 .perfil-membro {
-  font-size: 0.75rem;
-  color: #FF8400;
+  font-size: 13px;
+  color: #f5821f;
   font-weight: 600;
+}
+
+.perfil-bio {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #334155;
+  margin: 6px 0 2px;
+}
+
+.perfil-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 4px 0 0;
 }
 
 .btn-editar {
-  border: 2px solid #007BFF;
-  color: #007BFF;
+  margin-left: auto;
+  border: 2px solid #2563eb;
+  color: #2563eb;
   background: transparent;
-  border-radius: 999px;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: 700;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .btn-editar:hover {
-  background: rgba(0, 123, 255, 0.1);
+  background: #2563eb;
+  color: #fff;
 }
 
-/* Grid de cards */
+
+/* ======================================
+   GRID E CARDS DO PERFIL
+====================================== */
 .perfil-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -107,212 +149,338 @@ body {
 .card {
   background: #fff;
   border: 1px solid #e8eef8;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.livro{
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
   width: 100%;
-}
-.livro-card-perfil {
- 
-  border-radius: 0.75rem;
-  object-fit: cover;
-  display: flex;
-
-}
-
-.livro-card {
-  position: relative;
-  width: 50%;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.livro-capa-perfil {
-  
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-   width: 50%;
-}
-
-.livro-capa-perfil img {
-  width: 50%;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-/* Overlay transparente */
-.livro-overlay-perfil {
-  width: 50%;
-  inset: 0;
-  background: rgba(0, 0, 0, 0); /* invisível */
-  transition: background 0.3s;
-}
-
-.livro-card:hover .livro-overlay-perfil {
-  background: rgba(0, 0, 0, 0.2); /* preto 20% no hover */
-}
-
-
-.livro-card:hover .livro-capa-perfil {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-}
-
-.livro-info-perfil .titulo-perfil {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #030303;
-  font-family: 'Raleway', sans-serif;
-}
-.autor-perfil{
-  font-size: 0.75rem;
-  color: #555;
-  font-family: roboto, sans-serif;
-}
-.livro-info-perfil  {
-  font-size: 0.75rem;
-  color: #777;
-}
-
-.livro-info-perfil {
-text-align: justify;
-}
-
-
-.progress-bar {
-  margin: 20px 0 50px 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
 }
 
-.progress-container {
-  width: 100%;
-  height: 7px;
-  background-color: #e5e7eb; /* cinza claro */
-  border-radius: 9999px;
-   /* impede o gradiente de vazar */
-}
-
-#progress-bar {
-  height: 7px;
-  width: 68%; /* valor atual */
-  border-radius: 9999px;
-  background: linear-gradient(90deg, rgb(0, 123, 255), rgb(56, 189, 248));
-  transition: all 0.5s ease;
-}
-
-.progress-text {
+.card-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
-  color: #555;
-  font-family: roboto, sans-serif;
-  
+  align-items: center;
+  margin-bottom: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
-#progresso-leitura {
-  
-  color: #007BFF;
+.card-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.btn-acao{
-  
-width: 100%;
+.icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
-.tag{
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #ff8400;
+.icon-badge.laranja {
+  background: #fdecd9;
+  color: #f5821f;
 }
 
-.titulo-perfil{
-  font-size: 14px;
-  font-weight: 700;
-  color: #090909;
+.icon-badge.azul {
+  background: #dbeafe;
+  color: #2563eb;
 }
 
-.autor{
-  font-size: 12px;
-  font-weight: 400;
-  color: #666;
+
+/* ======================================
+   LEITURA ATUAL E PROGRESSO
+====================================== */
+.livro-atual {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
 }
-.livro-info {
+
+.capa-atual {
+  width: 76px;
+  height: 104px;
+  border-radius: 12px;
+  background-color: #4a2f1f;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.livro-atual-info {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  width: 80%;
-  padding: 0.5rem;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
 }
 
-.star {
-  color: #FFD700; /* cor dourada para estrelas */
-  font-size: 14px;
-  margin-top: 5px;
+.livro-atual-info strong {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.livro-atual-info p {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
+
+.progresso-container {
+  margin-bottom: 18px;
+}
+
+.progresso-topo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.progresso-porcentagem {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.barra-progresso-fundo {
+  width: 100%;
+  height: 8px;
+  background: #e5e9f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.barra-progresso-preenchida {
+  height: 100%;
+  background: linear-gradient(90deg, #1e3a8a, #3b9ef5);
+  border-radius: 10px;
+  transition: width 0.4s ease;
 }
 
 
-@media (min-width: 768px) {
-  .perfil-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* ======================================
+   LIVROS À VENDA E BOTÃO CARRINHO
+====================================== */
+.lista-livros {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
-@media (min-width: 1024px) {
-  .perfil-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.livro-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
 }
 
-.card {
-  background: #fff;
-  border: 1px solid #e8eef8;
-  border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+.livro-capa {
+  width: 44px;
+  height: 58px;
+  background: #1e3a8a;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.livro-capa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.livro-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.livro-info strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.estrelas {
+  color: #f5821f;
+  font-size: 13px;
+}
+
+.livro-acao-coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  min-width: 88px;
+  flex-shrink: 0;
+}
+
+.livro-preco {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-add-carrinho-perfil {
+  width: 88px;
   text-align: center;
-}
-
-.card h2 {
-  font-size: 0.9rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  color: #007BFF;
-}
-
-.card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
-}
-
-.card li {
-  font-size: 0.85rem;
-  padding: 0.25rem 0;
-  color: #333;
-}
-
-.btn-acao {
-  border: 2px solid #007BFF;
-  color: #007BFF;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #f5821f;
   background: transparent;
-  border-radius: 0.75rem;
-  padding: 0.5rem;
-  font-weight: 600;
+  color: #f5821f;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-add-carrinho-perfil:hover {
+  background: #f5821f;
+  color: #ffffff;
+}
+
+.acoes-card-venda {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+
+/* ======================================
+   AVALIAÇÕES E GRUPOS
+====================================== */
+.avaliacao-item {
+  margin-bottom: 16px;
+}
+
+.avaliacao-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.avaliacao-texto {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.grupo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9fb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.grupo-item p {
+  font-size: 12px;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+.data-grupo {
+  color: #f5821f;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.link-grupo-discord {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5865f2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link-grupo-discord:hover {
+  text-decoration: underline;
+}
+
+
+/* ======================================
+   BOTÕES GERAIS DOS CARDS
+====================================== */
+.btn-outline {
+  border: 2px solid;
+  background: transparent;
+  border-radius: 30px;
+  padding: 11px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline.laranja {
+  color: #f5821f;
+  border-color: #f5821f;
+}
+
+.btn-outline.laranja:hover {
+  background: #f5821f;
+  color: #fff;
+}
+
+.btn-outline.azul {
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-outline.azul:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-logout {
+  background: #f5821f;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.btn-acao:hover {
-  background: rgba(0, 123, 255, 0.1);
+.btn-logout:hover {
+  background: #9e4a01;
 }
 
-/* Feedback */
+
+/* ======================================
+   FORMULÁRIO DE FEEDBACK
+====================================== */
 .feedback {
   background: #fff;
   border: 1px solid #e8eef8;
@@ -360,505 +528,7 @@ width: 100%;
   cursor: pointer;
 }
 
-body.dark .card {
-  background: #1e2939;
-  color: #e5e7eb;
-
-  border: #333;
-}
-
-
-body.dark .card li{
-  background: #333;
-  color: #e5e7eb;
-  
-  border: #333;
-}
-
-body.dark #opiniao {
-  background: #666;
-  border: none;
-}
-body.dark #comentario {
-  background-color: #666;
-  border: none;
-}
-
-body.dark .perfil-info{
-  background: #1e2939;
-  border: none;
-}
-body.dark .perfil-header{
-  border: none;
-  border-radius: 2rem;
-}
-body.dark .perfil-email, .perfil-nome{
-  border: none;
-  color: white;
-}
-
-
-body.dark .feedback {
-  background: #1e2939;
-  color: #e5e7eb;
-
-  border: #333;
-}
-body.dark .grupo-item {
-  background: #1e2939;
-  color: #e5e7eb;
-  border: #909090 1px solid;
-
-}
-
-body.dark .feedback-card-publico {
-  background: #1e2939 !important;
-  color: #e5e7eb !important;
-  border: #909090 1px solid !important;
-}
-
-
-
-.cards-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 20px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  padding: 24px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.card-title {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
-.icon-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.icon-badge.laranja { background: #fdecd9; color: #f5821f; }
-.icon-badge.azul { background: #dbeafe; color: #2563eb; }
-
-/* Card de livros (API) */
-.lista-livros {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.livro-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.livro-capa {
-  width: 44px;
-  height: 44px;
-  background: #1e3a8a;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.livro-info {
-  flex: 1;
-}
-
-.livro-info strong {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.estrelas {
-  color: #f5821f;
-  font-size: 13px;
-}
-
-.livro-preco {
-  color: #2563eb;
-  font-weight: 700;
-}
-
-/* Card de avaliações */
-.avaliacao-item {
-  margin-bottom: 16px;
-}
-
-.avaliacao-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.avaliacao-texto {
-  font-size: 13px;
-  color: #666;
-  margin-top: 4px;
-}
-
-/* Card de grupos */
-.grupo-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f8f9fb;
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 12px;
-}
-
-.grupo-item p {
-  font-size: 12px;
-  color: #888;
-  margin-top: 2px;
-}
-
-.data-grupo {
-  color: #f5821f;
-  font-weight: 700;
-  font-size: 13px;
-}
-
-/* Botões */
-.btn-outline {
-  border: 2px solid;
-  background: transparent;
-  border-radius: 30px;
-  padding: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: auto;
-}
-
-.btn-outline.laranja { color: #f5821f; border-color: #f5821f; }
-.btn-outline.laranja:hover { background: #f5821f; color: #fff; }
-
-.btn-outline.azul { color: #2563eb; border-color: #2563eb; }
-.btn-outline.azul:hover { background: #2563eb; color: #fff; }
-
-.livro-atual {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.capa-atual {
-  width: 90px;
-  height: 120px;
-  border-radius: 12px;
-  background-color: #4a2f1f; /* cor de fallback caso a imagem não carregue */
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-}
-
-.livro-atual-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-}
-
-.livro-atual-info strong {
-  font-size: 16px;
-}
-
-.livro-atual-info p {
-  font-size: 13px;
-  color: #888;
-  margin: 0;
-}
-
-.progresso-container {
-  margin-bottom: 24px;
-}
-
-.progresso-topo {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 8px;
-}
-
-.progresso-porcentagem {
-  color: #2563eb;
-  font-weight: 700;
-}
-
-.barra-progresso-fundo {
-  width: 100%;
-  height: 8px;
-  background: #e5e9f0;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.barra-progresso-preenchida {
-  height: 100%;
-  background: linear-gradient(90deg, #1e3a8a, #3b9ef5);
-  border-radius: 10px;
-  transition: width 0.4s ease;
-}
-
-.perfil-grid {
-  display: grid;
- 
-  gap: 20px;
-}
-
-.card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  padding: 24px;
-  width: 100%;      /* ⬅️ em vez de 300px fixo */
-  min-width: 0;      /* ⬅️ importante! evita overflow em grid/flex */
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  box-sizing: border-box;
-}
-
-/* Banner com nome sobreposto */
-.perfil-header {
-  position: relative;
-  margin-bottom: 60px; /* espaço pro avatar não cortar o conteúdo abaixo */
-}
-
-.perfil-banner {
-  height: 140px;
-  border-radius: 20px 20px 0 0;
-  background: linear-gradient(90deg, #0a1e42, #1e88f5 55%, #f5821f 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 16px 24px;
-}
-
-.perfil-banner .perfil-nome {
-  color: #fff;
-  font-size: 22px;
-  font-weight: 800;
-  margin: 0;
-  margin-left: 110px; /* espaço pro avatar que vai sobrepor */
-  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
-}
-
-.perfil-info {
-  position: relative;
-  background: #fff;
-  border-radius: 0 0 20px 20px;
-  padding: 16px 24px 20px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-}
-
-.perfil-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #1e5fd9;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid #fff;
-  position: absolute;
-  top: -50px; /* sobrepõe o banner */
-  left: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.perfil-dados {
-  margin-left: 110px;
-}
-
-.perfil-email {
-  font-size: 14px;
-  color: #555;
-  margin: 0;
-}
-
-.perfil-membro {
-  font-size: 13px;
-  color: #f5821f;
-  font-weight: 600;
-}
-
-.btn-editar {
-  margin-left: auto;
-  border: 2px solid #2563eb;
-  color: #2563eb;
-  background: transparent;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-editar:hover {
-  background: #2563eb;
-  color: #fff;
-}
-
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-overlay.ativo {
-  display: flex;
-}
-
-.modal-conteudo {
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  width: 90%;
-  max-width: 420px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  animation: modalAparecer 0.25s ease;
-}
-
-@keyframes modalAparecer {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.modal-header h2 {
-  font-size: 18px;
-  margin: 0;
-}
-
-.modal-fechar {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #888;
-}
-
-#form-editar-perfil label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  margin-top: 14px;
-  color: #333;
-}
-
-#form-editar-perfil input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-#form-editar-perfil input:focus {
-  outline: none;
-  border-color: #2563eb;
-}
-
-.modal-botoes {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-}
-
-.btn-cancelar {
-  flex: 1;
-  padding: 12px;
-  border-radius: 30px;
-  border: 2px solid #ccc;
-  background: transparent;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-salvar {
-  flex: 1;
-  padding: 12px;
-  border-radius: 30px;
-  border: none;
-  background: #2563eb;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-salvar:hover {
-  background: #1d4ed8;
-}
-
-.btn-logout {
-  background: #f5821f;
-  color: #f8f8f8;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-weight: 700;
-  cursor: pointer;}
-
-  .btn-logout:hover {
-  background: #9e4a01;
-  color: #f8f8f8;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-weight: 700;
-  cursor: pointer;}
-
-  .feedback-radio,
+.feedback-radio,
 .feedback-checkbox {
   border: none;
   padding: 0;
@@ -876,6 +546,7 @@ body.dark .feedback-card-publico {
 .feedback-checkbox label {
   display: block;
   font-size: 14px;
+  text-transform: none;
   margin-bottom: 4px;
 }
 
@@ -892,251 +563,3 @@ body.dark .feedback-card-publico {
 }
 
 .feedback-confirmacao h3 {
-  color: #16a34a;
-  margin-bottom: 12px;
-}
-
-.feedback-confirmacao p {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.avaliacao-estrelas {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-.avaliacao-estrelas span {
-    font-size: 28px;
-    color: #ccc;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.avaliacao-estrelas span.ativa {
-    color: gold;
-}
-
-/* ======================================
-   MODAIS DO PERFIL (LEITURA, LIVROS, GRUPOS)
-====================================== */
-.modal-conteudo form label {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 14px;
-  margin-bottom: 6px;
-  color: #1e293b;
-}
-
-.modal-conteudo form input[type="text"],
-.modal-conteudo form input[type="number"] {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 14px;
-  background: #f8fafc;
-  color: #0f172a;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.modal-conteudo form input[type="text"]:focus,
-.modal-conteudo form input[type="number"]:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-.modal-conteudo form input[type="range"] {
-  width: 100%;
-  accent-color: #2563eb;
-  cursor: pointer;
-  margin-top: 4px;
-}
-
-/* Lista de grupos dentro do modal */
-#lista-grupos-disponiveis {
-  max-height: 280px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-#lista-grupos-disponiveis label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  background: #f8fafc;
-  cursor: pointer;
-  font-size: 13px;
-  margin: 0;
-  text-transform: none;
-  font-weight: 500;
-  color: #1e293b;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-#lista-grupos-disponiveis label:hover {
-  background: #eff6ff;
-  border-color: #93c5fd;
-}
-
-#lista-grupos-disponiveis input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #2563eb;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-/* Botão "+ Carrinho" dentro do card de livros à venda */
-.btn-add-carrinho-perfil {
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid #f5821f;
-  background: transparent;
-  color: #f5821f;
-  cursor: pointer;
-  font-weight: 700;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.btn-add-carrinho-perfil:hover {
-  background: #f5821f;
-  color: #ffffff;
-}
-
-
-/* ======================================
-   TEMA ESCURO (body.dark) - MODAIS DO PERFIL
-====================================== */
-body.dark .modal-conteudo {
-  background: #101828;
-  color: #f1f5f9;
-  border: 1px solid #1e2939;
-}
-
-body.dark .modal-header h2 {
-  color: #f8fafc;
-}
-
-body.dark .modal-fechar {
-  color: #94a3b8;
-}
-
-body.dark .modal-fechar:hover {
-  color: #ffffff;
-}
-
-body.dark .modal-conteudo form label {
-  color: #cbd5e1;
-}
-
-body.dark .modal-conteudo form input[type="text"],
-body.dark .modal-conteudo form input[type="number"] {
-  background: #1e2939;
-  border-color: #334155;
-  color: #f8fafc;
-}
-
-body.dark #lista-grupos-disponiveis label {
-  background: #1e2939;
-  border-color: #334155;
-  color: #e2e8f0;
-}
-
-body.dark #lista-grupos-disponiveis label:hover {
-  background: #273549;
-  border-color: #3b82f6;
-}
-
-body.dark .btn-cancelar {
-  color: #cbd5e1;
-  border-color: #475569;
-}
-
-body.dark .btn-cancelar:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* Coluna padronizada de preço + botão + Carrinho */
-.livro-acao-coluna {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  min-width: 86px;
-  flex-shrink: 0;
-}
-
-.btn-add-carrinho-perfil {
-  width: 86px;
-  text-align: center;
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid #f5821f;
-  background: transparent;
-  color: #f5821f;
-  cursor: pointer;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.btn-add-carrinho-perfil:hover {
-  background: #f5821f;
-  color: #ffffff;
-}
-
-.acoes-card-venda {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: auto;
-}
-
-.link-grupo-discord {
-  font-size: 12px;
-  font-weight: 700;
-  color: #5865f2;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.link-grupo-discord:hover {
-  text-decoration: underline;
-}
-
-.modal-conteudo form select,
-.modal-conteudo form input[type="url"] {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 14px;
-  background: #f8fafc;
-  color: #0f172a;
-  box-sizing: border-box;
-}
-
-body.dark .modal-conteudo form select,
-body.dark .modal-conteudo form input[type="url"] {
-  background: #1e2939;
-  border-color: #334155;
-  color: #f8fafc;
-}
-
-body.dark .link-grupo-discord {
-  color: #818cf8;
-}
-
-
- se importa de corrijir todo meu css
