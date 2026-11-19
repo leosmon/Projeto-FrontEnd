@@ -9,9 +9,7 @@
   <link rel="stylesheet" href="Style/livro.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="Style/avaliacoes.css">
-
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,20 +44,11 @@
           </p>
 
           <div class="livro-detalhe-acoes">
-            <button class="btn-feedback" id="btn-adicionar-carrinho">🛒 Adicionar ao Carrinho</button>
+            <button type="button" class="btn-feedback" id="btn-adicionar-carrinho">🛒 Adicionar ao Carrinho</button>
             <a id="link-openlibrary" href="#" target="_blank" rel="noopener" class="btn-outline azul">
-              
+              Ver na OpenLibrary
             </a>
           </div>
-          <!-- Avaliações do Livro -->
-          <section id="livro-avaliacoes-secao" class="livro-avaliacoes-secao"
-            style="margin-top: 28px; padding-top: 20px; border-top: 1px solid;">
-            <h2 style="font-size: 20px; margin-bottom: 8px;">Avaliações dos leitores</h2>
-            <p id="livro-avaliacoes-resumo" >
-              Nenhuma avaliação registrada para este título ainda.
-            </p>
-            <div id="livro-avaliacoes-lista" style="display: flex; flex-direction: column; gap: 12px;"></div>
-          </section>
 
           <!-- Aviso visual discreto quando adicionado ao carrinho (sem alert) -->
           <div id="aviso-carrinho"
@@ -67,6 +56,26 @@
             ✅ Livro adicionado ao carrinho! <a href="carrinho.html"
               style="color: #007BFF; text-decoration: underline;">Ir para o carrinho</a>
           </div>
+
+          <!-- Avaliações do Livro (abaixo da sinopse) -->
+          <section id="livro-avaliacoes-secao" class="livro-avaliacoes-secao">
+            <div class="livro-av-header">
+              <div>
+                <h2 style="font-size: 20px; margin-bottom: 4px;">Avaliações dos leitores</h2>
+                <p id="livro-avaliacoes-resumo" class="livro-av-resumo">
+                  Nenhuma avaliação registrada para este título ainda.
+                </p>
+              </div>
+
+              <div id="livro-av-acao-usuario"></div>
+            </div>
+
+            <div id="livro-avaliacoes-lista" class="livro-av-lista"></div>
+
+            <button type="button" id="btn-ver-todas-av-livro" class="btn-ver-todas-av" style="display: none;">
+              Ver todas as avaliações
+            </button>
+          </section>
         </div>
       </div>
 
@@ -74,16 +83,55 @@
         Não foi possível carregar este livro. <a href="index.html">Voltar à página inicial</a>
       </div>
     </div>
+
+    <!-- Modal: Ver Todas as Avaliações -->
+    <div class="modal-av-overlay" id="modal-todas-av-livro">
+      <div class="modal-av-box">
+        <div class="modal-av-header">
+          <h3>Todas as avaliações</h3>
+          <button type="button" class="modal-av-fechar" id="btn-fechar-todas-av">✕</button>
+        </div>
+        <div id="modal-todas-av-lista" class="livro-av-lista"></div>
+      </div>
+    </div>
+
+    <!-- Modal: Deixar Avaliação (apenas quando logado) -->
+    <div class="modal-av-overlay" id="modal-form-av-livro">
+      <div class="modal-av-box">
+        <div class="modal-av-header">
+          <h3>Deixar sua avaliação</h3>
+          <button type="button" class="modal-av-fechar" id="btn-fechar-form-av">✕</button>
+        </div>
+        <form id="form-avaliacao-detalhe">
+          <label for="select-nota-detalhe" class="modal-av-label">Nota</label>
+          <select id="select-nota-detalhe" class="modal-av-input">
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+
+          <label for="textarea-comentario-detalhe" class="modal-av-label">Comentário</label>
+          <textarea id="textarea-comentario-detalhe" class="modal-av-input" rows="3"
+            placeholder="Escreva o que você achou deste livro..." required></textarea>
+
+          <p id="erro-av-detalhe" class="modal-av-erro" style="display: none;"></p>
+
+          <div class="modal-av-botoes">
+            <button type="button" class="btn-modal-av-cancelar" id="btn-cancelar-form-av">Cancelar</button>
+            <button type="submit" class="btn-modal-av-salvar">Enviar avaliação</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
 
   <div id="footer"></div>
 
-
   <script src="js/header-footer.js"></script>
   <script src="js/livro-detalhe.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
 
 </html>
